@@ -2,26 +2,29 @@
 
 # main.py input.file output.file
 
-import os
+import sys
 
 def magie(input_text : str):
     output = ""
     return output
 
+def usage():
+    print(f"Benutzung: {sys.argv[0]} <input file name> <output file name>")
 
-
-
-if __name__ == "__main__":
-
-    if len(os.argv) == 3:
+def main():
     
-        input_file_name = os.argv[1]
-        output_file_name = os.argv[2]
+    if len(sys.argv) == 3:
+    
+        input_file_name = sys.argv[1]
+        output_file_name = sys.argv[2]
 
         try:
             input_file = open(input_file_name, "r")
-        except Exception e:
+        except Exception as e:
             print(e)
+            print("Bitte geben sie einen gültigen Input-Dateinamen an.")
+            usage()
+            return
 
         input_text = input_file.read()
 
@@ -29,5 +32,8 @@ if __name__ == "__main__":
 
         with open(output_file_name, "w") as output_file:
             output_file.write(magie(input_text))
-        
+    else:
+        usage()
 
+if __name__ == "__main__":
+    main()
