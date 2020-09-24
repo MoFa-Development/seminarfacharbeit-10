@@ -5,6 +5,7 @@
 import os
 
 def magie(input_text : str):
+    output = ""
     return output
 
 
