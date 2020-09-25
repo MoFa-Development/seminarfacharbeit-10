@@ -1,10 +1,14 @@
 #!/usr/bin/python3
 
-# main.py input.file output.file
+# region imports
 
 import sys
 import json
 import re
+
+# endregion
+
+# region konstanten
 
 ACTIONS = {"help": 1, "cn": 2, "compress-naive": 2, "dn": 3, "decompress-naive": 3}
 HELP = """
@@ -22,7 +26,10 @@ cn / compress-naive      -   Naive Kompression
 dn / decompress-naive    -   Umkehrung der naiven Kompression
 """.replace("main.py", sys.argv[0])
 
-#! Dieser Ansatz baut darauf, dass Worte wiederholt werden und gewinnt ausschließlich daraus Kompressionsvolumen. 
+# endregion
+
+#! Dieser Ansatz baut darauf, dass Worte wiederholt werden und gewinnt
+#! ausschließlich daraus Kompressionsvolumen. 
 #! Finden keine oder kaum Wiederholungen statt, nimmt die Größe sogar zu.
 
 def naive_compress(input_text : str):
@@ -50,7 +57,7 @@ def naive_compress(input_text : str):
     return output
 
 def naive_decompress(input_text : str):
-    print("decompression is not implemented yet")
+    print("Naive Dekomprimierung ist noch nicht implementiert")
 
 
 def usage():
@@ -59,8 +66,7 @@ def usage():
 
 
 def main():
-    write_to_file = False
-    
+
     if len(sys.argv) > 1 and sys.argv[1] in ACTIONS:
         action = ACTIONS[sys.argv[1]]
     else:
@@ -73,6 +79,8 @@ def main():
 
     if len(sys.argv) >= 3:
 
+        # region input file stuff
+
         input_file_name = sys.argv[2]
         
         if len(sys.argv) >= 4:
@@ -83,12 +91,14 @@ def main():
             input_file = open(input_file_name, "r")
         except Exception as e:
             print(e)
-            print("Bitte geben Sie einen gültigen Input-Dateinamen an.")
+            print("Bitte geben Sie einen gültigen Eingabedateinamen an.")
             usage()
-            return
+            return()
 
         input_text = input_file.read()
         input_file.close()
+
+        # endregion
 
         if action == 2:
             output_text = naive_compress(input_text)
@@ -103,6 +113,7 @@ def main():
 
     else:
         usage()
+        return()
 
 if __name__ == "__main__":
     main()
