@@ -4,6 +4,7 @@
 
 import sys
 import json
+import re
 
 
 def magie(input_text : str):
@@ -22,7 +23,7 @@ def magie(input_text : str):
 
     output = input_text
 
-    input_words = input_text.split(" ")
+    input_words = re.split(" |\n", input_text)
 
     for word in input_words:
         word_index = add_word_to_list(words)
