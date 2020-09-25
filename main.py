@@ -6,18 +6,19 @@ import sys
 import json
 import re
 
+#! Dieser Ansatz baut darauf, dass Worte wiederholt werden und gewinnt ausschließlich daraus Kompressionsvolumen. 
+#! Finden keine oder kaum Wiederholungen statt, nimmt die Größe sogar zu.
 
-def magie(input_text : str):
+def naive_compress(input_text : str):
     
-    words = {}
+    words = []
 
-    def add_word_to_list(word: str):
-        if len(words) > 0:
-            index = max(words)+1
+    def add_word_to_list(word : str):
+        if not word in words:
+            words.append(word)
+            index = len(words)-1
         else:
-            index = 0    
-        
-        words[index] = word
+            index = words.index(word)
         
         return index
 
@@ -26,10 +27,15 @@ def magie(input_text : str):
     input_words = re.split(" |\n", input_text)
 
     for word in input_words:
-        word_index = add_word_to_list(word)
-        output = output.replace(word, str(word_index))
-    
+        if len(word) > 1:
+            word_index = add_word_to_list(word)
+            output = output.replace(word, str(word_index))
+
     return output
+
+
+def decompress():
+    print("decompression is not implemented yet")
 
 
 def usage():
@@ -52,7 +58,7 @@ def main():
             input_file = open(input_file_name, "r")
         except Exception as e:
             print(e)
-            print("Bitte geben sie einen gültigen Input-Dateinamen an.")
+            print("Bitte geben Sie einen gültigen Input-Dateinamen an.")
             usage()
             return
 
@@ -60,8 +66,13 @@ def main():
 
         input_file.close()
 
-        with open(output_file_name, "w") as output_file:
-            output_file.write(magie(input_text))
+        if action == 1:
+            with open(output_file_name, "w") as output_file:
+                output_file.write(naive_compress(input_text))
+
+        if action == 2:
+            decompress(input_text)
+
     else:
         usage()
 
