@@ -3,20 +3,49 @@
 # main.py input.file output.file
 
 import sys
+import json
+
 
 def magie(input_text : str):
-    output = ""
+    
+    words = {}
+
+    def add_word_to_list(word: str):
+        if len(words) > 0:
+            index = max(words)+1
+        else:
+            index = 0    
+        
+        words[index] = word
+        
+        return index
+
+    output = input_text
+
+    input_words = input_text.split(" ")
+
+    for word in input_words:
+        word_index = add_word_to_list(words)
+        output.replace(word, str(word_index))
+    
     return output
 
+
 def usage():
-    print(f"Benutzung: {sys.argv[0]} <input file name> <output file name>")
+    print(f"Benutzung: {sys.argv[0]} [-compress / -decompress] <input file name> <output file name>")
 
 def main():
     
-    if len(sys.argv) == 3:
+    if len(sys.argv) == 4:
     
-        input_file_name = sys.argv[1]
-        output_file_name = sys.argv[2]
+        action = 1 if sys.argv[1] == "-compress" else 2 if sys.argv[2] == "-decompress" else 3
+        
+        if action == 3:
+            usage()
+            return()
+
+        input_file_name = sys.argv[2]
+        output_file_name = sys.argv[3]
 
         try:
             input_file = open(input_file_name, "r")
