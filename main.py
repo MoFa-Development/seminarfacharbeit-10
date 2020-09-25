@@ -26,8 +26,8 @@ def magie(input_text : str):
     input_words = re.split(" |\n", input_text)
 
     for word in input_words:
-        word_index = add_word_to_list(words)
-        output.replace(word, str(word_index))
+        word_index = add_word_to_list(word)
+        output = output.replace(word, str(word_index))
     
     return output
 
