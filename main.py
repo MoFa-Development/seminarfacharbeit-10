@@ -6,6 +6,22 @@ import sys
 import json
 import re
 
+ACTIONS = {"help": 1, "cn": 2, "compress-naive": 2, "dn": 3, "decompress-naive": 3}
+HELP = """
+------------ Hilfe -------------
+
+Syntax: main.py <Aktion> <Eingabedatei> <Ausgabedatei>
+
+Wenn keine Ausgabedatei angegeben wird, wird die Ausgabe über den stdout-Kanal ausgegeben. 
+
+----------- Aktionen -----------
+
+help                     -   Ausgabe dieser Hilfe
+
+cn / compress-naive      -   Naive Kompression
+dn / decompress-naive    -   Umkehrung der naiven Kompression
+""".replace("main.py", sys.argv[0])
+
 #! Dieser Ansatz baut darauf, dass Worte wiederholt werden und gewinnt ausschließlich daraus Kompressionsvolumen. 
 #! Finden keine oder kaum Wiederholungen statt, nimmt die Größe sogar zu.
 
@@ -33,26 +49,35 @@ def naive_compress(input_text : str):
 
     return output
 
-
-def decompress():
+def naive_decompress(input_text : str):
     print("decompression is not implemented yet")
 
 
 def usage():
-    print(f"Benutzung: {sys.argv[0]} [-compress / -decompress] <input file name> <output file name>")
+    print(f"Benutzung: {sys.argv[0]} <Aktion> <Eingabedatei> <Ausgabedatei>")
+    print(f"Weitere Hilfe: {sys.argv[0]} help")
+
 
 def main():
+    write_to_file = False
     
-    if len(sys.argv) == 4:
+    if len(sys.argv) > 1 and sys.argv[1] in ACTIONS:
+        action = ACTIONS[sys.argv[1]]
+    else:
+        usage()
+        return()
     
-        action = 1 if sys.argv[1] == "-compress" else 2 if sys.argv[2] == "-decompress" else 3
-        
-        if action == 3:
-            usage()
-            return()
+    if action == 1:
+        print(HELP)
+        return
+
+    if len(sys.argv) >= 3:
 
         input_file_name = sys.argv[2]
-        output_file_name = sys.argv[3]
+        
+        if len(sys.argv) >= 4:
+            write_to_file = True
+            output_file_name = sys.argv[3]
 
         try:
             input_file = open(input_file_name, "r")
@@ -63,15 +88,18 @@ def main():
             return
 
         input_text = input_file.read()
-
         input_file.close()
 
-        if action == 1:
-            with open(output_file_name, "w") as output_file:
-                output_file.write(naive_compress(input_text))
-
         if action == 2:
-            decompress(input_text)
+            output_text = naive_compress(input_text)
+        elif action == 3:
+            output_text = naive_decompress(input_text)
+        
+        if write_to_file:
+            with open(output_file_name, "w") as output_file:
+                output_file.write(output_text)
+        else:
+            sys.stdout.write(output_text)
 
     else:
         usage()
