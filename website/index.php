@@ -4,6 +4,6 @@
         <title>Seminarfacharbeit 10</title>
     </head>
     <body>
-        <p>Hallo Welt</p>
+        <p>Hallo Welt!</p>
     </body>
 </html>
