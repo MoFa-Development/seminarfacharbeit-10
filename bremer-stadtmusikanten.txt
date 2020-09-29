@@ -1,3 +1,12 @@
-Der schnelle 0 Fuchs 1 über 2 das 3 vergessen habe.
-Das 0 Wiesel 1 aus dem Meer, 2 habe 3 wohl vergessen.
-Test 4
+0 schnelle 1 2 3 über 4 das 5 vergessen habe.
+Das 1 Wiesel 3 aus dem Meer, 4 habe 5 wohl vergessen.
+0 1 Elefant ist cool.
+/
+()
+!
+~ 2
+♥ 6 ♥☺ 6
+
+
+Test 7
+0 Der 1 braune 2 Fuchs 3 springt 4 irgendwas 5 ich 6 ☻ 7 123

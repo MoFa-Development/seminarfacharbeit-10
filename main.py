@@ -26,6 +26,7 @@ cn / compress-naive      -   Naive Kompression
 dn / decompress-naive    -   Umkehrung der naiven Kompression
 """.replace("main.py", sys.argv[0])
 
+DICT_REPLACEMENTS = {"{", "}", "'", ",", ":"}
 # endregion
 
 #! Dieser Ansatz baut darauf, dass Worte wiederholt werden und gewinnt
@@ -54,11 +55,24 @@ def naive_compress(input_text : str):
             if input_words.count(word) >= 2 or word.isdigit(): #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
                 word_index = add_word_to_list(word)
                 output = output.replace(word, str(word_index))
+    di = dict()
+    for index,value in enumerate(words):
+        di[index] = value
+    
+    for c in DICT_REPLACEMENTS:
+        di = str(di).replace(c, "")
+    
+    output += "\n" + di
 
     return output
 
 def naive_decompress(input_text : str):
     print("Naive Dekomprimierung ist noch nicht implementiert")
+    '''
+    TODO
+    Letzte Zeile durch " " getrennte Liste einlesen.
+    Hinter jeder Zahl folgt ein Wort.
+    '''
 
 
 def usage():
