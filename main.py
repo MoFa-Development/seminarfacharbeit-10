@@ -36,13 +36,13 @@ def naive_compress(input_text : str):
     
     words = []
 
-    def add_word_to_list(word : str):
+    def add_word_to_list(word : str):    
         if not word in words:
             words.append(word)
             index = len(words)-1
         else:
             index = words.index(word)
-        
+            
         return index
 
     output = input_text
@@ -51,8 +51,9 @@ def naive_compress(input_text : str):
 
     for word in input_words:
         if len(word) > 1:
-            word_index = add_word_to_list(word)
-            output = output.replace(word, str(word_index))
+            if input_words.count(word) >= 2 or word.isdigit(): #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
+                word_index = add_word_to_list(word)
+                output = output.replace(word, str(word_index))
 
     return output
 
