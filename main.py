@@ -11,6 +11,7 @@ import re
 # region konstanten
 
 LIST_REPLACEMENTS = ["[", "]", "'", ","]
+LIST_DIVIDERS = [' ', '\n', '.', '?', ',', '!', '¿']
 
 ACTIONS = {"help": 1, "cn": 2, "compress-naive": 2, "dn": 3, "decompress-naive": 3}
 HELP = """
@@ -53,25 +54,31 @@ def naive_compress(input_text : str):
     input_words = re.split(" |\n", input_text)
 
     for word in input_words:
-        if len(word) > 1:
-            if input_words.count(word) >= 2 or word.isdigit(): #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
-                word_index = add_word_to_list(word)
-                output = output.replace(" "+word+" ", " "+str(word_index)+" ") # TODO Dieser Workaround ist ekelhaft und Moritz schämt sich schon dafür.
+        if input_words.count(word) >= 2 or word.isdigit(): #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
+            word_index = add_word_to_list(word)
+            output = output.replace(" "+word+" ", " "+str(word_index)+" ")
     
     words_str = str(words)
     for replacement in LIST_REPLACEMENTS:
-        words_str.replace(replacement, "")
+        words_str = words_str.replace(replacement, "")
 
     output += "\n" + words_str
 
     return output
 
 def naive_decompress(input_text : str):
-    print("Naive Dekomprimierung ist noch nicht implementiert")
     # TODO
     # Letzte Zeile durch " " getrennte Liste einlesen.
     # Hinter jeder Zahl folgt ein Wort.
+    
+    words = input_text.split('\n')[-1].split(" ")
+    
+    output = "\n".join(input_text.split('\n')[0:-1])
+    
+    for i in range(len(words)-1, -1, -1):
+        output = output.replace(str(i), words[i])
 
+    return output
 
 def usage():
     print(f"Benutzung: {sys.argv[0]} <Aktion> <Eingabedatei> <Ausgabedatei>")
