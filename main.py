@@ -69,7 +69,6 @@ def naive_compress(input_text : str):
 def naive_decompress(input_text : str):
     # TODO
     # Letzte Zeile durch " " getrennte Liste einlesen.
-    # Hinter jeder Zahl folgt ein Wort.
     
     words = input_text.split('\n')[-1].split(" ")
     
@@ -80,10 +79,10 @@ def naive_decompress(input_text : str):
 
     return output
 
+
 def usage():
     print(f"Benutzung: {sys.argv[0]} <Aktion> <Eingabedatei> <Ausgabedatei>")
     print(f"Weitere Hilfe: {sys.argv[0]} help")
-
 
 def main():
 
@@ -136,6 +135,7 @@ def main():
     else:
         usage()
         return()
+
 
 if __name__ == "__main__":
     main()
