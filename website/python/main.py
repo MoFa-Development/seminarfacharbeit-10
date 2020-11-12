@@ -41,12 +41,8 @@ def naive_compress(input_text : str):
     words = []
 
     def add_word_to_list(word : str):    
-        if not word in words:
-            words.append(word)
-            index = len(words)-1
-        else:
-            index = 9999
-            print("TEST FINDET DAS ÜBERHAUPT STATT?")
+        words.append(word)
+        index = len(words)-1
             
         return index
 
