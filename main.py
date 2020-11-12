@@ -45,7 +45,8 @@ def naive_compress(input_text : str):
             words.append(word)
             index = len(words)-1
         else:
-            index = words.index(word)
+            index = 9999
+            print("TEST FINDET DAS ÜBERHAUPT STATT?")
             
         return index
 
@@ -54,7 +55,9 @@ def naive_compress(input_text : str):
     input_words = re.split(" |\n", input_text)
 
     for word in input_words:
-        if input_words.count(word) >= 2 or word.isdigit(): #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
+        if word in words:
+            continue
+        if (input_words.count(word) >= 2 or word.isdigit()) and len(word) > 0: #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
             word_index = add_word_to_list(word)
             output = output.replace(" "+word+" ", " "+str(word_index)+" ")
     
@@ -63,6 +66,8 @@ def naive_compress(input_text : str):
         words_str = words_str.replace(replacement, "")
 
     output += "\n" + words_str
+    print(len(input_words))
+    print(len(words))
 
     return output
 
@@ -118,7 +123,8 @@ def main():
 
         input_text = input_file.read()
         input_file.close()
-
+        if input_text[-1] == '\n':
+            input_text = input_text[:-1]
         # endregion
 
         if action == 2:
