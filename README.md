@@ -1,3 +1,4 @@
-# Seminarfacharbeit 10
+## Grundlagenforschung zur Komprimierungsrate von Texten verschiedener Art
 
-Diese Seminarfacharbeit untersucht die Komprimierungsrate von natürlichen Sprachen. 
+Untersucht wird die Länge eines komprimierten Textes im Vergleich zum Ursprungstext. Dabei basiert die Komprimierung auf dem mehrfachen Auftreten von Zeichenketten. Dabei wird die Frage gestellt, in wie fern aus der Komprimierungsrate auf den Inhalt der Texte geschlossen werden kann.
+
