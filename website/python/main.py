@@ -122,7 +122,7 @@ def main():
         # endregion
 
         if action == 2:
-            output_text = naive_compress(input_text)
+            output_text = naive_compress(' '+input_text+' ')
         elif action == 3:
             output_text = naive_decompress(input_text)
         
