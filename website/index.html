@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" src="styles.css">
+        <title>Seminarfacharbeit 10</title>
+
+        <!--Libraries--->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <center>
+            <div id="bgCrd">
+                <textarea id="textarea"></textarea>
+                <button onclick="onClick()">Komprimiere</button>
+                <textarea id="textarea2"></textarea>
+            </div>
+        </center>
+    </body>
+</html>
+
+<script>
+
+function onClick()
+{
+    var text = document.getElementById("textarea").textContent;
+    $.ajax({
+    type: "POST",
+    url: "python/main.py",
+    data: { param: text}
+    }).done(function( o ) {
+        document.getElementById("textarea2").textContent = o.text;
+    });
+   
+}
+
+</script>
