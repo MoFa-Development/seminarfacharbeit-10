@@ -38,6 +38,8 @@ dn / decompress-naive    -   Umkehrung der naiven Kompression
 
 def naive_compress(input_text : str):
     
+    input_text = ' '+input_text+' '
+
     words = []
 
     def add_word_to_list(word : str):    
@@ -63,8 +65,6 @@ def naive_compress(input_text : str):
     words_str = " ".join(words)
 
     output += " \n" + words_str
-    print("Input len: \t" + str(len(input_text)))
-    print("Output len: \t" + str(len(output)))
 
     return output
 
@@ -79,10 +79,7 @@ def naive_decompress(input_text : str):
     for i in range(len(words)-1, -1, -1):
         output = output.replace(" "+str(i)+" ", " "+words[i]+" ")
 
-    output = output[1:]
-
-    print("Input len: \t" + str(len(input_text)))
-    print("Output len: \t" + str(len(output)))
+    output = output[1:-2]
 
     return output
 
@@ -128,7 +125,7 @@ def main():
         # endregion
 
         if action == 2:
-            output_text = naive_compress(' '+input_text+' ')
+            output_text = naive_compress(input_text)
         elif action == 3:
             output_text = naive_decompress(input_text)
         
@@ -137,6 +134,9 @@ def main():
                 output_file.write(output_text)
         else:
             sys.stdout.write(output_text)
+
+        print("Input len: \t" + str(len(input_text)))
+        print("Output len: \t" + str(len(output_text)))
 
     else:
         usage()
