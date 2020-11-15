@@ -50,20 +50,21 @@ def naive_compress(input_text : str):
 
     input_words = re.split(" |\n", input_text)
 
+    index = 1
+
     for word in input_words:
         if word in words:
             continue
         if (input_words.count(word) >= 2 or word.isdigit()) and len(word) > 0: #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
             word_index = add_word_to_list(word)
-            output = output.replace(" "+word+" ", " "+str(word_index)+" ")
-    
-    words_str = str(words)
-    for replacement in LIST_REPLACEMENTS:
-        words_str = words_str.replace(replacement, "")
+            output = output[:index] + output[index:].replace(" "+word+" ", " "+str(word_index)+" ")
+        index += len(word)+1
 
-    output += "\n" + words_str
-    print(len(input_words))
-    print(len(words))
+    words_str = " ".join(words)
+
+    output += " \n" + words_str
+    print("Input len: \t" + str(len(input_text)))
+    print("Output len: \t" + str(len(output)))
 
     return output
 
@@ -76,7 +77,12 @@ def naive_decompress(input_text : str):
     output = "\n".join(input_text.split('\n')[0:-1])
     
     for i in range(len(words)-1, -1, -1):
-        output = output.replace(str(i), words[i])
+        output = output.replace(" "+str(i)+" ", " "+words[i]+" ")
+
+    output = output[1:]
+
+    print("Input len: \t" + str(len(input_text)))
+    print("Output len: \t" + str(len(output)))
 
     return output
 
@@ -119,8 +125,6 @@ def main():
 
         input_text = input_file.read()
         input_file.close()
-        if input_text[-1] == '\n':
-            input_text = input_text[:-1]
         # endregion
 
         if action == 2:
