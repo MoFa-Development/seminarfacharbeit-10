@@ -36,6 +36,35 @@ dn / decompress-naive    -   Umkehrung der naiven Kompression
 #! ausschließlich daraus Kompressionsvolumen. 
 #! Finden keine oder kaum Wiederholungen statt, nimmt die Größe sogar zu.
 
+def find(string:str, substring:str):
+    indexes = []
+
+    beginning = substring[0]
+    length = len(substring)
+
+    for i, char in enumerate(string):
+        if char == beginning:
+            if string[i:i+length] == substring:
+                indexes.append(i)
+
+    return indexes
+
+def replace(text: str, original:str, replace:str) -> str:
+    indexes = find(text, original)
+    output = text
+
+    for index in indexes:
+        if not index == 0 and not text[index-1] in LIST_DIVIDERS:
+            continue
+        if not index == len(text)-len(original) and not text[index+len(original)] in LIST_DIVIDERS:
+            continue
+        
+        output = output[:index]+replace+output[index+len(original):]
+        
+        #! POSSIBLE OFF BY ONE HERE
+
+    return output
+
 def naive_compress(input_text : str):
     
     input_text = ' '+input_text+' '
@@ -59,7 +88,9 @@ def naive_compress(input_text : str):
             continue
         if (input_words.count(word) >= 2 or word.isdigit()) and len(word) > 0: #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
             word_index = add_word_to_list(word)
-            output = output[:index] + output[index:].replace(" "+word+" ", " "+str(word_index)+" ")
+            #output = output[:index] + output[index:].replace(" "+word+" ", " "+str(word_index)+" ")
+            output = output[:index] + replace(output[index:], word, str(word_index))
+        
         index += len(word)+1
 
     words_str = " ".join(words)
@@ -77,8 +108,8 @@ def naive_decompress(input_text : str):
     output = "\n".join(input_text.split('\n')[0:-1])
     
     for i in range(len(words)-1, -1, -1):
-        output = output.replace(" "+str(i)+" ", " "+words[i]+" ")
-
+        #output = output.replace(" "+str(i)+" ", " "+words[i]+" ")
+        output = replace(output, str(i), words[i]) 
     output = output[1:-2]
 
     return output
@@ -89,7 +120,6 @@ def usage():
     print(f"Weitere Hilfe: {sys.argv[0]} help")
 
 def main():
-
     if len(sys.argv) > 1 and sys.argv[1] in ACTIONS:
         action = ACTIONS[sys.argv[1]]
     else:
