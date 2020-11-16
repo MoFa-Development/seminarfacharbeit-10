@@ -11,7 +11,7 @@ import re
 # region konstanten
 
 LIST_REPLACEMENTS = ["[", "]", "'", ","]
-LIST_DIVIDERS = [' ', '\n', '.', '?', ',', '!', '¿']
+LIST_DIVIDERS = [' ', '\n', '.', '¿', '?', ',', '¡', '!', ';', '-', '(', ')', '[', ']', '/', '&', '\"', '\'']
 
 ACTIONS = {"help": 1, "cn": 2, "compress-naive": 2, "dn": 3, "decompress-naive": 3}
 HELP = """
@@ -47,9 +47,11 @@ def find(string:str, substring:str):
             if string[i:i+length] == substring:
                 indexes.append(i)
 
+    indexes.sort(reverse=True)
+
     return indexes
 
-def replace(text: str, original:str, replace:str) -> str:
+def replace(text: str, original:str, replace_str:str) -> str:
     indexes = find(text, original)
     output = text
 
@@ -59,16 +61,12 @@ def replace(text: str, original:str, replace:str) -> str:
         if not index == len(text)-len(original) and not text[index+len(original)] in LIST_DIVIDERS:
             continue
         
-        output = output[:index]+replace+output[index+len(original):]
+        output = output[:index]+replace_str+output[index+len(original):]
         
-        #! POSSIBLE OFF BY ONE HERE
-
     return output
 
 def naive_compress(input_text : str):
     
-    input_text = ' '+input_text+' '
-
     words = []
 
     def add_word_to_list(word : str):    
@@ -81,7 +79,7 @@ def naive_compress(input_text : str):
 
     input_words = re.split(" |\n", input_text)
 
-    index = 1
+    index = 0
 
     for word in input_words:
         if word in words:
@@ -90,8 +88,10 @@ def naive_compress(input_text : str):
             word_index = add_word_to_list(word)
             #output = output[:index] + output[index:].replace(" "+word+" ", " "+str(word_index)+" ")
             output = output[:index] + replace(output[index:], word, str(word_index))
-        
-        index += len(word)+1
+
+            index += len(str(word_index))+1
+        else:
+            index += len(word)+1
 
     words_str = " ".join(words)
 
@@ -107,10 +107,11 @@ def naive_decompress(input_text : str):
     
     output = "\n".join(input_text.split('\n')[0:-1])
     
-    for i in range(len(words)-1, -1, -1):
+    for i in range(len(words)):
         #output = output.replace(" "+str(i)+" ", " "+words[i]+" ")
-        output = replace(output, str(i), words[i]) 
-    output = output[1:-2]
+        output = replace(output, str(i), words[i])
+
+    output = output[:-1]
 
     return output
 
@@ -120,6 +121,7 @@ def usage():
     print(f"Weitere Hilfe: {sys.argv[0]} help")
 
 def main():
+
     if len(sys.argv) > 1 and sys.argv[1] in ACTIONS:
         action = ACTIONS[sys.argv[1]]
     else:
@@ -165,8 +167,10 @@ def main():
         else:
             sys.stdout.write(output_text)
 
+        print("")
         print("Input len: \t" + str(len(input_text)))
         print("Output len: \t" + str(len(output_text)))
+        print("")
 
     else:
         usage()
