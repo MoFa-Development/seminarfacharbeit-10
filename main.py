@@ -11,7 +11,7 @@ import re
 # region konstanten
 
 LIST_REPLACEMENTS = ["[", "]", "'", ","]
-LIST_DIVIDERS = [' ', '\n', '.', '¿', '?', ',', '¡', '!', ';', '-', '(', ')', '[', ']', '/', '&', '\"', '\'']
+LIST_DELIMITERS = ['-', '+', '=', ':', '>', '<', ' ', '\n', '\t', '.', '¿', '?', ',', '¡', '!', ';', '(', ')', '[', ']', '{', '}', '$', '#', '/', '&', '\"', '\'']
 
 ACTIONS = {"help": 1, "cn": 2, "compress-naive": 2, "dn": 3, "decompress-naive": 3}
 HELP = """
@@ -54,9 +54,9 @@ def replace(text: str, original:str, replace_str:str) -> str:
     output = text
 
     for index in indexes:
-        if not index == 0 and not text[index-1] in LIST_DIVIDERS:
+        if not index == 0 and not text[index-1] in LIST_DELIMITERS:
             continue
-        if not index == len(text)-len(original) and not text[index+len(original)] in LIST_DIVIDERS:
+        if not index == len(text)-len(original) and not text[index+len(original)] in LIST_DELIMITERS:
             continue
         
         output = output[:index]+replace_str+output[index+len(original):]
@@ -75,7 +75,7 @@ def naive_compress(input_text: str):
 
     output = input_text
 
-    input_words = re.split(" |\n", input_text)
+    input_words = re.split('|'.join(map(re.escape, LIST_DELIMITERS)), input_text)
 
     index = 0
 
@@ -162,8 +162,9 @@ def main():
             sys.stdout.write(output_text)
 
         print("")
-        print("Input len: \t" + str(len(input_text)))
-        print("Output len: \t" + str(len(output_text)))
+        print("Input len:\t" + str(len(input_text)))
+        print("Output len:\t" + str(len(output_text)))
+        print("Output/Input:\t" + str(len(output_text)/len(input_text)))
         print("")
 
     else:
