@@ -29,12 +29,10 @@ cn / compress-naive      -   Naive Kompression
 dn / decompress-naive    -   Umkehrung der naiven Kompression
 """.replace("main.py", sys.argv[0])
 
-
 # endregion
 
 #! Dieser Ansatz baut darauf, dass Worte wiederholt werden und gewinnt
 #! ausschließlich daraus Kompressionsvolumen. 
-#! Finden keine oder kaum Wiederholungen statt, nimmt die Größe sogar zu.
 
 def find(string:str, substring:str):
     indexes = []
@@ -65,11 +63,11 @@ def replace(text: str, original:str, replace_str:str) -> str:
         
     return output
 
-def naive_compress(input_text : str):
+def naive_compress(input_text: str):
     
     words = []
 
-    def add_word_to_list(word : str):    
+    def add_word_to_list(word: str):    
         words.append(word)
         index = len(words)-1
             
@@ -86,7 +84,6 @@ def naive_compress(input_text : str):
             continue
         if (input_words.count(word) >= 2 or word.isdigit()) and len(word) > 0: #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
             word_index = add_word_to_list(word)
-            #output = output[:index] + output[index:].replace(" "+word+" ", " "+str(word_index)+" ")
             output = output[:index] + replace(output[index:], word, str(word_index))
 
             index += len(str(word_index))+1
@@ -100,15 +97,12 @@ def naive_compress(input_text : str):
     return output
 
 def naive_decompress(input_text : str):
-    # TODO
-    # Letzte Zeile durch " " getrennte Liste einlesen.
     
     words = input_text.split('\n')[-1].split(" ")
     
     output = "\n".join(input_text.split('\n')[0:-1])
     
     for i in range(len(words)):
-        #output = output.replace(" "+str(i)+" ", " "+words[i]+" ")
         output = replace(output, str(i), words[i])
 
     output = output[:-1]
@@ -121,7 +115,6 @@ def usage():
     print(f"Weitere Hilfe: {sys.argv[0]} help")
 
 def main():
-
     if len(sys.argv) > 1 and sys.argv[1] in ACTIONS:
         action = ACTIONS[sys.argv[1]]
     else:
@@ -154,6 +147,7 @@ def main():
 
         input_text = input_file.read()
         input_file.close()
+        
         # endregion
 
         if action == 2:
@@ -175,7 +169,6 @@ def main():
     else:
         usage()
         return()
-
 
 if __name__ == "__main__":
     main()
