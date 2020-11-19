@@ -3,7 +3,6 @@
 # region imports
 
 import sys
-import json
 import re
 
 # endregion
