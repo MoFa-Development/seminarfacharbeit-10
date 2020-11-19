@@ -62,10 +62,10 @@ def replace(text: str, original:str, replace_str:str) -> str:
         
     return output
 
-def naive_compress(input_text: str):
-    
-    words = []
 
+words = []
+
+def naive_compress(input_text: str):
     def add_word_to_list(word: str):    
         words.append(word)
         index = len(words)-1
@@ -135,6 +135,7 @@ def main():
             output_file_name = sys.argv[3]
         else:
             write_to_file = False
+            output_file_name = ""
 
         try:
             input_file = open(input_file_name, "r")
@@ -153,6 +154,8 @@ def main():
             output_text = naive_compress(input_text)
         elif action == 3:
             output_text = naive_decompress(input_text)
+        else:
+            output_text = ""
         
         if write_to_file:
             with open(output_file_name, "w") as output_file:
@@ -163,7 +166,8 @@ def main():
         print("")
         print("Input len:\t" + str(len(input_text)))
         print("Output len:\t" + str(len(output_text)))
-        print("Output/Input:\t" + str(len(output_text)/len(input_text)))
+        print("Duplikatswörter:\t" + str(len(words)))
+        print("\033[1mDatenersparnis:\t" + str(round(100 - len(output_text)/len(input_text)*100, 2)) + "%\033[0m")
         print("")
 
     else:
