@@ -38,6 +38,7 @@ function onClick()
     url: "php/compress.php",
     data: { text: text}
     }).done(function( o ) {
+        o = o.split("-----");
         document.getElementById("textarea2").value = o;
     });
    

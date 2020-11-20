@@ -164,6 +164,7 @@ def main():
         elif action != 4:
             sys.stdout.write(output_text)
 
+        print("-----")
         print("")
         print("Input len:\t" + str(len(input_text)))
         print("Output len:\t" + str(len(output_text)))
