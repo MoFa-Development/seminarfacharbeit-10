@@ -15,4 +15,11 @@ body{
 .textarea{
     min-width: 98%;
     display: inline-block;
+    padding: 1%;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.button{
+    margin-bottom: 30px;
 }
