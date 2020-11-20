@@ -12,7 +12,7 @@ import re
 LIST_REPLACEMENTS = ["[", "]", "'", ","]
 LIST_DELIMITERS = ['-', '+', '=', ':', '>', '<', ' ', '\n', '\t', '.', '¿', '?', ',', '¡', '!', ';', '(', ')', '[', ']', '{', '}', '$', '#', '/', '&', '\"', '\'']
 
-ACTIONS = {"help": 1, "cn": 2, "compress-naive": 2, "dn": 3, "decompress-naive": 3}
+ACTIONS = {"help": 1, "cn": 2, "compress-naive": 2, "dn": 3, "decompress-naive": 3, "compress-naive-no-output": 4, "cnno": 4}
 HELP = """
 ------------ Hilfe -------------
 
@@ -22,10 +22,11 @@ Wenn keine Ausgabedatei angegeben wird, wird die Ausgabe über den stdout-Kanal 
 
 ----------- Aktionen -----------
 
-help                     -   Ausgabe dieser Hilfe
+help                            -   Ausgabe dieser Hilfe
 
-cn / compress-naive      -   Naive Kompression
-dn / decompress-naive    -   Umkehrung der naiven Kompression
+cn / compress-naive             -   Naive Kompression
+dn / decompress-naive           -   Umkehrung der naiven Kompression
+cnno / compress-naive-no-output -   Naive Kompression ohne ausgabe des Textes
 """.replace("main.py", sys.argv[0])
 
 # endregion
@@ -150,7 +151,7 @@ def main():
         
         # endregion
 
-        if action == 2:
+        if action == 2 or action == 4:
             output_text = naive_compress(input_text)
         elif action == 3:
             output_text = naive_decompress(input_text)
@@ -160,7 +161,7 @@ def main():
         if write_to_file:
             with open(output_file_name, "w") as output_file:
                 output_file.write(output_text)
-        else:
+        elif action != 4:
             sys.stdout.write(output_text)
 
         print("")
