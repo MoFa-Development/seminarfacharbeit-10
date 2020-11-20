@@ -22,7 +22,7 @@
                 <textarea class="textarea" id="textarea2" placeholder="Ausgabe" readonly></textarea>
             </div>
             <div class="field">
-                <label class="label is-size-6 is-family-monospace"></label>
+                <label class="label is-size-6 is-family-monospace" id="label"></label>
             </div>
         </div>
     </body>
@@ -38,8 +38,8 @@ function onClick()
     url: "php/compress.php",
     data: { text: text}
     }).done(function( o ) {
-        o = o.split("-----");
-        document.getElementById("textarea2").value = o;
+        document.getElementById("textarea2").value = o.split("-----")[0];
+        document.getElementById("label").value = o.split("-----")[1];
     });
    
 }
