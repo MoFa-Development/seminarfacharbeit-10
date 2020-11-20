@@ -1,20 +1,27 @@
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" src="styles.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Seminarfacharbeit 10</title>
 
         <!--Libraries--->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <link rel="stylesheet" href="css/styles.css">
     </head>
     <body>
-        <center>
-            <div id="bgCrd">
-                <textarea id="textarea"></textarea>
-                <button onclick="onClick()">Komprimiere</button>
-                <textarea id="textarea2"></textarea>
+        <div class="bgCard">
+            <div class="control">
+                <textarea class="textarea has-fixed-size" id="textarea" placeholder="Eingabe"></textarea>
             </div>
-        </center>
+            <button onclick="onClick()">Komprimiere</button>
+            <div class="control">
+                <textarea class="textarea has-fixed-size" id="textarea2" placeholder="Ausgabe"></textarea>
+            </div>
+        </div>
     </body>
 </html>
 
@@ -22,13 +29,13 @@
 
 function onClick()
 {
-    var text = document.getElementById("textarea").textContent;
+    var text = document.getElementById("textarea").value;
     $.ajax({
     type: "POST",
-    url: "python/main.py",
-    data: { param: text}
+    url: "php/compress.php",
+    data: { text: text}
     }).done(function( o ) {
-        document.getElementById("textarea2").textContent = o.text;
+        document.getElementById("textarea2").value = o;
     });
    
 }
