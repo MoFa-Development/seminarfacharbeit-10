@@ -15,8 +15,8 @@
     <body>
         <div class="tabs is-large is-centered">
             <ul>
-              <li class="is-active"><a>Komprimieren</a></li>
-              <li><a href="decompress.html">Dekomprimieren</a></li>
+              <li><a href="index.html">Komprimieren</a></li>
+              <li class="is-active"><a>Dekomprimieren</a></li>
               <li><a href="stats.html">Statistiken</a></li>
               <li><a href="about.html">About</a></li>
             </ul>
@@ -26,7 +26,7 @@
             <div class="control">
                 <textarea class="textarea" id="textarea" placeholder="Eingabe"></textarea>
             </div>
-            <button class="button is-large is-fullwidth" onclick="onClick()">Komprimiere</button>
+            <button class="button is-large is-fullwidth" onclick="onClick()">Dekomprimiere</button>
             <div class="control">
                 <textarea class="textarea" id="textarea2" placeholder="Ausgabe" readonly></textarea>
             </div>
@@ -44,7 +44,7 @@ function onClick()
     var text = document.getElementById("textarea").value;
     $.ajax({
     type: "POST",
-    url: "php/compress.php",
+    url: "php/decompress.php",
     data: { text: text}
     }).done(function( o ) {
         var result = o.split("-----\n\n");

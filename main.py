@@ -169,7 +169,7 @@ def main():
         print("Input len:\t" + str(len(input_text)))
         print("Output len:\t" + str(len(output_text)))
         print("Duplikatswörter:\t" + str(len(words)))
-        print("\033[1mDatenersparnis:\t" + str(round(100 - len(output_text)/len(input_text)*100, 2)) + "%\033[0m")
+        print("\033[1mZeichen:\t" + str(round(100 - len(output_text)/len(input_text)*100, 2)) + "%\033[0m")
         print("")
 
     else:
