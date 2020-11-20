@@ -4,6 +4,7 @@
 
 import sys
 import re
+import datetime
 
 # endregion
 
@@ -177,4 +178,7 @@ def main():
         return()
 
 if __name__ == "__main__":
+    start = datetime.datetime.now().timestamp()
     main()
+    end = datetime.datetime.now().timestamp()
+    print(f"Laufzeit: {end-start} Sekunden")
