@@ -38,8 +38,9 @@ function onClick()
     url: "php/compress.php",
     data: { text: text}
     }).done(function( o ) {
-        document.getElementById("textarea2").value = o.split("-----")[0];
-        document.getElementById("label").innerHTML = o.split("-----")[1];
+        var result = o.split("-----");
+        document.getElementById("textarea2").value = result[0];
+        document.getElementById("label").innerText = result[1];
     });
    
 }
