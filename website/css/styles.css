@@ -1,14 +1,14 @@
 .bgCard{
     margin: auto;
     background-color: white;
-    max-width: 30%;
+    min-width: 400px;
     box-shadow: 0px 0 10px rgba(0, 0, 0, 0.8);
-    padding: 1%;
+    padding: 15px;
     border-radius: 10px;
 }
 
 .textarea{
-    min-width: 98%;
+    width: 98%;
     display: inline-block;
     margin-bottom: 30px;
 }
