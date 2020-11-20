@@ -8,11 +8,11 @@ body{
 .bgCard{
     margin: auto;
     background-color: white;
-    max-width: 20%;
-    width: 20%;
+    max-width: 30%;
     box-shadow: 0px 0 10px rgba(0, 0, 0, 0.8);
 }
 
 .textarea{
-    margin: 10px;
+    min-width: 98%;
+    display: inline-block;
 }
