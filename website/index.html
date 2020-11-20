@@ -39,7 +39,7 @@ function onClick()
     data: { text: text}
     }).done(function( o ) {
         document.getElementById("textarea2").value = o.split("-----")[0];
-        document.getElementById("label").value = o.split("-----")[1];
+        document.getElementById("label").innerHTML = o.split("-----")[1];
     });
    
 }
