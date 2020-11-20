@@ -2,8 +2,7 @@
 
 $text = $_POST["text"];
 
-$file = fopen("../../texts/temp.txt", "w") or die("Datei konnte nicht geöffnet werden.");
-shell_exec("sudo chmod 777 ../../texts/temp.txt");
+$file = fopen("/tmp/temp.txt", "w") or die("Datei konnte nicht geöffnet werden.");
 fwrite($file, $text) or die("Datei konnte nicht beschrieben werden.");
 fclose($file) or die("Datei konnte nicht geschlossen werden.");
 
