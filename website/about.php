@@ -24,7 +24,7 @@
         
         <div class="container is-max-desktop">
             <div class="notification is-primary">
-              Diese Website nutzt den Komprimierungsalgorithmus der <strong>Version <?php exec("git rev-list --all --count 2>&1", $result); echo($result); ?></strong>.
+              Diese Website nutzt den Komprimierungsalgorithmus der <strong>Version <?php exec("git rev-list --all --count 2>&1", $result); echo($result[0]); ?></strong>.
             </div>
           </div>
         
