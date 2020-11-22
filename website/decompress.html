@@ -26,7 +26,7 @@
             <div class="control">
                 <textarea class="textarea" id="textarea" placeholder="Eingabe"></textarea>
             </div>
-            <button class="button is-large is-fullwidth" onclick="onClick()">Dekomprimiere</button>
+            <button class="button is-large is-fullwidth" onclick="onClick()" id="btn1">Dekomprimiere</button>
             <div class="control">
                 <textarea class="textarea" id="textarea2" placeholder="Ausgabe" readonly></textarea>
             </div>
@@ -42,12 +42,17 @@
 
 function onClick()
 {
+    $("#btn1").toggleClass("is-loading");
+    $("#btn1").prop("disabled", function(i, v) { return !v; });
+
     var text = document.getElementById("textarea").value;
     $.ajax({
     type: "POST",
     url: "php/decompress.php",
     data: { text: text}
     }).done(function( o ) {
+        $("#btn1").toggleClass("is-loading");
+        $("#btn1").prop("disabled", function(i, v) { return !v; });
         var result = o.split("-----\n\n");
         result[1] = result[1].replace("\033[1m", "");
         result[1] = result[1].replace("\033[0m", "");
