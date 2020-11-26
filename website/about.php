@@ -17,7 +17,7 @@
             <ul>
               <li><a href="index.html">Komprimieren</a></li>
               <li><a href="decompress.html">Dekomprimieren</a></li>
-              <li><a href="stats.html">Statistiken</a></li>
+              <li><a href="stats.php">Statistiken</a></li>
               <li class="is-active"><a>About</a></li>
             </ul>
         </div>

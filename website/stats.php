@@ -22,6 +22,13 @@
             </ul>
         </div>
         
+            <?php
+
+                include "php/statsLoader.php";
+
+                
+
+            ?>
         
         
     </body>
