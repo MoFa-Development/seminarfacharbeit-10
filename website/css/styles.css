@@ -18,3 +18,9 @@
 .button{
     margin-bottom: 30px;
 }
+
+#plot{
+    display: block;
+    margin: auto;
+    max-width: 1000px;
+}
