@@ -1,6 +1,6 @@
 <?php
         //Mit Server verbinden und Datenbank auswaehlen
-        $database = mysqli_connect("localhost", "raspberry", "seminarfach2020") or die("Connection failed: " . mysqli_error($database));
+        $database = mysqli_connect("localhost", "raspberry", "seminarfach2020") or die("Connection failed: " . mysqli_error($database)); print_r($database);
         $db_selected = mysqli_select_db($database, "seminarfach");
           
         if (!$db_selected)
@@ -23,7 +23,7 @@
                       charRate int(3) NOT NULL,
                       genre varchar(30) NOT NULL,
                       PRIMARY KEY  (ID)
-                      )"; print_r($database); print_r($databse->query($sql));
+                      )";
             $result = $databse->query($sql) or die("Connection failed: " . mysqli_error($database));
         }
 
