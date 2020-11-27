@@ -1,6 +1,6 @@
 <?php
         //Mit Server verbinden und Datenbank auswaehlen
-        $database = mysqli_connect("localhost", "raspberry", "seminarfach2020");
+        $database = mysqli_connect("localhost", "raspberry", "seminarfach2020") or die("Connection failed: " . $database->connect_error);
         $db_selected = mysqli_select_db($database, "seminarfach");
 
         if ($database->connect_error)
