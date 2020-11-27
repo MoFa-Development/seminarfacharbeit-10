@@ -22,8 +22,8 @@
                       duplicateWords int(11) NOT NULL,
                       charRate int(3) NOT NULL,
                       PRIMARY KEY  (ID)
-                      )";
-            $result = $databse->query($sql) or die("Connection failed: " . mysqli_error($database));echo mysqli_errno($database);
+                      )"; print_r($database); print_r($databse->query($sql));
+            $result = $databse->query($sql) or die("Connection failed: " . mysqli_error($database));
         }
 
         $final_result = [];
