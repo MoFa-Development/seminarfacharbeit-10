@@ -7,10 +7,10 @@
             $sql = 'CREATE DATABASE seminarfach';
 
         
-        $database->set_charset("utf8");die("test");
+        $database->set_charset("utf8");
         
         $sql = "* FROM articles";
-        $result = $database->query($sql);
+        $result = $database->query($sql); echo "1";
 
         if(empty($result)) 
         {
@@ -23,18 +23,18 @@
                       charRate int(3) NOT NULL,
                       PRIMARY KEY  (ID)
                       )";
-            $result = $databse->query($sql);
+            $result = $databse->query($sql);echo "2";
         }
 
         $final_result = [];
 
         if ($result->num_rows > 0) 
         {
-            $rowNr = 1;
+            $rowNr = 1;echo "3";
             while($row = mysqli_fetch_assoc($result)) 
             {
                 $final_result[$rowNr] = $row;
-                $rowNr += 1;
+                $rowNr += 1;echo "4";
             }
         }
         else 
