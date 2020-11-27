@@ -9,7 +9,7 @@
         
         $database->set_charset("utf8");
         
-        $sql = "* FROM articles";
+        $sql = "SELECT * FROM articles";
         $result = $database->query($sql);
 
         if(empty($result)) 
@@ -21,6 +21,7 @@
                       outputLen int(11) NOT NULL,
                       duplicateWords int(11) NOT NULL,
                       charRate int(3) NOT NULL,
+                      genre varchar(30) NOT NULL,
                       PRIMARY KEY  (ID)
                       )"; print_r($database); print_r($databse->query($sql));
             $result = $databse->query($sql) or die("Connection failed: " . mysqli_error($database));
