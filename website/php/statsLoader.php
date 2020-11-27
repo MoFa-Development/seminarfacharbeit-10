@@ -1,7 +1,6 @@
 <?php
         //Mit Server verbinden und Datenbank auswaehlen
         $database = mysqli_connect("localhost", "raspberry", "seminarfach2020") or die("Connection failed: " . mysqli_error($database));
-        die("test");
         $db_selected = mysqli_select_db($database, "seminarfach");
           
         if (!$db_selected)
@@ -42,3 +41,4 @@
         {
             echo "0 results";
         }
+        die("test");
