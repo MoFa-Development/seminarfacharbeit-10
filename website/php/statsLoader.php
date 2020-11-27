@@ -10,10 +10,10 @@
         $database->set_charset("utf8");
         
         $sql = "* FROM articles";
-        $result = $database->query($sql); echo "1";
+        $result = $database->query($sql);
 
         if(empty($result)) 
-        {echo "1.1";
+        {
             $sql = "CREATE TABLE articles (
                       ID int(11) AUTO_INCREMENT,
                       topTenWords varchar(100) NOT NULL,
@@ -22,8 +22,10 @@
                       duplicateWords int(11) NOT NULL,
                       charRate int(3) NOT NULL,
                       PRIMARY KEY  (ID)
-                      )";echo "1.2";
-            $result = $databse->query($sql);echo "2";
+                      )";
+                      echo "wa";
+            $result = $databse->query($sql);
+            echo "rum";
         }
 
         $final_result = [];
