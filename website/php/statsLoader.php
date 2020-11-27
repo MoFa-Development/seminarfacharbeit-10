@@ -23,9 +23,7 @@
                       charRate int(3) NOT NULL,
                       PRIMARY KEY  (ID)
                       )";
-                      echo "wa";
-            $result = $databse->query($sql);
-            echo "rum";
+            $result = $databse->query($sql) or die("Connection failed: " . mysqli_error($database));;
         }
 
         $final_result = [];
