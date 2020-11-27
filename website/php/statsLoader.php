@@ -7,8 +7,8 @@
             $sql = 'CREATE DATABASE seminarfach';
 
         
-        $database->set_charset("utf8");
-
+        $database->set_charset("utf8");die("test");
+        
         $sql = "* FROM articles";
         $result = $database->query($sql);
 
@@ -41,4 +41,3 @@
         {
             echo "0 results";
         }
-        die("test");
