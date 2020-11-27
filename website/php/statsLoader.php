@@ -3,16 +3,17 @@
         $database = mysqli_connect("localhost", "raspberry", "seminarfach2020");
         $db_selected = mysqli_select_db($database, "seminarfach");
 
+        if ($database->connect_error)
+            die("Connection failed: " . $database->connect_error);
+          
         if (!$db_selected)
             $sql = 'CREATE DATABASE seminarfach';
 
+        
         $database->set_charset("utf8");
 
-        if ($conn->connect_error)
-            die("Connection failed: " . $conn->connect_error);
-          
         $sql = "* FROM articles";
-        $result = $conn->query($sql);
+        $result = $database->query($sql);
 
         if(empty($result)) 
         {
@@ -25,7 +26,7 @@
                       charRate int(3) NOT NULL,
                       PRIMARY KEY  (ID)
                       )";
-            $result = $conn->query($sql);
+            $result = $databse->query($sql);
         }
 
         $final_result = [];
