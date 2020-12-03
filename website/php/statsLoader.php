@@ -1,6 +1,6 @@
 <?php
         //Mit Server verbinden und Datenbank auswaehlen
-        $database = mysqli_connect("localhost", "raspberry", "seminarfach2020") or die("Connection failed: " . mysqli_error($database));
+        $database = mysqli_connect("localhost", getenv("sfDbName"), getenv("sfDbPassword")) or die("Connection failed: " . mysqli_error($database));
         $db_selected = mysqli_select_db($database, "seminarfach");
         
         
@@ -26,7 +26,7 @@
                       outputLen int(11) NOT NULL,
                       duplicateWords int(11) NOT NULL,
                       charRate int(3) NOT NULL,
-                      genre varchar(30) NOT NULL,
+                      author varchar(30) NOT NULL,
                       PRIMARY KEY  (ID)
                       )";
             $database->query($sql) or die("Connection failed: " . mysqli_error($database)); //WARUM ZUM F*** IST $database == null ???!?!?!?!?!
@@ -48,5 +48,5 @@
         }
         else 
         {
-            echo "0 results";
+            echo "Keine Daten vorhanden";
         }

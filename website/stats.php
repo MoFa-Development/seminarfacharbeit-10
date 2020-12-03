@@ -45,7 +45,7 @@ foreach($fr as $r)
 {
     $rid = strval($r["id"]);
 
-    $genre = $r["genre"];
+    $author = $r["author"];
     $charRate = $r["charRate"];
     $duplicateWords = $r["duplicateWords"];
     $topTenWords = $r["topTenWords"];
@@ -56,7 +56,7 @@ foreach($fr as $r)
     var trace$rid = {
         x: [$inputLen],
         y: [$outputLen],
-        text: ['Genre: $genre<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
+        text: ['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
         mode: 'markers',
         marker: {
           size: [$duplicateWords*100],
