@@ -11,7 +11,8 @@ import datetime
 # region konstanten
 
 LIST_REPLACEMENTS = ["[", "]", "'", ","]
-LIST_DELIMITERS = ['-', '+', '=', ':', '>', '<', ' ', '\n', '\t', '.', '¿', '?', ',', '¡', '!', ';', '(', ')', '[', ']', '{', '}', '$', '#', '/', '&', '\"', '\'']
+LIST_DELIMITERS = ['-', '+', '=', ':', '>', '<', ' ', '\n', '\t', '.', '¿', '?', ',',
+                   '¡', '!', ';', '(', ')', '[', ']', '{', '}', '$', '#', '/', '&', '\"', '\'', '»', '«']
 
 ACTIONS = {"help": 1, "cn": 2, "compress-naive": 2, "dn": 3, "decompress-naive": 3, "compress-naive-no-output": 4, "cnno": 4}
 HELP = """
