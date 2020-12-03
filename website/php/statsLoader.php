@@ -12,7 +12,7 @@
         $sql = "SELECT * FROM articles";
         $result = $database->query($sql);
 
-        if(empty($result)) 
+        if(empty($result))
         {
             $sql = "CREATE TABLE articles (
                       ID int(11) AUTO_INCREMENT,

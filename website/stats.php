@@ -32,6 +32,7 @@
 
     include "php/statsLoader.php";
     $fr = $final_result;
+
 ?>
 
 
@@ -44,11 +45,18 @@ foreach($fr as $r)
 {
     $rid = $r["id"];
 
+    $genre = $r["genre"];
+    $charRate = $r["charRate"];
+    $duplicateWords = $r["duplicateWords"];
+    $topTenWords = $r["topTenWords"];
+    $inputLen = $r["inputLen"];
+    $outputLen = $r["outputLen"];
+
     echo"
     var trace$rid = {
         x: [1, 2, 3, 4],
         y: [10, 11, 12, 13],
-        text: ['A<br>size: 40', 'B<br>size: 60', 'C<br>size: 80', 'D<br>size: 100'],
+        text: ['Genre: $genre', 'CharRate: $charRate', 'Duplikatswörter: $duplicateWords', 'InputLen: $inputLen', 'OutputLen: $outputLen'],
         mode: 'markers',
         marker: {
           size: [400, 600, 800, 1000],
