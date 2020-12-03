@@ -29,8 +29,7 @@
                       genre varchar(30) NOT NULL,
                       PRIMARY KEY  (ID)
                       )";
-            print_r($database);
-            $result = $databse->query($sql) or die("Connection failed: " . mysqli_error($database)); //WARUM ZUM F*** IST $database == null ???!?!?!?!?!
+            $result = $database->query($sql) or die("Connection failed: " . mysqli_error($database)); //WARUM ZUM F*** IST $database == null ???!?!?!?!?!
         }
 
         $final_result = [];
