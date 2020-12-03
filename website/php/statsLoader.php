@@ -1,18 +1,23 @@
 <?php
         //Mit Server verbinden und Datenbank auswaehlen
-        $database = mysqli_connect("localhost", "raspberry", "seminarfach2020") or die("Connection failed: " . mysqli_error($database)); print_r($database);
+        $database = mysqli_connect("localhost", "raspberry", "seminarfach2020") or die("Connection failed: " . mysqli_error($database));
         $db_selected = mysqli_select_db($database, "seminarfach");
-          
-        if (!$db_selected)
-            $sql = 'CREATE DATABASE seminarfach';
+        
+        
 
+        if (!$db_selected)
+        {
+            $sql = 'CREATE DATABASE seminarfach';
+            $database->query($sql);
+            $db_selected = mysqli_select_db($database, "seminarfach");
+        }
         
         $database->set_charset("utf8");
         
         $sql = "SELECT * FROM articles";
         $result = $database->query($sql);
-
-        if(empty($result)) 
+        
+        if(empty($result))
         {
             $sql = "CREATE TABLE articles (
                       ID int(11) AUTO_INCREMENT,
@@ -24,7 +29,7 @@
                       genre varchar(30) NOT NULL,
                       PRIMARY KEY  (ID)
                       )";
-            $result = $databse->query($sql) or die("Connection failed: " . mysqli_error($database));
+            $result = $database->query($sql) or die("Connection failed: " . mysqli_error($database)); //WARUM ZUM F*** IST $database == null ???!?!?!?!?!
         }
 
         $final_result = [];
