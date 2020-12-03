@@ -76,7 +76,7 @@ echo "var data = [".$str."];";
 
 
 var layout = {
-  title: 'Statistiken der Komprimierbarkeit von Texten verschiedenen Genres',
+  title: 'Statistiken der Komprimierbarkeit von Texten verschiedener Autoren',
   showlegend: true,
 };
 
