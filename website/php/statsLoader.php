@@ -20,7 +20,7 @@
         if(empty($result))
         {
             $sql = "CREATE TABLE articles (
-                      ID int(11) AUTO_INCREMENT,
+                      id int(11) AUTO_INCREMENT,
                       topTenWords varchar(100) NOT NULL,
                       inputLen int(11) NOT NULL,
                       outputLen int(11) NOT NULL,
@@ -29,18 +29,21 @@
                       genre varchar(30) NOT NULL,
                       PRIMARY KEY  (ID)
                       )";
-            $result = $database->query($sql) or die("Connection failed: " . mysqli_error($database)); //WARUM ZUM F*** IST $database == null ???!?!?!?!?!
+            $database->query($sql) or die("Connection failed: " . mysqli_error($database)); //WARUM ZUM F*** IST $database == null ???!?!?!?!?!
+            
+            $sql = "SELECT * FROM articles";
+            $result = $database->query($sql);
         }
 
         $final_result = [];
 
         if ($result->num_rows > 0) 
         {
-            $rowNr = 1;echo "3";
+            $rowNr = 1;
             while($row = mysqli_fetch_assoc($result)) 
             {
                 $final_result[$rowNr] = $row;
-                $rowNr += 1;echo "4";
+                $rowNr += 1;
             }
         }
         else 

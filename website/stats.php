@@ -43,7 +43,7 @@
 $str = "";
 foreach($fr as $r)
 {
-    $rid = $r["id"];
+    $rid = strval($r["id"]);
 
     $genre = $r["genre"];
     $charRate = $r["charRate"];
@@ -54,19 +54,18 @@ foreach($fr as $r)
 
     echo"
     var trace$rid = {
-        x: [1, 2, 3, 4],
-        y: [10, 11, 12, 13],
-        text: ['Genre: $genre', 'CharRate: $charRate', 'Duplikatswörter: $duplicateWords', 'InputLen: $inputLen', 'OutputLen: $outputLen'],
+        x: [$inputLen],
+        y: [$outputLen],
+        text: ['Genre: $genre<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
         mode: 'markers',
         marker: {
-          size: [400, 600, 800, 1000],
+          size: [$duplicateWords*100],
           sizeref: 2,
           sizemode: 'area'
         }
       };
     ";
-
-    $str += "trace".$rid.", ";
+    $str .= "trace".$rid."  , ";
 }
 $str = rtrim($str, ", ");
 
