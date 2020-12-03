@@ -1,5 +1,5 @@
 <?php
-echo getenv("sfDbName");
+var_dump(getenv("sfDbName"));
 
         //Mit Server verbinden und Datenbank auswaehlen
         $database = mysqli_connect("localhost", getenv("sfDbName"), getenv("sfDbPassword")) or die("Connection failed: " . mysqli_error($database));
