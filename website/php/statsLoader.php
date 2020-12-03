@@ -1,8 +1,6 @@
 <?php
-var_dump(getenv("sfDbName"));
-
         //Mit Server verbinden und Datenbank auswaehlen
-        $database = mysqli_connect("localhost", getenv("sfDbName"), getenv("sfDbPassword")) or die("Connection failed: " . mysqli_error($database));
+        $database = mysqli_connect("localhost", getenv("SFDBNAME"), getenv("SFDBPASSWORD")) or die("Connection failed: " . mysqli_error($database));
         $db_selected = mysqli_select_db($database, "seminarfach");
         
         
