@@ -20,7 +20,7 @@ class crawler:
             werk_page = requests.get("https://projekt-gutenberg.org"+werk_link[5:])
             werk_source = html.fromstring(werk_page.content)
 
-            filename = "/".join(werk_link[5:].split("/")[:-1])[1:]+".txt"
+            filename = "projekt-gutenberg"+"/".join(werk_link[5:].split("/")[:-1])+".txt"
             print(filename)
 
             os.makedirs(os.path.dirname(filename), exist_ok=True)
