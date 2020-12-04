@@ -63,7 +63,9 @@ foreach($fr as $r)
         echo
         "
 
-        Plotly.extendTraces(document.getElementById('plot'), [{
+        Plotly.extendTraces(
+          'plot', 
+        [{
           x: [$inputLen],
           y: [$outputLen]
         }], [$index]);
