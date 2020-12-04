@@ -115,10 +115,10 @@ var layout = {
   title: 'Statistiken der Komprimierbarkeit von Texten verschiedener Autoren',
   showlegend: true,
   xaxis: {
-    title: 'CharRate'
+    title: 'InputLen'
   },
   yaxis: {
-    title: 'InputLen'
+    title: 'CharRate'
   }
 };
 
