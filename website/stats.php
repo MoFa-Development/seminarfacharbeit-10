@@ -43,6 +43,7 @@
 $str = "";
 
 $authors = [];
+$additions = [];
 
 foreach($fr as $r)
 {
@@ -60,7 +61,8 @@ foreach($fr as $r)
       if(in_array($author, $authors))
       {
         $index = strval(array_search($author, $authors));
-        echo
+
+        $additions[] =
         "
 
         Plotly.extendTraces(
@@ -109,5 +111,15 @@ var layout = {
 var config = {responsive: true}
 
 Plotly.newPlot('plot', data, layout, config);
+
+<?php
+
+foreach($additions as $addition)
+{
+  echo $addition;
+}
+
+?>
+
 
 </script>
