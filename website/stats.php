@@ -55,8 +55,8 @@ foreach($fr as $r)
         echo
         "
         Plotly.extendTraces('plot', {
-          x: [$inputLen],
-          y: [$outputLen]
+          x: [[$inputLen]],
+          y: [[$outputLen]]
         }, [$index]);
         ";
 
