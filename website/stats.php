@@ -48,6 +48,15 @@ foreach($fr as $r)
 {
     $author = $r["author"];
 
+    $rid = strval($r["id"]);
+
+    $charRate = $r["charRate"];
+    $duplicateWords = $r["duplicateWords"];
+    $topTenWords = $r["topTenWords"];
+    $inputLen = $r["inputLen"];
+    $outputLen = $r["outputLen"];
+
+    
       if(in_array($author, $authors))
       {
         $index = strval(array_search($author, $authors));
@@ -61,14 +70,6 @@ foreach($fr as $r)
 
         continue;
       }
-
-    $rid = strval($r["id"]);
-
-    $charRate = $r["charRate"];
-    $duplicateWords = $r["duplicateWords"];
-    $topTenWords = $r["topTenWords"];
-    $inputLen = $r["inputLen"];
-    $outputLen = $r["outputLen"];
 
     $authors[] = $author;
 
