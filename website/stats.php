@@ -50,13 +50,13 @@ foreach($fr as $r)
 
       if(in_array($author, $authors))
       {
-        $index = array_search($author, $author);
+        $index = strval(array_search($author, $author));
 
         echo
         "
         Plotly.extendTraces('plot', {
-          x: [[$inputLen]],
-          y: [[$outputLen]]
+          x: [$inputLen],
+          y: [$outputLen]
         }, [$index]);
         ";
 
