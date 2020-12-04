@@ -41,19 +41,40 @@
 <?php
 
 $str = "";
+
+$authors = [];
+
 foreach($fr as $r)
 {
+    $author = $r["author"];
+
+      if(in_array($author, $authors))
+      {
+        $index = array_search($author, $author);
+
+        echo
+        "
+        Plotly.extendTraces('plot', {
+          x: [$inputLen],
+          y: [$outputLen]
+        }, [$index]);
+        ";
+
+        continue;
+      }
+
     $rid = strval($r["id"]);
 
-    $author = $r["author"];
     $charRate = $r["charRate"];
     $duplicateWords = $r["duplicateWords"];
     $topTenWords = $r["topTenWords"];
     $inputLen = $r["inputLen"];
     $outputLen = $r["outputLen"];
 
+    $authors[] = $author;
+
     echo"
-    var trace$rid = {
+    var $author = {
         x: [$inputLen],
         y: [$outputLen],
         name: '$author',
@@ -66,7 +87,7 @@ foreach($fr as $r)
         }
       };
     ";
-    $str .= "trace".$rid."  , ";
+    $str .= $author."  , ";
 }
 $str = rtrim($str, ", ");
 
