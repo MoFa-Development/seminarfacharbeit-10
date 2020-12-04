@@ -63,10 +63,10 @@ foreach($fr as $r)
         echo
         "
 
-        Plotly.extendTraces('plot', {
-          x: [[1]],
-          y: [[2]]
-        }, $index);
+        Plotly.extendTraces('plot', [{
+          x: [1],
+          y: [2]
+        }], $index);
 
         ";
 
