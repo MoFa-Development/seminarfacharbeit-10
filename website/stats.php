@@ -88,7 +88,7 @@ foreach($fr as $r)
     $authors[] = $author;
 
     echo"
-    var $author = {
+    var $rid = {
         x: [$inputLen],
         y: [$outputLen],
         name: '$author',
