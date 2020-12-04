@@ -68,9 +68,9 @@ foreach($fr as $r)
         Plotly.extendTraces(
           'plot', 
         {
-          x: [[$inputLen]],
-          //y: [$outputLen]
-        }, $index);
+          x: [$inputLen],
+          y: [$outputLen]
+        }, [$index]);
 
         ";
 
@@ -123,7 +123,6 @@ foreach($additions as $addition)
 }
 
 ?>
-
   
 }, 5000);
 
