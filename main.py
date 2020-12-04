@@ -33,9 +33,6 @@ cnno / compress-naive-no-output -   Naive Kompression ohne ausgabe des Textes
 
 # endregion
 
-#! Dieser Ansatz baut darauf, dass Worte wiederholt werden und gewinnt
-#! ausschließlich daraus Kompressionsvolumen. 
-
 def find(string:str, substring:str):
     indexes = []
 
@@ -91,6 +88,22 @@ def naive_compress(input_text: str):
             index += len(str(word_index))+1
         else:
             index += len(word)+1
+
+    top_words = {}
+
+    for word in words:
+        top_words[word] = input_words.count(word)
+    
+    top_words = sorted(top_words.items(), key=lambda x: x[1], reverse=True)
+
+    top_words_str = ""
+
+    for word, amount in top_words:
+        top_words_str += f"{word}:{amount},"
+
+    top_words_str = top_words_str[:-1]
+
+    print("top_words: "+top_words_str) # das ist nicht schön, das sollte irgendwie übergeben werden
 
     words_str = " ".join(words)
 
@@ -166,13 +179,10 @@ def main():
         elif action != 4:
             sys.stdout.write(output_text)
 
-        print("-----")
-        print("")
-        print("Input len:\t" + str(len(input_text)))
-        print("Output len:\t" + str(len(output_text)))
-        print("Duplikatswörter:\t" + str(len(words)))
-        print("\033[1mZeichen:\t" + str(round(100 - len(output_text)/len(input_text)*100, 2)) + "%\033[0m")
-        print("")
+        print("input_len: " + str(len(input_text)))
+        print("output_len: " + str(len(output_text)))
+        print("duplicate_words: " + str(len(words)))
+        print("char_rate: " + str(round(100 - len(output_text)/len(input_text)*100, 2)))
 
     else:
         usage()
@@ -182,4 +192,4 @@ if __name__ == "__main__":
     start = datetime.datetime.now().timestamp()
     main()
     end = datetime.datetime.now().timestamp()
-    print(f"Laufzeit: {round(end-start, 4)} Sekunden")
+    print(f"exec_time: {round(end-start, 6)}")
