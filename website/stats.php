@@ -62,10 +62,11 @@ foreach($fr as $r)
         $index = strval(array_search($author, $authors));
         echo
         "
-        Plotly.extendTraces('plot', {
-          x: [[$inputLen]],
+        Plotly.extendTraces('plot', [{
+          x: [[$inputLen]]
+        },{
           y: [[$outputLen]]
-        }, [$index]);
+          }], [$index]);
         ";
 
         continue;
