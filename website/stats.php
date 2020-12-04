@@ -88,7 +88,7 @@ foreach($fr as $r)
     $authors[] = $author;
 
     echo"
-    var $rid = {
+    var t$rid = {
         x: [$inputLen],
         y: [$outputLen],
         name: '$author',
@@ -101,7 +101,7 @@ foreach($fr as $r)
         }
       };
     ";
-    $str .= $author."  , ";
+    $str .= "t".$rid."  , ";
 }
 $str = rtrim($str, ", ");
 
