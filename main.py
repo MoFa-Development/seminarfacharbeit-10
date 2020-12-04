@@ -94,7 +94,7 @@ def naive_compress(input_text: str):
     for word in words:
         top_words[word] = input_words.count(word)
     
-    top_words = sorted(top_words.items(), key=lambda x: x[1], reverse=True)
+    top_words = sorted(top_words.items(), key=lambda x: x[1], reverse=True)[:50]
 
     top_words_str = ""
 

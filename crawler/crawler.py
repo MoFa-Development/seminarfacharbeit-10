@@ -28,6 +28,8 @@ class crawler:
             i += 1
 
         for werk_link in alle_werke:
+            if "misc.html" in werk_link:
+                continue
             werk_page = requests.get("https://projekt-gutenberg.org"+werk_link[5:])
             werk_source = html.fromstring(werk_page.content)
 
@@ -44,6 +46,7 @@ class crawler:
 
             while werk_source.xpath("/html/body/a[3]/@href") and "weiter" in werk_source.xpath("/html/body/a[3]")[0].text:
                 newlink = "https://projekt-gutenberg.org" + "/".join(werk_link[5:].split("/")[:-1]) + "/" + werk_source.xpath("/html/body/a[3]/@href")[0]
+                print(newlink)
                 werk_page = requests.get(newlink)
                 werk_source = html.fromstring(werk_page.content)
                 
