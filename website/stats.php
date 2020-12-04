@@ -69,7 +69,15 @@ foreach($fr as $r)
           'plot', 
         {
           x: [[$inputLen]],
-          y: [[$outputLen]]
+          y: [[$outputLen]],
+          name: '$author',
+          text: ['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
+          mode: 'markers',
+          marker: {
+            size: [$duplicateWords*100],
+            sizeref: 2,
+            sizemode: 'area'
+          }
         }, [$index]);
 
         ";
