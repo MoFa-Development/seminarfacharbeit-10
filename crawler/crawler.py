@@ -67,10 +67,12 @@ class crawler:
                     split = line.split(": ")
                     data[split[0]] = split[1]
 
-            sql = "INSERT INTO articles (topTenWords, inputLen, outputLen, duplicateWords, charRate, author, execTime) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO articles (topWords, inputLen, outputLen, duplicateWords, charRate, author, execTime) VALUES (%s, %s, %s, %s, %s, %s, %s)"
             val = (data["top_words"], int(data["input_len"]), int(data["output_len"]), int(data["duplicate_words"]), float(data["char_rate"]), author, float(data["exec_time"]))
             db_cursor.execute(sql, val)
             db.commit()
+
+            os.remove(filename)
 
             # Es ist 00:17 Uhr, ich habe ungefähr 3 Stunden gearbeitet und fange an in die Leere starrend "Don't worry be happy" zu summen, nachdem ich eine nach der anderen kryptischen Fehlermeldung gefixt habe. 
 
