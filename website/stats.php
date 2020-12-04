@@ -41,21 +41,57 @@
 <?php
 
 $str = "";
+
+$authors = [];
+$additions = [];
+
 foreach($fr as $r)
 {
+    $author = $r["author"];
+
     $rid = strval($r["id"]);
 
-    $author = $r["author"];
     $charRate = $r["charRate"];
     $duplicateWords = $r["duplicateWords"];
     $topTenWords = $r["topTenWords"];
     $inputLen = $r["inputLen"];
     $outputLen = $r["outputLen"];
 
+
+      if(in_array($author, $authors))
+      {
+        $index = strval(array_search($author, $authors));
+
+        $additions[] =
+        "
+
+        Plotly.extendTraces(
+          'plot', 
+        {
+          x: [[$inputLen]],
+          y: [[$outputLen]],
+          name: ['$author'],
+          text: [['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
+          mode: ['markers'],
+          marker: [{
+            size: [$duplicateWords*100],
+            sizeref: 2,
+            sizemode: 'area'
+          }]
+        }, [$index]);
+
+        ";
+
+        continue;
+      }
+
+    $authors[] = $author;
+
     echo"
-    var trace$rid = {
+    var $author = {
         x: [$inputLen],
         y: [$outputLen],
+        name: '$author',
         text: ['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
         mode: 'markers',
         marker: {
@@ -65,7 +101,7 @@ foreach($fr as $r)
         }
       };
     ";
-    $str .= "trace".$rid."  , ";
+    $str .= $author."  , ";
 }
 $str = rtrim($str, ", ");
 
@@ -83,5 +119,15 @@ var layout = {
 var config = {responsive: true}
 
 Plotly.newPlot('plot', data, layout, config);
+
+<?php
+
+foreach($additions as $addition)
+{
+  echo $addition;
+}
+
+?>
+
 
 </script>
