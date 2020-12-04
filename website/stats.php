@@ -112,7 +112,8 @@ var config = {responsive: true}
 
 Plotly.newPlot('plot', data, layout, config);
 
-await sleep(2000);
+setTimeout(function () 
+{
 
 <?php
 
@@ -122,6 +123,9 @@ foreach($additions as $addition)
 }
 
 ?>
+
+  
+}, 5000);
 
 
 </script>
