@@ -2,6 +2,14 @@
 from lxml import html
 import requests
 import os
+import mysql.connector
+
+db = mysql.connector.connect(
+            host="localhost",
+            user=os.getenv('SF_DB_NAME'),
+            password=os.getenv('SF_DB_PASSWORD')
+            )
+
 
 class crawler:
     def __init__(self, link):
