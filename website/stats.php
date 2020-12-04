@@ -69,7 +69,7 @@ foreach($fr as $r)
           'plot', 
         {
           x: [[$inputLen]],
-          y: [[$outputLen]],
+          y: [[$charRate]],
           name: ['$author'],
           text: [['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
           mode: ['markers'],
@@ -90,7 +90,7 @@ foreach($fr as $r)
     echo"
     var t$rid = {
         x: [$inputLen],
-        y: [$outputLen],
+        y: [$charRate],
         name: '$author',
         text: ['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
         mode: 'markers',
@@ -114,6 +114,12 @@ echo "var data = [".$str."];";
 var layout = {
   title: 'Statistiken der Komprimierbarkeit von Texten verschiedener Autoren',
   showlegend: true,
+  xaxis: {
+    title: 'CharRate'
+  },
+  yaxis: {
+    title: 'InputLen'
+  }
 };
 
 var config = {responsive: true}
