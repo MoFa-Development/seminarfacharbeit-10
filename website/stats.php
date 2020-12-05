@@ -72,7 +72,7 @@ foreach($fr as $r)
           y: [[$charRate]],
           name: [[['$author']]],
           text: [['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
-          mode: [['markers']],
+          mode: 'markers',
           marker: [{
             size: [$duplicateWords*100],
             sizeref: 2,
@@ -91,7 +91,7 @@ foreach($fr as $r)
     var t$rid = {
         x: [$inputLen],
         y: [$charRate],
-        name: '$author',
+        name: ['$author'],
         text: ['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
         mode: 'markers',
         marker: {
