@@ -71,7 +71,7 @@ foreach($fr as $r)
           x: [[$inputLen]],
           y: [[$charRate]],
           name: [['$author']],
-          text: [['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
+          text: [['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
           mode: [['markers']],
           marker: [[{
             size: [$duplicateWords*100],
@@ -92,7 +92,7 @@ foreach($fr as $r)
         x: [$inputLen],
         y: [$charRate],
         name: ['$author'],
-        text: ['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
+        text: ['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
         mode: ['markers'],
         marker: [{
           size: [$duplicateWords*100],
