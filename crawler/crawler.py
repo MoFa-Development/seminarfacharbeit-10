@@ -52,7 +52,8 @@ class crawler:
             db_cursor.execute("SELECT value FROM temp WHERE name = 'clustering';")
             self.i = db_cursor.fetchone()[0]+1
             db_cursor.execute(f"UPDATE temp SET value = {self.i} WHERE name = 'clustering';")
-            
+            db.commit()
+
             print("index: "+str(self.i))
             
             werk_info = alle_werke[self.i]
@@ -110,9 +111,9 @@ class crawler:
                     split = line.split(": ")
                     data[split[0]] = split[1]
 
-            sql = "INSERT INTO articles (topWords, inputLen, outputLen, duplicateWords, charRate, author, execTime, title, genre) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            sql = "INSERT INTO articles (topWords, inputLen, outputLen, duplicateWords, charRate, author, execTime, title, genre, url) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
             val = (data["top_words"], int(data["input_len"]), int(data["output_len"]), int(
-                data["duplicate_words"]), float(data["char_rate"]), author, float(data["exec_time"]), title, genre)
+                data["duplicate_words"]), float(data["char_rate"]), author, float(data["exec_time"]), title, genre, "https://projekt-gutenberg.org"+werk_link[5:])
             db_cursor.execute(sql, val)
             db.commit()
 
