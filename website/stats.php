@@ -56,6 +56,7 @@ foreach($fr as $r)
     $topTenWords = $r["topTenWords"];
     $inputLen = $r["inputLen"];
     $outputLen = $r["outputLen"];
+    $title = $r["title"];
 
 
       if(in_array($author, $authors))
@@ -70,12 +71,14 @@ foreach($fr as $r)
         {
           x: [[$inputLen]],
           y: [[$charRate]],
-          text: [['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
+          hovertemplate: [['%{text}']],
+          text: [['Titel: $title<br>Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
           mode: [['markers']],
           marker: [[{
             size: $duplicateWords*100,
             sizeref: 2,
-            sizemode: 'area'
+            sizemode: 'area',
+            opacity: 0.3
           }]]
         }, [$index]);
 
@@ -91,12 +94,14 @@ foreach($fr as $r)
         x: [$inputLen],
         y: [$charRate],
         name: '$author',
-        text: ['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
+        hovertemplate: ['%{text}'],
+        text: ['Titel: $title<br>Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
         mode: ['markers'],
         marker: [{
           size: [$duplicateWords*10],
           sizeref: 2,
-          sizemode: 'area'
+          sizemode: 'area',
+          opacity: 0.3
         }]
       };
     ";
