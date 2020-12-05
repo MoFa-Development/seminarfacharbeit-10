@@ -72,11 +72,11 @@ foreach($fr as $r)
           y: [[$charRate]],
           text: [['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
           mode: [['markers']],
-          marker: {
+          marker: [{
             size: [$duplicateWords*100],
             sizeref: 2,
             sizemode: 'area'
-          }
+          }]
         }, [$index]);
 
         ";
@@ -93,11 +93,11 @@ foreach($fr as $r)
         name: '$author',
         text: ['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
         mode: ['markers'],
-        marker: [{
+        marker: {
           size: [$duplicateWords*100],
           sizeref: 2,
           sizemode: 'area'
-        }]
+        }
       };
     ";
     $str .= "t".$rid."  , ";
