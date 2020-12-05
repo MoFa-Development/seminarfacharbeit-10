@@ -70,13 +70,7 @@ foreach($fr as $r)
         {
           x: [[$inputLen]],
           y: [[$charRate]],
-          text: [['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
-          mode: [['markers']],
-          marker: [[{
-            size: [$duplicateWords*100],
-            sizeref: 2,
-            sizemode: 'area'
-          }]]
+          text: [['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']]
         }, [$index]);
 
         ";
@@ -92,12 +86,12 @@ foreach($fr as $r)
         y: [$charRate],
         name: '$author',
         text: ['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
-        mode: ['markers'],
-        marker: [{
+        mode: 'markers',
+        marker: {
           size: [$duplicateWords*100],
           sizeref: 2,
           sizemode: 'area'
-        }]
+        }
       };
     ";
     $str .= "t".$rid."  , ";
