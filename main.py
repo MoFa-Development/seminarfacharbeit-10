@@ -171,7 +171,10 @@ def main():
         print("input_len: " + str(len(input_text)))
         print("output_len: " + str(len(output_text)))
         print("duplicate_words: " + str(len(words)))
-        print("char_rate: " + str(round(100 - len(output_text)/len(input_text)*100, 2)))
+        if len(input_text) == 0:
+            print("char_rate: 0")
+        else:
+            print("char_rate: " + str(round(100 - len(output_text)/len(input_text)*100, 2)))
 
     else:
         usage()

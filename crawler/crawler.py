@@ -24,14 +24,10 @@ class crawler:
         alle_werke = []
 
         tmp_author = ""
-        tmp_len = 0
 
         for item in source.xpath("/html/body/dl/*"):
             if item.tag == "dt":
                 tmp_author = item.text
-                if len(tmp_author) > tmp_len:
-                    print(len(tmp_author))
-                    tmp_len = len(tmp_author)
             elif item.tag == "dd":
                 children = item.getchildren()
                 if len(children) >= 2 and "href" in children[0].attrib and children[1].getchildren():
@@ -41,9 +37,6 @@ class crawler:
         if len(sys.argv) == 2:
             print("Untere Grenze: "+sys.argv[1])
             alle_werke = alle_werke[int(sys.argv[1]):]
-        elif len(sys.argv) == 3:
-            print("Untere Grenze: "+sys.argv[1]+ "; Obere Grenze: "+ sys.argv[2])
-            alle_werke = alle_werke[int(sys.argv[1]):int(sys.argv[2])]
 
         self.i = 0
         
