@@ -47,7 +47,7 @@ $additions = [];
 
 foreach($fr as $r)
 {
-    $author = $r["author"];
+    $author = str_replace("'", "", $r["author"]);
 
     $rid = strval($r["id"]);
 
