@@ -56,7 +56,7 @@ foreach($fr as $r)
     $topTenWords = $r["topTenWords"];
     $inputLen = $r["inputLen"];
     $outputLen = $r["outputLen"];
-    $title = $r["title"];
+    $title = str_replace("'", "", $r["title"]);
     $genre = $r["genre"];
 
 
