@@ -11,6 +11,8 @@ import datetime
 # region konstanten
 
 LIST_REPLACEMENTS = ["[", "]", "'", ","]
+REGEX_DELIMITERS = r"""\-|\+|=|:|>|<|\ |\
+|\      |\.|¿|\?|,|¡|!|;|\(|\)|\[|\]|\{|\}|\$|\#|/|\&|" |'|»|«"""
 LIST_DELIMITERS = ['-', '+', '=', ':', '>', '<', ' ', '\n', '\t', '.', '¿', '?', ',',
                    '¡', '!', ';', '(', ')', '[', ']', '{', '}', '$', '#', '/', '&', '\"', '\'', '»', '«']
 
@@ -33,32 +35,18 @@ cnno / compress-naive-no-output -   Naive Kompression ohne ausgabe des Textes
 
 # endregion
 
-def find(string:str, substring:str):
-    indexes = []
-
-    beginning = substring[0]
-    length = len(substring)
-
-    for i, char in enumerate(string):
-        if char == beginning:
-            if string[i:i+length] == substring:
-                indexes.append(i)
-
-    indexes.sort(reverse=True)
-
-    return indexes
-
-def replace(text: str, original:str, replace_str:str) -> str:
-    indexes = find(text, original)
+def replace(text: str, substr:str, repstr:str) -> str:
+    matches = reversed(list(re.finditer(substr, text)))
     output = text
 
-    for index in indexes:
+    for match in matches:
+        index = match.start()
         if not index == 0 and not text[index-1] in LIST_DELIMITERS:
             continue
-        if not index == len(text)-len(original) and not text[index+len(original)] in LIST_DELIMITERS:
+        if not index == len(text)-len(substr) and not text[index+len(substr)] in LIST_DELIMITERS:
             continue
         
-        output = output[:index]+replace_str+output[index+len(original):]
+        output = output[:index]+repstr+output[index+len(substr):]
         
     return output
 
@@ -74,7 +62,8 @@ def naive_compress(input_text: str):
 
     output = input_text
 
-    input_words = re.split('|'.join(map(re.escape, LIST_DELIMITERS)), input_text)
+    #input_words = re.split('|'.join(map(re.escape, LIST_DELIMITERS)), input_text)
+    input_words = re.split(REGEX_DELIMITERS, input_text)
 
     index = 0
 
@@ -94,7 +83,7 @@ def naive_compress(input_text: str):
     for word in words:
         top_words[word] = input_words.count(word)
     
-    top_words = sorted(top_words.items(), key=lambda x: x[1], reverse=True)[:50]
+    top_words = sorted(top_words.items(), key=lambda x: x[1], reverse=True)[:100]
 
     top_words_str = ""
 
