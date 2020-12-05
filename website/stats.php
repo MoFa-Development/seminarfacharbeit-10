@@ -70,14 +70,13 @@ foreach($fr as $r)
         {
           x: [[$inputLen]],
           y: [[$charRate]],
-          name: ['$author'],
-          text: [['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
-          mode: ['markers'],
-          marker: [{
-            size: [$duplicateWords*100],
+          text: [['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
+          mode: [['markers']],
+          marker: [[{
+            size: $duplicateWords*100,
             sizeref: 2,
             sizemode: 'area'
-          }]
+          }]]
         }, [$index]);
 
         ";
@@ -92,13 +91,13 @@ foreach($fr as $r)
         x: [$inputLen],
         y: [$charRate],
         name: '$author',
-        text: ['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
-        mode: 'markers',
-        marker: {
-          size: [$duplicateWords*100],
+        text: ['Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
+        mode: ['markers'],
+        marker: [{
+          size: [$duplicateWords*10],
           sizeref: 2,
           sizemode: 'area'
-        }
+        }]
       };
     ";
     $str .= "t".$rid."  , ";
