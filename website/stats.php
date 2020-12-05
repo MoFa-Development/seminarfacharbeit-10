@@ -70,7 +70,7 @@ foreach($fr as $r)
         {
           x: [[$inputLen]],
           y: [[$charRate]],
-          name: [[['$author']]],
+          name: [['$author']],
           text: [['Author: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
           mode: 'markers',
           marker: [{
