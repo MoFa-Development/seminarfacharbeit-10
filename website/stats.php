@@ -57,6 +57,7 @@ foreach($fr as $r)
     $inputLen = $r["inputLen"];
     $outputLen = $r["outputLen"];
     $title = $r["title"];
+    $genre = $r["genre"];
 
 
       if(in_array($author, $authors))
@@ -72,7 +73,7 @@ foreach($fr as $r)
           x: [[$inputLen]],
           y: [[$charRate]],
           hovertemplate: [['%{text}']],
-          text: [['Titel: $title<br>Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
+          text: [['Titel: $title<br>Autor: $author<br>Genre: $genre<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
           mode: [['markers']],
           marker: [[{
             size: $duplicateWords*100,
