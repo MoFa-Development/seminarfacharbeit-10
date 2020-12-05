@@ -49,9 +49,9 @@ class crawler:
         
         while self.i < len(alle_werke):
 
-            db_cursor.execute("SELECT value FROM temp WHERE name = 'clustering'")
+            db_cursor.execute("SELECT value FROM temp WHERE name = 'clustering';")
             self.i = db_cursor.fetchone()[0]+1
-            db_cursor.execute(f"UPDATE temp SET value = {self.i} WHERE name = 'clustering'")
+            db_cursor.execute(f"UPDATE temp SET value = {self.i} WHERE name = 'clustering';")
             
             print("index: "+str(self.i))
             
