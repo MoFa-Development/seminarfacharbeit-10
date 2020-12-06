@@ -6,6 +6,8 @@ import sys
 import mysql.connector
 import subprocess
 from bs4 import BeautifulSoup
+import time
+import random
 
 unwanted_text = ("""Startseite
 ∞
@@ -136,12 +138,18 @@ class crawler:
             werk_page = requests.get("https://projekt-gutenberg.org"+werk_link[5:])
             werk_source = html.fromstring(werk_page.text)
             
-            print("https://projekt-gutenberg.org"+werk_link[5:])
+            # print("https://projekt-gutenberg.org"+werk_link[5:])
             filename = "/tmp/projekt-gutenberg"+"/".join(werk_link[5:].split("/")[:-1])+".txt"
-            print("filename='"+filename+"'")
+            # print("filename='"+filename+"'")
+            
+            f = None
 
-            os.makedirs(os.path.dirname(filename), exist_ok=True)
-            f = open(filename, "w")
+            while not f:
+                try:
+                    os.makedirs(os.path.dirname(filename), exist_ok=True)
+                    f = open(filename, "w")
+                except:
+                    time.sleep(random.random()*5)
 
             #/html/body/a[3]
 
@@ -205,7 +213,8 @@ class crawler:
             db_cursor.execute(sql, val)
             db.commit()
 
-            os.remove(filename)
+            if os.path.isfile(filename):
+                os.remove(filename)
 
 
 
