@@ -98,7 +98,7 @@ class crawler:
     def __init__(self, link):
         page = requests.get(link)
 
-        source = html.fromstring(page.text)
+        source = html.fromstring(str(page.content, "utf-8"))
 
         alle_werke = []
 
@@ -136,7 +136,7 @@ class crawler:
             genre = werk_info[3]
 
             werk_page = requests.get("https://projekt-gutenberg.org"+werk_link[5:])
-            werk_source = html.fromstring(werk_page.text)
+            werk_source = html.fromstring(str(werk_page.content, "utf-8"))
             
             # print("https://projekt-gutenberg.org"+werk_link[5:])
             filename = "/tmp/projekt-gutenberg"+"/".join(werk_link[5:].split("/")[:-1])+".txt"
