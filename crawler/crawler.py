@@ -206,12 +206,14 @@ class crawler:
                 if ": " in line:
                     split = line.split(": ")
                     data[split[0]] = split[1]
-
-            sql = "INSERT INTO articles (topWords, inputLen, outputLen, duplicateWords, charRate, author, execTime, title, genre, url) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-            val = (data["top_words"], int(data["input_len"]), int(data["output_len"]), int(
-                data["duplicate_words"]), float(data["char_rate"]), author, float(data["exec_time"]), title, genre, "https://projekt-gutenberg.org"+werk_link[5:])
-            db_cursor.execute(sql, val)
-            db.commit()
+            try:
+                sql = "INSERT INTO articles (topWords, inputLen, outputLen, duplicateWords, charRate, author, execTime, title, genre, url) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                val = (data["top_words"], int(data["input_len"]), int(data["output_len"]), int(
+                    data["duplicate_words"]), float(data["char_rate"]), author, float(data["exec_time"]), title, genre, "https://projekt-gutenberg.org"+werk_link[5:])
+                db_cursor.execute(sql, val)
+                db.commit()
+            except Exception as e:
+                sys.stderr.write(e)
 
             if os.path.isfile(filename):
                 os.remove(filename)
