@@ -57,8 +57,8 @@ foreach($fr as $r)
     $inputLen = $r["inputLen"];
     $outputLen = $r["outputLen"];
     $title = str_replace("'", "", $r["title"]);
-    $genre = $r["genre"];
-
+    $genre = str_replace("\r", "",$r["genre"]);
+    $genre = str_replace("\n", "",$genre);
 
       if(in_array($author, $authors))
       {
