@@ -1,0 +1,15 @@
+[Unit]
+Description=Seminarfacharbeit Textcrawler
+After=network.target
+StartLimitIntervalSec=1
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=moritz
+WorkingDirectory=/home/moritz/seminarfacharbeit-10/
+ExecStart=/bin/bash /home/moritz/multithreaded-crawler.sh
+
+[Install]
+WantedBy=multi-user.target

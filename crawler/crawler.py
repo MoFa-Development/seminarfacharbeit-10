@@ -5,6 +5,83 @@ import os
 import sys
 import mysql.connector
 import subprocess
+from bs4 import BeautifulSoup
+
+unwanted_text = ("""Startseite
+∞
+Alle Werke
+∞
+Neu
+∞
+Information
+∞
+Shop
+∞
+Lesetips
+∞
+Themen
+∞
+Buchverlag
+∞
+Impressum
+∞
+Datenschutz
+∞
+Quellenangabe
+Autoren:
+A
+·
+B
+·
+C
+·
+D
+·
+E
+·
+F
+·
+G
+·
+H
+·
+I
+·
+J
+·
+K
+·
+L
+·
+M
+·
+N
+·
+O
+·
+P
+·
+Q
+·
+R
+·
+S
+·
+T
+·
+U
+·
+V
+·
+W
+·
+X
+·
+Y
+·
+Z
+·
+Alle Autoren""", "<< zurück", "Autorenseite", "InhaltInhalt", "weiter >>") 
 
 db = mysql.connector.connect(
             host="seminarfach.zapto.org",
@@ -19,7 +96,7 @@ class crawler:
     def __init__(self, link):
         page = requests.get(link)
 
-        source = html.fromstring(page.content)
+        source = html.fromstring(page.text)
 
         alle_werke = []
 
@@ -57,7 +134,7 @@ class crawler:
             genre = werk_info[3]
 
             werk_page = requests.get("https://projekt-gutenberg.org"+werk_link[5:])
-            werk_source = html.fromstring(werk_page.content)
+            werk_source = html.fromstring(werk_page.text)
             
             print("https://projekt-gutenberg.org"+werk_link[5:])
             filename = "/tmp/projekt-gutenberg"+"/".join(werk_link[5:].split("/")[:-1])+".txt"
@@ -70,25 +147,43 @@ class crawler:
 
             #werk_source.xpath("/html/body/a[3]")[0].text
             
-            for thing in werk_source.xpath("/html/body/*"):
-                if thing.tag == "p" or thing.tag == "h3" or thing.tag == "h2":
-                    if thing.text:
-                        if "<img src=" in thing.text:
-                            continue
-                        f.write(thing.text.replace("<br>", "\n")+"\n\n")
+            soup = BeautifulSoup(str(werk_page.content, "utf-8"), features="html.parser")
+
+            for script in soup(["script", "style"]):
+                script.extract()
+
+            text = soup.get_text()
+            
+            lines = (line.strip() for line in text.splitlines())
+            chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+            text = '\n'.join(chunk for chunk in chunks if chunk)
+            
+            for rm in unwanted_text:
+                text = text.replace(rm, "")
+
+            f.write(text+"\n")
 
             while werk_source.xpath("/html/body/a[3]/@href") and "weiter" in werk_source.xpath("/html/body/a[3]")[0].text:
                 newlink = "https://projekt-gutenberg.org" + "/".join(werk_link[5:].split("/")[:-1]) + "/" + werk_source.xpath("/html/body/a[3]/@href")[0]
                 print(newlink)
                 werk_page = requests.get(newlink)
-                werk_source = html.fromstring(werk_page.content)
+                werk_source = html.fromstring(str(werk_page.content, "utf-8"))
+
+                soup = BeautifulSoup(str(werk_page.content, "utf-8"), features="html.parser")
+
+                for script in soup(["script", "style"]):
+                    script.extract()
+
+                text = soup.get_text()
                 
-                for thing in werk_source.xpath("/html/body/*"):
-                    if thing.tag == "p" or thing.tag == "h3" or thing.tag == "h2":
-                        if thing.text:
-                            if "<img src=" in thing.text:
-                                continue
-                            f.write(thing.text.replace("<br>", "\n")+"\n\n")
+                lines = (line.strip() for line in text.splitlines())
+                chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+                text = '\n'.join(chunk for chunk in chunks if chunk)
+                
+                for rm in unwanted_text:
+                    text = text.replace(rm, "")
+
+                f.write(text+"\n")
             
             f.close()
 
