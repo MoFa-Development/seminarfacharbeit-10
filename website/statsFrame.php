@@ -23,7 +23,7 @@
         return;
     }
     $fr = loadStats($ord);
-
+    echo $ord;
 ?>
 
 
