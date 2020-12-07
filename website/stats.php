@@ -36,35 +36,35 @@
               <li><a href="about.php">About</a></li>
             </ul>
         </div>
-            
-        <div class="dropdown" style="margin: auto">
-          <div class="dropdown-trigger">
-            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-              <span id="ddText"><?php if(isset($ord)) echo $ord; else echo "Bitte auswählen";?></span>
-              <span class="icon is-small">
-                <i class="fas fa-angle-down" aria-hidden="true"></i>
-              </span>
-            </button>
-          </div>
-          <div class="dropdown-menu" id="dropdown-menu" role="menu">
-            <div class="dropdown-content">
-              <a onclick="document.getElementById('ord').value = 'title'; document.getElementById('ddText').innerHTML = 'title'" class="dropdown-item <?php if($ord == "title") echo "is-active";?>">
-                title
-              </a>
-              <a onclick="document.getElementById('ord').value = 'author'; document.getElementById('ddText').innerHTML = 'author'" class="dropdown-item <?php if($ord == "author") echo "is-active";?>">
-                author
-              </a>
-              <a onclick="document.getElementById('ord').value = 'genre'; document.getElementById('ddText').innerHTML = 'genre'" class="dropdown-item <?php if($ord == "genre") echo "is-active";?>">
-                genre
-              </a>
-            </div>
-          </div>
-        </div>
-
         <form action="stats.php" method="get" class="filterSettings">
-          <input id="sliderWithValue" class="slider has-output is-fullwidth" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
+            <div class="dropdown filterSettingsControl" style="margin: auto">
+              <div class="dropdown-trigger">
+                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                  <span id="ddText"><?php if(isset($ord)) echo $ord; else echo "Bitte auswählen";?></span>
+                  <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </div>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <a onclick="document.getElementById('ord').value = 'title'; document.getElementById('ddText').innerHTML = 'title'" class="dropdown-item <?php if($ord == "title") echo "is-active";?>">
+                    title
+                  </a>
+                  <a onclick="document.getElementById('ord').value = 'author'; document.getElementById('ddText').innerHTML = 'author'" class="dropdown-item <?php if($ord == "author") echo "is-active";?>">
+                    author
+                  </a>
+                  <a onclick="document.getElementById('ord').value = 'genre'; document.getElementById('ddText').innerHTML = 'genre'" class="dropdown-item <?php if($ord == "genre") echo "is-active";?>">
+                    genre
+                  </a>
+                </div>
+              </div>
+            </div>
+
+        
+          <input id="sliderWithValue" class="slider has-output is-fullwidth filterSettingsControl" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
           <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
-          <input type="submit" class="button" value="Diagramm erstellen"></input>
+          <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
           <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">
         </form>
 
