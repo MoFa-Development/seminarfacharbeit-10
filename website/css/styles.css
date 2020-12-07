@@ -33,4 +33,10 @@
     outline-width: 3px;
     outline-color: whitesmoke;
     text-align: center;
+    margin: auto;
+    padding: 20px;
+}
+
+.filterSettingsControl{
+    display: block;
 }
