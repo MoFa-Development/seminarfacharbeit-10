@@ -48,14 +48,14 @@
           </div>
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content">
-              <a onclick="document.getElementById('ord').value = 'title'; document.getElementById('ddText').innerHTML = 'Einzelne Werke'" class="dropdown-item <?php if($ord == "title") echo "is-active";?>">
-                Einzelne Werke
+              <a onclick="document.getElementById('ord').value = 'title'; document.getElementById('ddText').innerHTML = 'title'" class="dropdown-item <?php if($ord == "title") echo "is-active";?>">
+                title
               </a>
-              <a onclick="document.getElementById('ord').value = 'author'; document.getElementById('ddText').innerHTML = 'Autor'" class="dropdown-item <?php if($ord == "author") echo "is-active";?>">
-                Autor
+              <a onclick="document.getElementById('ord').value = 'author'; document.getElementById('ddText').innerHTML = 'author'" class="dropdown-item <?php if($ord == "author") echo "is-active";?>">
+                author
               </a>
-              <a onclick="document.getElementById('ord').value = 'genre'; document.getElementById('ddText').innerHTML = 'Genre'" class="dropdown-item <?php if($ord == "genre") echo "is-active";?>">
-                Genre
+              <a onclick="document.getElementById('ord').value = 'genre'; document.getElementById('ddText').innerHTML = 'genre'" class="dropdown-item <?php if($ord == "genre") echo "is-active";?>">
+                genre
               </a>
             </div>
           </div>
