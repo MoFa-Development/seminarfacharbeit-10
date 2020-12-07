@@ -130,7 +130,7 @@
 
 
           $counter = 0;
-          $max = $_GET["amount"] + 1;
+          $max = $_GET["amount"] + 2;
           $skip = "";
           foreach($fr as $r)
           {
