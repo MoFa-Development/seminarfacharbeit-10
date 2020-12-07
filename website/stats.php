@@ -150,7 +150,7 @@
             //Jump to next ord if max words reached for this ord reached
             if($counter >= $max)
             {
-              $orderTypes[] = ${$ord};
+              $orderTypes[] = "skip";
               $counter = 0;
             }
             $counter += 1;
