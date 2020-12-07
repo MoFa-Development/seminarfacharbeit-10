@@ -53,3 +53,7 @@
     display: block;
     margin: auto;
 }
+
+.input, .textarea {
+    width: 35px !important;
+}
