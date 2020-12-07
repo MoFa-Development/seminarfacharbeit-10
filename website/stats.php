@@ -31,7 +31,8 @@
 <?php
 
     include "php/statsLoader.php";
-    $fr = $final_result;
+    $ord = "genre";
+    $fr = loadStats($ord);
 
 ?>
 
@@ -42,15 +43,24 @@
 
 $str = "";
 
-$authors = [];
-$additions = [];
+$orderTypes = []; //z.B. alle Autoren oder Genre
+
+$rid_l = [];
+$author_l = [];
+$charRate_l = [];
+$duplicateWords_l = [];
+$topTenWords_l = [];
+$inputLen_l = [];
+$outputLen_l = [];
+$title_l = [];
+$genre_l = [];
+
+
 
 foreach($fr as $r)
 {
-    $author = str_replace("'", "", $r["author"]);
-
     $rid = strval($r["id"]);
-
+    $author = str_replace("'", "", $r["author"]);
     $charRate = $r["charRate"];
     $duplicateWords = $r["duplicateWords"];
     $topTenWords = $r["topTenWords"];
@@ -60,55 +70,81 @@ foreach($fr as $r)
     $genre = str_replace("\r", "",$r["genre"]);
     $genre = str_replace("\n", "",$genre);
 
-      if(in_array($author, $authors))
+
+    if(end($orderTypes) != ${$ord})
+    {
+
+      /*
+          PRINT FULL TRACE
+      */
+      $ordVal = ${$ord};
+
+
+      $texts = [];
+      foreach($rid_l as $i)
       {
-        $index = strval(array_search($author, $authors));
+        $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."'";
+      }
 
-        $additions[] =
-        "
+      $texts = implode(", ", $texts);
 
-        Plotly.extendTraces(
-          'plot', 
-        {
-          x: [[$inputLen]],
-          y: [[$charRate]],
-          hovertemplate: [['%{text}']],
-          text: [['Titel: $title<br>Autor: $author<br>Genre: $genre<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
-          mode: [['markers']],
-          marker: [[{
-            size: $duplicateWords*100,
+      $rid_l = implode(", ", $rid_l);
+      $author_l = implode(", ", $author_l);
+      $charRate_l = implode(", ", $charRate_l);
+      $duplicateWords_l = implode(", ", $duplicateWords_l);
+      $topTenWords_l = implode(", ", $topTenWords_l);
+      $inputLen_l = implode(", ", $inputLen_l);
+      $outputLen_l = implode(", ", $outputLen_l);
+      $title_l = implode(", ", $title_l);
+      $genre_l = implode(", ", $genre_l);
+
+      echo"
+      var t$rid = {
+          x: [$inputLen_l],
+          y: [$charRate_l],
+          name: '$ordVal',
+          hovertemplate: '%{text}',
+          text: [$texts],
+          mode: 'markers',
+          marker: {
+            size: [$duplicateWords_l],
             sizeref: 2,
             sizemode: 'area',
             opacity: 0.3
-          }]]
-        }, [$index]);
+          }
+        };
+      ";
+      $str .= "t".$rid.", ";
 
-        ";
+      /*
+          PRINT FULL TRACE END
+      */
 
-        continue;
-      }
+      $rid_l = [];
+      $author_l = [];
+      $charRate_l = [];
+      $duplicateWords_l = [];
+      $topTenWords_l = [];
+      $inputLen_l = [];
+      $outputLen_l = [];
+      $title_l = [];
+      $genre_l = [];
 
-    $authors[] = $author;
-
-    echo"
-    var t$rid = {
-        x: [$inputLen],
-        y: [$charRate],
-        name: '$author',
-        hovertemplate: ['%{text}'],
-        text: ['Titel: $title<br>Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
-        mode: ['markers'],
-        marker: [{
-          size: [$duplicateWords*10],
-          sizeref: 2,
-          sizemode: 'area',
-          opacity: 0.3
-        }]
-      };
-    ";
-    $str .= "t".$rid."  , ";
+      $orderTypes[] = ${$ord};
+    }
+      $rid_l[] = $rid;
+      $author_l[] = $author;
+      $charRate_l[] = $charRate;
+      $duplicateWords_l[] = $duplicateWords;
+      $topTenWords_l[] = $topTenWords;
+      $inputLen_l[] = $inputLen;
+      $outputLen_l[] = $outputLen;
+      $title_l[] = $title;
+      $genre_l[] = $genre;
 }
+
 $str = rtrim($str, ", ");
+
 
 echo "var data = [".$str."];";
 
@@ -130,15 +166,5 @@ var layout = {
 var config = {responsive: true}
 
 Plotly.newPlot('plot', data, layout, config);
-
-<?php
-
-foreach($additions as $addition)
-{
-  echo $addition;
-}
-
-?>
-
 
 </script>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Seminarfacharbeit 10</title>
+
+        <!--Libraries--->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+        <div class="tabs is-large is-centered">
+            <ul>
+              <li><a href="index.html">Komprimieren</a></li>
+              <li><a href="decompress.html">Dekomprimieren</a></li>
+              <li class="is-active"><a>Statistiken</a></li>
+              <li><a href="about.php">About</a></li>
+            </ul>
+        </div>
+        
+            <div id="plot"></div>
+        
+    </body>
+</html>
+
+<?php
+
+    include "php/statsLoader.php";
+    $fr = $final_result;
+
+?>
+
+
+<script>
+
+<?php
+
+$str = "";
+
+$authors = [];
+$additions = [];
+
+foreach($fr as $r)
+{
+    $author = str_replace("'", "", $r["author"]);
+
+    $rid = strval($r["id"]);
+
+    $charRate = $r["charRate"];
+    $duplicateWords = $r["duplicateWords"];
+    $topTenWords = $r["topTenWords"];
+    $inputLen = $r["inputLen"];
+    $outputLen = $r["outputLen"];
+    $title = str_replace("'", "", $r["title"]);
+    $genre = str_replace
+    ("\r", "",$r["genre"]);
+    $genre = str_replace("\n", "",$genre);
+
+      if(in_array($author, $authors))
+      {
+        $index = strval(array_search($author, $authors));
+
+        $additions[] =
+        "
+
+        Plotly.extendTraces(
+          'plot', 
+        {
+          x: [[$inputLen]],
+          y: [[$charRate]],
+          hovertemplate: [['%{text}']],
+          text: [['Titel: $title<br>Autor: $author<br>Genre: $genre<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
+          mode: [['markers']],
+          marker: [[{
+            size: $duplicateWords*100,
+            sizeref: 2,
+            sizemode: 'area',
+            opacity: 0.3
+          }]]
+        }, [$index]);
+
+        ";
+
+        continue;
+      }
+
+    $authors[] = $author;
+
+    echo"
+    var t$rid = {
+        x: [$inputLen],
+        y: [$charRate],
+        name: '$author',
+        hovertemplate: ['%{text}'],
+        text: ['Titel: $title<br>Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
+        mode: ['markers'],
+        marker: [{
+          size: [$duplicateWords*10],
+          sizeref: 2,
+          sizemode: 'area',
+          opacity: 0.3
+        }]
+      };
+    ";
+    $str .= "t".$rid."  , ";
+}
+$str = rtrim($str, ", ");
+
+echo "var data = [".$str."];";
+
+?>
+
+
+
+var layout = {
+  title: 'Statistiken der Komprimierbarkeit von Texten verschiedener Autoren',
+  showlegend: true,
+  xaxis: {
+    title: 'InputLen'
+  },
+  yaxis: {
+    title: 'CharRate'
+  }
+};
+
+var config = {responsive: true}
+
+Plotly.newPlot('plot', data, layout, config);
+
+<?php
+
+foreach($additions as $addition)
+{
+  echo $addition;
+}
+
+?>
+
+
+</script>

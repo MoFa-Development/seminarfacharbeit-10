@@ -14,11 +14,7 @@
         
         $database->set_charset("utf8");
         
-function loadStats($ord)
-{
-        global $database;
-
-        $sql = "SELECT * FROM articles ORDER BY ".$ord;
+        $sql = "SELECT * FROM articles";
         $result = $database->query($sql);
         
         if(empty($result))
@@ -41,11 +37,16 @@ function loadStats($ord)
 
         $final_result = [];
 
-        $rowNr = 1;
-        while($row = mysqli_fetch_assoc($result)) 
+        if ($result->num_rows > 0) 
         {
-            $final_result[$rowNr] = $row;
-            $rowNr += 1;
+            $rowNr = 1;
+            while($row = mysqli_fetch_assoc($result)) 
+            {
+                $final_result[$rowNr] = $row;
+                $rowNr += 1;
+            }
         }
-        return $final_result;
-}
+        else 
+        {
+            echo "Keine Daten vorhanden";
+        }
