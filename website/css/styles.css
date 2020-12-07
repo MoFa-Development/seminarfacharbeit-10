@@ -27,5 +27,10 @@
 }
 
 .filterSettings{
+    display: block;
+    border-radius: 5px;
+    outline-style: solid;
+    outline-width: 3px;
+    outline-color: whitesmoke;
     text-align: center;
 }
