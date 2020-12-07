@@ -23,7 +23,7 @@
             </ul>
         </div>
             
-        <div class="dropdown is-active">
+        <div class="dropdown">
           <div class="dropdown-trigger">
             <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
               <span>Bitte auswählen</span>
