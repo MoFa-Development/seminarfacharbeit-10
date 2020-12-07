@@ -11,10 +11,6 @@
           {
               $ord = "Bitte auswählen";
           }
-          if(!isset($_GET["endOrd"]))
-          {
-            $_GET["endOrd"] = "z";
-          }
 ?>
 <!DOCTYPE html>
 <html>
@@ -112,6 +108,12 @@
           if($ord != "Bitte auswählen")
           {
             $fr = loadStats($ord);
+          }
+
+          
+          if(!isset($_GET["endOrd"]))
+          {
+            $_GET["endOrd"] = "z";
           }
 
         ?>
