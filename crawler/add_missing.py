@@ -119,12 +119,7 @@ class crawler:
 
         self.i = 0
         
-        while self.i < len(alle_werke):
-            
-            db_cursor.execute("SELECT value FROM temp WHERE name = 'clustering';")
-            self.i = db_cursor.fetchone()[0]+1
-            db_cursor.execute(f"UPDATE temp SET value = {self.i} WHERE name = 'clustering';")
-            db.commit()
+        for i in range(len(alle_werke)):            
 
             print("index: "+str(self.i))
             
@@ -135,34 +130,17 @@ class crawler:
             author = werk_info[2]
             genre = werk_info[3]
 
+            db_cursor.execute(f"SELECT * FROM articles WHERE url = {"https://projekt-gutenberg.org"+werk_link[5:]}")
+            if len(db_cursor.fetchall) >= 1:
+                continue
+
             werk_page = requests.get("https://projekt-gutenberg.org"+werk_link[5:])
             werk_source = html.fromstring(str(werk_page.content, "utf-8"))
             
+
             # print("https://projekt-gutenberg.org"+werk_link[5:])
             filename = "/tmp/projekt-gutenberg"+"/".join(werk_link[5:].split("/")[:-1])+".txt"
             # print("filename='"+filename+"'")
-
-            while os.path.isfile(filename):
-
-                self.i += 1
-                db_cursor.execute(f"UPDATE temp SET value = {self.i} WHERE name = 'clustering';")
-                db.commit()
-
-                print("index: "+str(self.i))
-                
-                werk_info = alle_werke[self.i]
-
-                werk_link = werk_info[0]
-                title = werk_info[1]
-                author = werk_info[2]
-                genre = werk_info[3]
-
-                werk_page = requests.get("https://projekt-gutenberg.org"+werk_link[5:])
-                werk_source = html.fromstring(str(werk_page.content, "utf-8"))
-                
-                # print("https://projekt-gutenberg.org"+werk_link[5:])
-                filename = "/tmp/projekt-gutenberg"+"/".join(werk_link[5:].split("/")[:-1])+".txt"
-                # print("filename='"+filename+"'")
             
             f = None
 
