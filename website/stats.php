@@ -1,3 +1,17 @@
+<?
+          if(!isset($_GET["amount"]))
+          {
+              $_GET["amount"] = 0;
+          }
+          if(isset($_GET["ord"]))
+          {
+              $ord = $_GET["ord"];
+          }
+          else
+          {
+              $ord = "Bitte auswählen";
+          }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -48,7 +62,7 @@
         </div>
 
         <form action="stats.php" method="get">
-          <input id="sliderWithValue" class="slider has-output is-fullwidth" min="1" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
+          <input id="sliderWithValue" class="slider has-output is-fullwidth" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
           <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
           <input type="submit" class="button" value="Diagramm erstellen"></input>
           <input type="hidden" id="ord" name="ord">
@@ -88,16 +102,11 @@
         <?php
 
           include "php/statsLoader.php";
+          if($ord != "Bitte auswählen")
+          {
+            $fr = loadStats($ord);
+          }
 
-          if(isset($_GET["ord"]))
-          {
-              $ord = $_GET["ord"];
-          }
-          else
-          {
-              return;
-          }
-          $fr = loadStats($ord);
         ?>
 
 
