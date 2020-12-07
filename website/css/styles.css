@@ -23,7 +23,6 @@
 #plotFrame{
     display: block;
     margin: auto;
-    max-width: 1500px;
 }
 
 .filterSettings{
