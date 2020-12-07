@@ -34,22 +34,25 @@
           </div>
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content">
-              <a href="?ord=title" class="dropdown-item <?php if($_GET["ord"] == "title") echo "is-active";?>">
+              <a onclick="document.getElementById('plotFrame').src = 'https://seminarfach.zapto.org/statsFrame?ord=title'" class="dropdown-item <?php if($_GET["ord"] == "title") echo "is-active";?>">
                 Einzelne Werke
               </a>
-              <a href="?ord=author" class="dropdown-item <?php if($_GET["ord"] == "author") echo "is-active";?>">
+              <a onclick="document.getElementById('plotFrame').src = 'https://seminarfach.zapto.org/statsFrame?ord=author'" class="dropdown-item <?php if($_GET["ord"] == "author") echo "is-active";?>">
                 Autor
               </a>
-              <a href="?ord=genre" class="dropdown-item <?php if($_GET["ord"] == "genre") echo "is-active";?>">
+              <a onclick="document.getElementById('plotFrame').src = 'https://seminarfach.zapto.org/statsFrame?ord=genre'" class="dropdown-item <?php if($_GET["ord"] == "genre") echo "is-active";?>">
                 Genre
               </a>
             </div>
           </div>
         </div>
 
-
+        <input id="sliderWithValue" class="slider has-output is-fullwidth" min="1" max="100" value="0" step="1" type="range">
+        <output for="sliderWithValue">1</output>
 
         <script>
+          bulmaSlider.attach();
+
           var dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', function(event) {
             event.stopPropagation();
@@ -59,156 +62,9 @@
 
 
 
-            <div id="plot"></div>
+            <iframe id="plotFrame" src="http://seminarfach.zapto.org/statsFrame.php">
+
+            </iframe>
         
     </body>
 </html>
-
-<?php
-
-    include "php/statsLoader.php";
-    
-    if(isset($_GET["ord"]))
-    {
-      $ord = $_GET["ord"];
-    }
-    else
-    {
-      return;
-    }
-    $fr = loadStats($ord);
-
-?>
-
-
-<script>
-
-<?php
-
-$str = "";
-
-$orderTypes = []; //z.B. alle Autoren oder Genre
-
-$rid_l = [];
-$author_l = [];
-$charRate_l = [];
-$duplicateWords_l = [];
-$topTenWords_l = [];
-$inputLen_l = [];
-$outputLen_l = [];
-$title_l = [];
-$genre_l = [];
-
-
-
-foreach($fr as $r)
-{
-    $rid = strval($r["id"]);
-    $author = str_replace("'", "", $r["author"]);
-    $charRate = $r["charRate"];
-    $duplicateWords = $r["duplicateWords"];
-    $topTenWords = $r["topTenWords"];
-    $inputLen = $r["inputLen"];
-    $outputLen = $r["outputLen"];
-    $title = str_replace("'", "", $r["title"]);
-    $genre = str_replace("\r", "",$r["genre"]);
-    $genre = str_replace("\n", "",$genre);
-
-
-    if(end($orderTypes) != ${$ord})
-    {
-
-      /*
-          PRINT FULL TRACE
-      */
-      $ordVal = ${$ord};
-
-
-      $texts = [];
-      for ($i = 0; $i <= sizeof($rid_l); $i++)
-      {
-        $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."'";
-      }
-
-      $texts = implode(", ", $texts);
-
-      $rid_l = implode(", ", $rid_l);
-      $author_l = implode(", ", $author_l);
-      $charRate_l = implode(", ", $charRate_l);
-      $duplicateWords_l = implode(", ", $duplicateWords_l);
-      $topTenWords_l = implode(", ", $topTenWords_l);
-      $inputLen_l = implode(", ", $inputLen_l);
-      $outputLen_l = implode(", ", $outputLen_l);
-      $title_l = implode(", ", $title_l);
-      $genre_l = implode(", ", $genre_l);
-
-      echo"
-      var t$rid = {
-          x: [$inputLen_l],
-          y: [$charRate_l],
-          name: '$ordVal',
-          hovertemplate: '%{text}',
-          text: [$texts],
-          mode: 'markers',
-          marker: {
-            size: [$duplicateWords_l],
-            sizeref: 2,
-            sizemode: 'area',
-            opacity: 0.3
-          }
-        };
-      ";
-      $str .= "t".$rid.", ";
-
-      /*
-          PRINT FULL TRACE END
-      */
-
-      $rid_l = [];
-      $author_l = [];
-      $charRate_l = [];
-      $duplicateWords_l = [];
-      $topTenWords_l = [];
-      $inputLen_l = [];
-      $outputLen_l = [];
-      $title_l = [];
-      $genre_l = [];
-
-      $orderTypes[] = ${$ord};
-    }
-      $rid_l[] = $rid;
-      $author_l[] = $author;
-      $charRate_l[] = $charRate;
-      $duplicateWords_l[] = $duplicateWords;
-      $topTenWords_l[] = $topTenWords;
-      $inputLen_l[] = $inputLen;
-      $outputLen_l[] = $outputLen;
-      $title_l[] = $title;
-      $genre_l[] = $genre;
-}
-
-$str = rtrim($str, ", ");
-
-
-echo "var data = [".$str."];";
-
-?>
-
-
-
-var layout = {
-  title: 'Statistiken der Komprimierbarkeit von Texten verschiedener Autoren',
-  showlegend: true,
-  xaxis: {
-    title: 'InputLen'
-  },
-  yaxis: {
-    title: 'CharRate'
-  }
-};
-
-var config = {responsive: true}
-
-Plotly.newPlot('plot', data, layout, config);
-
-</script>

@@ -20,8 +20,8 @@
     margin-bottom: 30px;
 }
 
-#plot{
+#plotFrame{
     display: block;
     margin: auto;
-    max-width: 1000px;
+    max-width: 1500px;
 }
