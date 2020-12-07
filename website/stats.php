@@ -13,7 +13,7 @@
           }
           if(!isset($_GET["endOrd"]))
           {
-            $_GET["endOrd"] = 999999;
+            $_GET["endOrd"] = "z";
           }
 ?>
 <!DOCTYPE html>
@@ -66,6 +66,7 @@
           </div>
 
           <form action="stats.php" method="get">
+            <input class="input" type="text" placeholder="A" name="startOrd"><label class="is-medium"> bis </label><input class="input" type="text" placeholder="z" name="endOrd">
             <label class="is-medium">Text-Anzahl pro Farbe</label>
             <input id="sliderWithValue" class="slider has-output is-fullwidth filterSettingsControl" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
             <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
@@ -155,7 +156,7 @@
             $thisOrd = ord($title[0]);
 
 
-            if(${$ord} == $skip || $thisOrd < $_GET["startOrd"] || $thisOrd > $_GET["endOrd"])
+            if(${$ord} == $skip || $thisOrd < ord($_GET["startOrd"]) || $thisOrd > ord($_GET["endOrd"]))
               continue;
 
             //Jump to next ord if max words reached for this ord reached
