@@ -155,7 +155,7 @@
             $thisOrd = ord($title[0]);
 
 
-            if(${$ord} == $skip || $thisOrd < $_GET["startOrd"] || $thisOrd > $$_GET["endOrd"])
+            if(${$ord} == $skip || $thisOrd < $_GET["startOrd"] || $thisOrd > $_GET["endOrd"])
               continue;
 
             //Jump to next ord if max words reached for this ord reached
