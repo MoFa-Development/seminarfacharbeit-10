@@ -33,7 +33,7 @@ function loadStats($ord)
                       author varchar(30) NOT NULL,
                       PRIMARY KEY  (ID)
                       )";
-            $database->query($sql) or die("Connection failed: " . mysqli_error($database)); //WARUM ZUM F*** IST $database == null ???!?!?!?!?!
+            $database->query($sql);
             
             $sql = "SELECT * FROM articles";
             $result = $database->query($sql);
