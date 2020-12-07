@@ -51,7 +51,7 @@
         <output for="sliderWithValue">1</output>
 
         <script>
-          bulmaSlider.attach();
+          document.getElementById('sliderWithValue').attach();
 
           var dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', function(event) {
