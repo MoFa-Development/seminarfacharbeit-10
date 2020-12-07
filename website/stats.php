@@ -107,6 +107,8 @@
           {
             $rid = strval($r["id"]);
             $author = str_replace("'", "", $r["author"]);
+            $author = str_replace("\r", "",$author);
+            $author = str_replace("\n", "",$author);
             $charRate = $r["charRate"];
             $duplicateWords = $r["duplicateWords"];
             $topTenWords = $r["topTenWords"];
