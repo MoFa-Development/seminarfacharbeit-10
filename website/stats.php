@@ -34,13 +34,13 @@
           </div>
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content">
-              <a onclick="document.getElementById('plotFrame').src = 'https://seminarfach.zapto.org/statsFrame?ord=title'" class="dropdown-item <?php if($_GET["ord"] == "title") echo "is-active";?>">
+              <a onclick="document.getElementById('plotFrame').src = 'https://seminarfach.zapto.org/statsFrame.php?ord=title'" class="dropdown-item <?php if($_GET["ord"] == "title") echo "is-active";?>">
                 Einzelne Werke
               </a>
-              <a onclick="document.getElementById('plotFrame').src = 'https://seminarfach.zapto.org/statsFrame?ord=author'" class="dropdown-item <?php if($_GET["ord"] == "author") echo "is-active";?>">
+              <a onclick="document.getElementById('plotFrame').src = 'https://seminarfach.zapto.org/statsFrame.php?ord=author'" class="dropdown-item <?php if($_GET["ord"] == "author") echo "is-active";?>">
                 Autor
               </a>
-              <a onclick="document.getElementById('plotFrame').src = 'https://seminarfach.zapto.org/statsFrame?ord=genre'" class="dropdown-item <?php if($_GET["ord"] == "genre") echo "is-active";?>">
+              <a onclick="document.getElementById('plotFrame').src = 'https://seminarfach.zapto.org/statsFrame.php?ord=genre'" class="dropdown-item <?php if($_GET["ord"] == "genre") echo "is-active";?>">
                 Genre
               </a>
             </div>
