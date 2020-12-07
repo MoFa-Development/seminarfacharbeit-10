@@ -130,7 +130,7 @@
 
 
           $counter = 0;
-          $max = $_GET["amount"];
+          $max = $_GET["amount"] + 1;
           foreach($fr as $r)
           {
             $rid = strval($r["id"]);
