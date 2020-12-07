@@ -61,7 +61,7 @@
           </div>
         </div>
 
-        <form action="stats.php" method="get">
+        <form action="stats.php" method="get" class="filterSettings">
           <input id="sliderWithValue" class="slider has-output is-fullwidth" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
           <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
           <input type="submit" class="button" value="Diagramm erstellen"></input>
