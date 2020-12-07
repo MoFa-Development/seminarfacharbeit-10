@@ -62,6 +62,7 @@
           </div>
 
           <form action="stats.php" method="get">
+            <label class="is-medium">Text-Anzahl pro Farbe</label>
             <input id="sliderWithValue" class="slider has-output is-fullwidth filterSettingsControl" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
             <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
             <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>

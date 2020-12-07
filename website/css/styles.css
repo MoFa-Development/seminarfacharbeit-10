@@ -28,11 +28,13 @@
 
 .filterSettings{
     display: block;
-    border-radius: 5px;
+    border-radius: 10px;
     outline-style: solid;
-    outline-width: 3px;
+    outline-width: 2px;
     outline-color: whitesmoke;
-    margin: auto;
+    margin-left: 30%;
+    margin-right: 30%;
+    text-align: center;
     padding: 20px;
 }
 
