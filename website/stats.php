@@ -11,6 +11,10 @@
           {
               $ord = "Bitte auswählen";
           }
+          if(!isset($_GET["endOrd"]))
+          {
+            $_GET["endOrd"] = 999999;
+          }
 ?>
 <!DOCTYPE html>
 <html>
@@ -148,8 +152,10 @@
             $genre = str_replace("\r", "",$r["genre"]);
             $genre = str_replace("\n", "",$genre);
 
+            $thisOrd = ord($title[0]);
 
-            if(${$ord} == $skip)
+
+            if(${$ord} == $skip || $thisOrd < $_GET["startOrd"] || $thisOrd > $$_GET["endOrd"])
               continue;
 
             //Jump to next ord if max words reached for this ord reached
