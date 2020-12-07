@@ -37,6 +37,7 @@
     text-align: center;
     padding: 20px;
     min-width: 213px;
+    max-width: 675px;
 }
 
 .dropdown-menu{
