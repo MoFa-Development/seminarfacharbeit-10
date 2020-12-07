@@ -51,7 +51,6 @@
         <output for="sliderWithValue">1</output>
 
         <script>
-          document.getElementById('sliderWithValue').attach();
 
           var dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', function(event) {
