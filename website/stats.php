@@ -175,17 +175,18 @@
 
                 echo"
                 var t$rid = {
-                    x: [$inputLen_l],
-                    y: [$charRate_l],
-                    name: '$ordVal',
-                    hovertemplate: '%{text}',
-                    text: [$texts],
-                    mode: 'markers',
-                    marker: {
-                    size: [$duplicateWords_l],
-                    sizeref: 2,
-                    sizemode: 'area',
-                    opacity: 0.3
+                      x: [$inputLen_l],
+                      y: [$charRate_l],
+                      name: '$ordVal',
+                      hovertemplate: '%{text}',
+                      text: [$texts],
+                      mode: 'markers',
+                      visible: 'legendonly',
+                      marker: {
+                      size: [$duplicateWords_l],
+                      sizeref: 2,
+                      sizemode: 'area',
+                      opacity: 0.3
                     }
                 };
                 ";
@@ -230,12 +231,13 @@
         var layout = {
           title: 'Statistiken der Komprimierbarkeit von Texten verschiedener Autoren',
           showlegend: true,
+          hovermode: 'closest',
           xaxis: {
-          title: 'InputLen'
-        },
+            title: 'InputLen'
+          },
           yaxis: {
-          title: 'CharRate'
-        }
+            title: 'CharRate'
+          }
         };
 
         var config = {responsive: true}
