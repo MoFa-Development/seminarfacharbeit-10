@@ -1,3 +1,17 @@
+<?php
+          if(!isset($_GET["amount"]))
+          {
+              $_GET["amount"] = 0;
+          }
+          if(isset($_GET["ord"]))
+          {
+              $ord = $_GET["ord"];
+          }
+          else
+          {
+              $ord = "Bitte auswählen";
+          }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -22,123 +36,242 @@
               <li><a href="about.php">About</a></li>
             </ul>
         </div>
-        
-            <div id="plot"></div>
-        
+        <div class="filterSettings">
+          <div class="dropdown filterSettingsControl" style="margin: auto">
+            <div class="dropdown-trigger">
+              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                <span id="ddText"><?php if(isset($ord)) echo $ord; else echo "Bitte auswählen";?></span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+              <div class="dropdown-content">
+                <a onclick="document.getElementById('ord').value = 'title'; document.getElementById('ddText').innerHTML = 'title'" class="dropdown-item">
+                  title
+                </a>
+                <a onclick="document.getElementById('ord').value = 'author'; document.getElementById('ddText').innerHTML = 'author'" class="dropdown-item">
+                  author
+                </a>
+                <a onclick="document.getElementById('ord').value = 'genre'; document.getElementById('ddText').innerHTML = 'genre'" class="dropdown-item">
+                  genre
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <form action="stats.php" method="get">
+            <input class="input" type="text" placeholder="A" name="startOrd" value="<?php echo $_GET["startOrd"];?>"><label class="is-medium"> bis </label><input class="input" type="text" placeholder="z" name="endOrd" value="<?php echo $_GET["endOrd"];?>">
+            <br>
+            <label class="is-medium">Text-Anzahl pro Farbe</label>
+            <input id="sliderWithValue" class="slider has-output is-fullwidth filterSettingsControl" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
+            <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
+            <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
+            <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">
+          </form>
+        </div>
+        <script>
+
+          var dropdown = document.querySelector('.dropdown');
+            dropdown.addEventListener('click', function(event) {
+            event.stopPropagation();
+            dropdown.classList.toggle('is-active');
+          });
+
+          function findOutputForSlider(el) {
+            var idVal = el.id;
+            outputs = document.getElementsByTagName('output');
+            for( var i = 0; i < outputs.length; i++ ) {
+              if (outputs[i].htmlFor == idVal)
+                return outputs[i];
+            }
+          }
+
+          var sliders = document.querySelectorAll( 'input[type="range"].slider' );
+          [].forEach.call( sliders, function ( slider ) {
+            var output = findOutputForSlider( slider );
+            if ( output ) {
+              slider.addEventListener( 'input', function( event ) {
+                output.value = event.target.value;
+              } );
+            }
+          } );
+
+        </script>
+
+        <div id="plot"></div>
+
+        <?php
+
+          include "php/statsLoader.php";
+          if($ord != "Bitte auswählen")
+          {
+            $fr = loadStats($ord);
+          }
+
+          
+          if(!isset($_GET["endOrd"]))
+          {
+            $_GET["endOrd"] = "z";
+          }
+
+        ?>
+
+
+        <script>
+
+        <?php
+
+          $str = "";
+
+          $orderTypes = []; //z.B. alle Autoren oder Genre
+
+          $rid_l = [];
+          $author_l = [];
+          $charRate_l = [];
+          $duplicateWords_l = [];
+          $topTenWords_l = [];
+          $inputLen_l = [];
+          $outputLen_l = [];
+          $title_l = [];
+          $genre_l = [];
+
+
+          $counter = 0;
+          $max = $_GET["amount"] + 2;
+          $skip = "";
+          foreach($fr as $r)
+          {
+            $rid = strval($r["id"]);
+            $author = str_replace("'", "", $r["author"]);
+            $author = str_replace("\r", "",$author);
+            $author = str_replace("\n", "",$author);
+            $charRate = $r["charRate"];
+            $duplicateWords = $r["duplicateWords"];
+            $topTenWords = $r["topTenWords"];
+            $inputLen = $r["inputLen"];
+            $outputLen = $r["outputLen"];
+            $title = str_replace("'", "", $r["title"]);
+            $genre = str_replace("\r", "",$r["genre"]);
+            $genre = str_replace("\n", "",$genre);
+
+            $thisOrd = ord(${$ord}[0]);
+
+
+            if(${$ord} == $skip || $thisOrd < ord($_GET["startOrd"]) || $thisOrd > ord($_GET["endOrd"]))
+              continue;
+
+            //Jump to next ord if max words reached for this ord reached
+            if($counter >= $max)
+            {
+              $orderTypes[] = "skip";
+              $skip = ${$ord};
+              $counter = 0;
+            }
+            $counter += 1;
+
+            if(end($orderTypes) != ${$ord})
+            {
+
+                /*
+                    PRINT FULL TRACE
+                */
+                $ordVal = ${$ord};
+
+
+                $texts = [];
+                for ($i = 0; $i <= sizeof($rid_l); $i++)
+                {
+                  $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>Genre: ".$genre_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."'";
+                }
+
+                $texts = implode(", ", $texts);
+
+                $rid_l = implode(", ", $rid_l);
+                $author_l = implode(", ", $author_l);
+                $charRate_l = implode(", ", $charRate_l);
+                $duplicateWords_l = implode(", ", $duplicateWords_l);
+                $topTenWords_l = implode(", ", $topTenWords_l);
+                $inputLen_l = implode(", ", $inputLen_l);
+                $outputLen_l = implode(", ", $outputLen_l);
+                $title_l = implode(", ", $title_l);
+                $genre_l = implode(", ", $genre_l);
+
+                echo"
+                var t$rid = {
+                      x: [$inputLen_l],
+                      y: [$charRate_l],
+                      name: '$ordVal',
+                      hovertemplate: '%{text}',
+                      text: [$texts],
+                      mode: 'markers',
+                      visible: 'legendonly',
+                      marker: {
+                      size: [$duplicateWords_l],
+                      sizeref: 2,
+                      sizemode: 'area',
+                      opacity: 0.3
+                    }
+                };
+                ";
+                $str .= "t".$rid.", ";
+
+                /*
+                    PRINT FULL TRACE END
+                */
+
+                $rid_l = [];
+                $author_l = [];
+                $charRate_l = [];
+                $duplicateWords_l = [];
+                $topTenWords_l = [];
+                $inputLen_l = [];
+                $outputLen_l = [];
+                $title_l = [];
+                $genre_l = [];
+
+                $orderTypes[] = ${$ord};
+            }
+            else
+            {
+              $rid_l[] = $rid;
+              $author_l[] = $author;
+              $charRate_l[] = $charRate;
+              $duplicateWords_l[] = $duplicateWords;
+              $topTenWords_l[] = $topTenWords;
+              $inputLen_l[] = $inputLen;
+              $outputLen_l[] = $outputLen;
+              $title_l[] = $title;
+              $genre_l[] = $genre;
+            }
+          }
+
+          $str = rtrim($str, ", ");
+
+
+          echo "var data = [".$str."];";
+
+        ?>
+
+
+
+        var layout = {
+          title: 'Statistiken der Komprimierbarkeit von Texten verschiedener Autoren',
+          showlegend: true,
+          hovermode: 'closest',
+          xaxis: {
+            title: 'InputLen'
+          },
+          yaxis: {
+            title: 'CharRate'
+          }
+        };
+
+        var config = {responsive: true}
+
+        Plotly.newPlot('plot', data, layout, config);
+
+      </script>
     </body>
 </html>
-
-<?php
-
-    include "php/statsLoader.php";
-    $fr = $final_result;
-
-?>
-
-
-<script>
-
-<?php
-
-$str = "";
-
-$authors = [];
-$additions = [];
-
-foreach($fr as $r)
-{
-    $author = str_replace("'", "", $r["author"]);
-
-    $rid = strval($r["id"]);
-
-    $charRate = $r["charRate"];
-    $duplicateWords = $r["duplicateWords"];
-    $topTenWords = $r["topTenWords"];
-    $inputLen = $r["inputLen"];
-    $outputLen = $r["outputLen"];
-    $title = str_replace("'", "", $r["title"]);
-    $genre = str_replace("\r", "",$r["genre"]);
-    $genre = str_replace("\n", "",$genre);
-
-      if(in_array($author, $authors))
-      {
-        $index = strval(array_search($author, $authors));
-
-        $additions[] =
-        "
-
-        Plotly.extendTraces(
-          'plot', 
-        {
-          x: [[$inputLen]],
-          y: [[$charRate]],
-          hovertemplate: [['%{text}']],
-          text: [['Titel: $title<br>Autor: $author<br>Genre: $genre<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen']],
-          mode: [['markers']],
-          marker: [[{
-            size: $duplicateWords*100,
-            sizeref: 2,
-            sizemode: 'area',
-            opacity: 0.3
-          }]]
-        }, [$index]);
-
-        ";
-
-        continue;
-      }
-
-    $authors[] = $author;
-
-    echo"
-    var t$rid = {
-        x: [$inputLen],
-        y: [$charRate],
-        name: '$author',
-        hovertemplate: ['%{text}'],
-        text: ['Titel: $title<br>Autor: $author<br>CharRate: $charRate%<br>Duplikatswörter: $duplicateWords<br>InputLen: $inputLen<br>OutputLen: $outputLen'],
-        mode: ['markers'],
-        marker: [{
-          size: [$duplicateWords*10],
-          sizeref: 2,
-          sizemode: 'area',
-          opacity: 0.3
-        }]
-      };
-    ";
-    $str .= "t".$rid."  , ";
-}
-$str = rtrim($str, ", ");
-
-echo "var data = [".$str."];";
-
-?>
-
-
-
-var layout = {
-  title: 'Statistiken der Komprimierbarkeit von Texten verschiedener Autoren',
-  showlegend: true,
-  xaxis: {
-    title: 'InputLen'
-  },
-  yaxis: {
-    title: 'CharRate'
-  }
-};
-
-var config = {responsive: true}
-
-Plotly.newPlot('plot', data, layout, config);
-
-<?php
-
-foreach($additions as $addition)
-{
-  echo $addition;
-}
-
-?>
-
-
-</script>

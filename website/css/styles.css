@@ -20,8 +20,39 @@
     margin-bottom: 30px;
 }
 
-#plot{
+#plotFrame{
     display: block;
     margin: auto;
-    max-width: 1000px;
+}
+
+.filterSettings{
+    display: block;
+    border-radius: 10px;
+    outline-style: solid;
+    outline-width: 2px;
+    outline-color: whitesmoke;
+    margin: auto;
+    margin-bottom: 2px;
+    text-align: center;
+    padding: 20px;
+    min-width: 213px;
+    max-width: 675px;
+}
+
+.dropdown-menu{
+    margin-bottom: 20px;
+    position: unset;
+}
+
+.button{
+    margin-bottom: 5px;
+}
+
+.filterSettingsControl{
+    display: block;
+    margin: auto;
+}
+
+.input, .textarea {
+    width: 35px !important;
 }

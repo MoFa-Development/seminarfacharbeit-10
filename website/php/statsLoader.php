@@ -14,7 +14,11 @@
         
         $database->set_charset("utf8");
         
-        $sql = "SELECT * FROM articles";
+function loadStats($ord)
+{
+        global $database;
+
+        $sql = "SELECT * FROM articles ORDER BY ".$ord;
         $result = $database->query($sql);
         
         if(empty($result))
@@ -29,7 +33,7 @@
                       author varchar(30) NOT NULL,
                       PRIMARY KEY  (ID)
                       )";
-            $database->query($sql) or die("Connection failed: " . mysqli_error($database)); //WARUM ZUM F*** IST $database == null ???!?!?!?!?!
+            $database->query($sql);
             
             $sql = "SELECT * FROM articles";
             $result = $database->query($sql);
@@ -37,16 +41,11 @@
 
         $final_result = [];
 
-        if ($result->num_rows > 0) 
+        $rowNr = 1;
+        while($row = mysqli_fetch_assoc($result)) 
         {
-            $rowNr = 1;
-            while($row = mysqli_fetch_assoc($result)) 
-            {
-                $final_result[$rowNr] = $row;
-                $rowNr += 1;
-            }
+            $final_result[$rowNr] = $row;
+            $rowNr += 1;
         }
-        else 
-        {
-            echo "Keine Daten vorhanden";
-        }
+        return $final_result;
+}
