@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<?
+<?php
           if(!isset($_GET["amount"]))
           {
               $_GET["amount"] = 0;
@@ -13,6 +12,7 @@
               $ord = "Bitte auswählen";
           }
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
