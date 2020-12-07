@@ -65,7 +65,7 @@
           <input id="sliderWithValue" class="slider has-output is-fullwidth" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
           <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
           <input type="submit" class="button" value="Diagramm erstellen"></input>
-          <input type="hidden" id="ord" name="ord">
+          <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">
         </form>
 
         <script>
