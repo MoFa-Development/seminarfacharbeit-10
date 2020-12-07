@@ -183,7 +183,7 @@
                 $texts = [];
                 for ($i = 0; $i <= sizeof($rid_l); $i++)
                 {
-                  $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."'";
+                  $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>Genre: ".$genre_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."'";
                 }
 
                 $texts = implode(", ", $texts);
