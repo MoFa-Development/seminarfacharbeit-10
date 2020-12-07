@@ -50,7 +50,7 @@
         <form action="stats.php" method="get">
           <input id="sliderWithValue" class="slider has-output is-fullwidth" min="1" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
           <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
-          <input type="submit" class="button">Diagramm erstellen</input>
+          <input type="submit" class="button" value="Diagramm erstellen"></input>
           <input type="hidden" id="ord" name="ord">
           <input type="hidden" id="amount" name="amount">
         </form>
