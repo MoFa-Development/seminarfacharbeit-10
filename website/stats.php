@@ -26,7 +26,7 @@
         <div class="dropdown" style="margin: auto">
           <div class="dropdown-trigger">
             <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-              <span>Bitte auswählen</span>
+              <span id="ddText"><?php if(isset($_GET["ord"])) echo $_GET["ord"]; else echo "Bitte auswählen";?></span>
               <span class="icon is-small">
                 <i class="fas fa-angle-down" aria-hidden="true"></i>
               </span>
@@ -34,13 +34,13 @@
           </div>
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content">
-              <a onclick="document.getElementById('ord').value = 'title'" class="dropdown-item <?php if($_GET["ord"] == "title") echo "is-active";?>">
+              <a onclick="document.getElementById('ord').value = 'title'; document.getElementById('ddText').innerHTML = 'Einzelne Werke'" class="dropdown-item <?php if($_GET["ord"] == "title") echo "is-active";?>">
                 Einzelne Werke
               </a>
-              <a onclick="document.getElementById('ord').value = 'author'" class="dropdown-item <?php if($_GET["ord"] == "author") echo "is-active";?>">
+              <a onclick="document.getElementById('ord').value = 'author'; document.getElementById('ddText').innerHTML = 'Autor'" class="dropdown-item <?php if($_GET["ord"] == "author") echo "is-active";?>">
                 Autor
               </a>
-              <a onclick="document.getElementById('ord').value = 'genre'" class="dropdown-item <?php if($_GET["ord"] == "genre") echo "is-active";?>">
+              <a onclick="document.getElementById('ord').value = 'genre'; document.getElementById('ddText').innerHTML = 'Genre'" class="dropdown-item <?php if($_GET["ord"] == "genre") echo "is-active";?>">
                 Genre
               </a>
             </div>
@@ -61,6 +61,26 @@
             event.stopPropagation();
             dropdown.classList.toggle('is-active');
           });
+
+          function findOutputForSlider(el) {
+            var idVal = el.id;
+            outputs = document.getElementsByTagName('output');
+            for( var i = 0; i < outputs.length; i++ ) {
+              if (outputs[i].htmlFor == idVal)
+                return outputs[i];
+            }
+          }
+
+          var sliders = document.querySelectorAll( 'input[type="range"].slider' );
+          [].forEach.call( sliders, function ( slider ) {
+            var output = findOutputForSlider( slider );
+            if ( output ) {
+              slider.addEventListener( 'input', function( event ) {
+                output.value = event.target.value;
+              } );
+            }
+          } );
+
         </script>
 
         <div id="plot"></div>
