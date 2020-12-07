@@ -131,6 +131,7 @@
 
           $counter = 0;
           $max = $_GET["amount"] + 1;
+          $skip = "";
           foreach($fr as $r)
           {
             $rid = strval($r["id"]);
@@ -147,10 +148,14 @@
             $genre = str_replace("\n", "",$genre);
 
 
+            if(${$ord} == $skip)
+              continue;
+
             //Jump to next ord if max words reached for this ord reached
             if($counter >= $max)
             {
               $orderTypes[] = "skip";
+              $skip = ${$ord};
               $counter = 0;
             }
             $counter += 1;
