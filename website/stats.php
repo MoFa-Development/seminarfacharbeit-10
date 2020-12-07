@@ -34,13 +34,13 @@
           </div>
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content">
-              <a onclick="document.getElementById('ord').value = 'title" class="dropdown-item <?php if($_GET["ord"] == "title") echo "is-active";?>">
+              <a onclick="document.getElementById('ord').value = 'title'" class="dropdown-item <?php if($_GET["ord"] == "title") echo "is-active";?>">
                 Einzelne Werke
               </a>
-              <a onclick="document.getElementById('ord').value = 'author" class="dropdown-item <?php if($_GET["ord"] == "author") echo "is-active";?>">
+              <a onclick="document.getElementById('ord').value = 'author'" class="dropdown-item <?php if($_GET["ord"] == "author") echo "is-active";?>">
                 Autor
               </a>
-              <a onclick="document.getElementById('ord').value = 'genre" class="dropdown-item <?php if($_GET["ord"] == "genre") echo "is-active";?>">
+              <a onclick="document.getElementById('ord').value = 'genre'" class="dropdown-item <?php if($_GET["ord"] == "genre") echo "is-active";?>">
                 Genre
               </a>
             </div>
