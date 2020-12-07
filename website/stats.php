@@ -23,7 +23,7 @@
             </ul>
         </div>
             
-        <div class="dropdown">
+        <div class="dropdown" style="margin: auto">
           <div class="dropdown-trigger">
             <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
               <span>Bitte auswählen</span>
@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        
+
 
         <script>
           var dropdown = document.querySelector('.dropdown');
