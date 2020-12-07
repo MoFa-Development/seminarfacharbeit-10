@@ -120,12 +120,12 @@
 
 
             //Jump to next ord if max words reached for this ord reached
-            $counter += 1;
             if($counter >= $max)
             {
               $orderTypes[] = ${$ord};
               $counter = 0;
             }
+            $counter += 1;
 
             if(end($orderTypes) != ${$ord})
             {
