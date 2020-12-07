@@ -47,7 +47,7 @@
               </button>
             </div>
             <div class="dropdown-menu" id="dropdown-menu" role="menu">
-              <div class="dropdown-content filterSettingsControl">
+              <div class="dropdown-content">
                 <a onclick="document.getElementById('ord').value = 'title'; document.getElementById('ddText').innerHTML = 'title'" class="dropdown-item <?php if($ord == "title") echo "is-active";?>">
                   title
                 </a>

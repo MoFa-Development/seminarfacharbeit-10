@@ -38,7 +38,7 @@
     padding: 20px;
 }
 
-.filterSettingsControl{
+.filterSettingsControl, .dropdown-menu{
     display: block;
     margin: auto;
 }
