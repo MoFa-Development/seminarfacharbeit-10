@@ -39,7 +39,8 @@
 }
 
 .dropdown-menu{
-    margin-left: 200px;
+    margin-bottom: 20px;
+    position: unset;
 }
 
 .button{
