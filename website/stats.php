@@ -52,7 +52,6 @@
           <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
           <input type="submit" class="button" value="Diagramm erstellen"></input>
           <input type="hidden" id="ord" name="ord">
-          <input type="hidden" id="amount" name="amount">
         </form>
 
         <script>
