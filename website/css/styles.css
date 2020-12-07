@@ -39,7 +39,11 @@
 }
 
 .dropdown-menu{
-    margin: auto;
+    margin-left: 200px;
+}
+
+.button{
+    margin-bottom: 5px;
 }
 
 .filterSettingsControl{
