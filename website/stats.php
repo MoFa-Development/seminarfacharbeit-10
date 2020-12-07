@@ -61,7 +61,7 @@
 
 
 
-            <iframe id="plotFrame" src="http://seminarfach.zapto.org/statsFrame.php">
+            <iframe id="plotFrame" src="http://seminarfach.zapto.org/statsFrame.php" style="height: 100% width: 100%">
 
             </iframe>
         
