@@ -167,7 +167,7 @@
                 $texts = [];
                 for ($i = 0; $i <= sizeof($rid_l); $i++)
                 {
-                $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."'";
+                  $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."'";
                 }
 
                 $texts = implode(", ", $texts);
@@ -217,15 +217,18 @@
 
                 $orderTypes[] = ${$ord};
             }
-                $rid_l[] = $rid;
-                $author_l[] = $author;
-                $charRate_l[] = $charRate;
-                $duplicateWords_l[] = $duplicateWords;
-                $topTenWords_l[] = $topTenWords;
-                $inputLen_l[] = $inputLen;
-                $outputLen_l[] = $outputLen;
-                $title_l[] = $title;
-                $genre_l[] = $genre;
+            else
+            {
+              $rid_l[] = $rid;
+              $author_l[] = $author;
+              $charRate_l[] = $charRate;
+              $duplicateWords_l[] = $duplicateWords;
+              $topTenWords_l[] = $topTenWords;
+              $inputLen_l[] = $inputLen;
+              $outputLen_l[] = $outputLen;
+              $title_l[] = $title;
+              $genre_l[] = $genre;
+            }
           }
 
           $str = rtrim($str, ", ");
