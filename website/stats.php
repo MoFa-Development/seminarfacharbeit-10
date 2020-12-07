@@ -56,12 +56,12 @@
             dropdown.addEventListener('click', function(event) {
             event.stopPropagation();
             dropdown.classList.toggle('is-active');
-          }); 
+          });
         </script>
 
 
 
-            <iframe id="plotFrame" src="http://seminarfach.zapto.org/statsFrame.php" style="height: 100% width: 100%">
+            <iframe id="plotFrame" src="http://seminarfach.zapto.org/statsFrame.php" style="height: 100% width: 100%; ">
 
             </iframe>
         
