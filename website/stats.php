@@ -40,7 +40,7 @@
         <div class="dropdown" style="margin: auto">
           <div class="dropdown-trigger">
             <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-              <span id="ddText"><?php if(isset($_GET["ord"])) echo $_GET["ord"]; else echo "Bitte auswählen";?></span>
+              <span id="ddText"><?php if(isset($ord)) echo $ord; else echo "Bitte auswählen";?></span>
               <span class="icon is-small">
                 <i class="fas fa-angle-down" aria-hidden="true"></i>
               </span>
@@ -48,13 +48,13 @@
           </div>
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content">
-              <a onclick="document.getElementById('ord').value = 'title'; document.getElementById('ddText').innerHTML = 'Einzelne Werke'" class="dropdown-item <?php if($_GET["ord"] == "title") echo "is-active";?>">
+              <a onclick="document.getElementById('ord').value = 'title'; document.getElementById('ddText').innerHTML = 'Einzelne Werke'" class="dropdown-item <?php if($ord == "title") echo "is-active";?>">
                 Einzelne Werke
               </a>
-              <a onclick="document.getElementById('ord').value = 'author'; document.getElementById('ddText').innerHTML = 'Autor'" class="dropdown-item <?php if($_GET["ord"] == "author") echo "is-active";?>">
+              <a onclick="document.getElementById('ord').value = 'author'; document.getElementById('ddText').innerHTML = 'Autor'" class="dropdown-item <?php if($ord == "author") echo "is-active";?>">
                 Autor
               </a>
-              <a onclick="document.getElementById('ord').value = 'genre'; document.getElementById('ddText').innerHTML = 'Genre'" class="dropdown-item <?php if($_GET["ord"] == "genre") echo "is-active";?>">
+              <a onclick="document.getElementById('ord').value = 'genre'; document.getElementById('ddText').innerHTML = 'Genre'" class="dropdown-item <?php if($ord == "genre") echo "is-active";?>">
                 Genre
               </a>
             </div>
