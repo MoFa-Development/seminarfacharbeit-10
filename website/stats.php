@@ -301,8 +301,8 @@
         Plotly.newPlot('plot', data, layout, config);
 
         document.getElementById('plot').on('plotly_click', function(data){
-            alert(data.points[0].link);
-            alert(data.link);
+            alert(data.points[0].customdata);
+            alert(data.customdata);
         });
 
 
