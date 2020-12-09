@@ -20,9 +20,8 @@
     margin-bottom: 30px;
 }
 
-#plotFrame{
-    display: block;
-    margin: auto;
+#plot{
+    height: 100%;
 }
 
 .filterSettings{
