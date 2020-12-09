@@ -164,7 +164,7 @@
             $author = str_replace("\n", "",$author);
             $charRate = $r["charRate"];
             $duplicateWords = $r["duplicateWords"];
-            $topWords = explode(",", $r["topWords"], 10); unset($topWords[count($topWords)-1]);
+            $topWords = explode(",", $r["topWords"], 5); unset($topWords[count($topWords)-1]);
             $topWords = implode(", ", $topWords);
             $inputLen = $r["inputLen"];
             $outputLen = $r["outputLen"];
@@ -235,7 +235,7 @@
                       sizeref: 2,
                       sizemode: 'area',
                       opacity: 0.3,
-                      link: [$url_l]
+                      customdata: [$url_l]
                     }
                 };
                 ";
@@ -302,6 +302,7 @@
 
         document.getElementById('plot').on('plotly_click', function(data){
             alert(data.points[0].link);
+            alert(data.link);
         });
 
 
