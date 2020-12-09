@@ -214,6 +214,8 @@
                 $xVal = ${$_GET["xOrd"] + "_l"};
                 $yVal = ${$_GET["yOrd"] + "_l"};
 
+                die( $xVal + $yVal);
+
                 echo"
                 var t$rid = {
                       x: [$xVal],
