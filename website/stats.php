@@ -165,6 +165,7 @@
             $charRate = $r["charRate"];
             $duplicateWords = $r["duplicateWords"];
             $topWords = explode(",", $r["topWords"], 10); unset($topWords[count($topWords)-1]);
+            $topWords = implode(", ", $topWords);
             $inputLen = $r["inputLen"];
             $outputLen = $r["outputLen"];
             $title = str_replace("'", "", $r["title"]);
