@@ -70,9 +70,9 @@
             <br>
             <label class="is-medium">X-Achse: </label><input class="input bigInput" type="text" placeholder="InputLen" name="xOrd" value="<?php if(isset($_GET["xOrd"])) echo $_GET["xOrd"]; else echo "inputLen";?>">
             <br>
-            <label class="is-medium">Y-Achse: </label><input class="input bigInput" type="text" placeholder="charRate" name="yOrd" value="<?php if(isset($_GET["yOrd"])) echo $_GET["yOrd"]; else echo "charRate";?>?>">
-            <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
+            <label class="is-medium">Y-Achse: </label><input class="input bigInput" type="text" placeholder="charRate" name="yOrd" value="<?php if(isset($_GET["yOrd"])) echo $_GET["yOrd"]; else echo "charRate";?>">
             <br>
+            <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
             <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">
           </form>
         </div>
