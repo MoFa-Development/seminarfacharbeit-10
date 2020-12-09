@@ -62,7 +62,7 @@
           </div>
 
           <form action="stats.php" method="get">
-            <input class="input" type="text" placeholder="A" name="startOrd" value="<?php (isset($_GET["startOrd"])) ? echo $_GET["startOrd"] : echo "A";?>"><label class="is-medium"> bis </label><input class="input" type="text" placeholder="Z" name="endOrd" value="<?php (isset($_GET["endOrd"])) ? echo $_GET["endOrd"] : echo "Z";?>">
+            <input class="input" type="text" placeholder="A" name="startOrd" value="<?php if(isset($_GET["startOrd"])) echo $_GET["startOrd"]; else echo "A";?>"><label class="is-medium"> bis </label><input class="input" type="text" placeholder="Z" name="endOrd" value="<?php if(isset($_GET["endOrd"])) echo $_GET["endOrd"]; else echo "Z";?>">
             <br>
             <label class="is-medium">Text-Anzahl pro Farbe</label>
             <input id="sliderWithValue" class="slider has-output is-fullwidth filterSettingsControl" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
