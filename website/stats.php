@@ -11,6 +11,22 @@
           {
               $ord = "Listenart wählen";
           }
+          if(isset($_GET["xOrd"]))
+          {
+              $ord = $_GET["xOrd"];
+          }
+          else
+          {
+              $ord = "inputLen";
+          }
+          if(isset($_GET["yOrd"]))
+          {
+              $ord = $_GET["yOrd"];
+          }
+          else
+          {
+              $ord = "charRate";
+          }
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,9 +84,9 @@
             <input id="sliderWithValue" class="slider has-output is-fullwidth filterSettingsControl" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
             <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
             <br>
-            <label class="is-medium">X-Achse: </label><input class="input bigInput" type="text" placeholder="InputLen" name="xOrd" value="<?php if(isset($_GET["xOrd"])) echo $_GET["xOrd"]; else echo "inputLen";?>">
+            <label class="is-medium">X-Achse: </label><input class="input bigInput" type="text" placeholder="InputLen" name="xOrd" value="<?php echo $_GET["xOrd"];?>">
             <br>
-            <label class="is-medium">Y-Achse: </label><input class="input bigInput" type="text" placeholder="charRate" name="yOrd" value="<?php if(isset($_GET["yOrd"])) echo $_GET["yOrd"]; else echo "charRate";?>">
+            <label class="is-medium">Y-Achse: </label><input class="input bigInput" type="text" placeholder="charRate" name="yOrd" value="<?php echo $_GET["yOrd"];?>">
             <br>
             <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
             <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">
