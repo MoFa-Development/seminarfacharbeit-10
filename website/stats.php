@@ -85,7 +85,7 @@
             <br><br>
             <label class="is-medium">Y-Achse: </label><input class="input bigInput" type="text" placeholder="charRate" name="yOrd" value="<?php echo $_GET["yOrd"];?>">
             <br><br>
-            <label class="is-medium">Bubble-Größe: </label><input class="input bigInput" type="text" placeholder="duplicateWords" name="bSize" value="<?php echo $_GET["bSize"];?>">
+            <label class="is-medium">Bubble-Größe: </label><input class="input biggerInput" type="text" placeholder="duplicateWords" name="bSize" value="<?php echo $_GET["bSize"];?>">
             <br><br>
             <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
             <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">

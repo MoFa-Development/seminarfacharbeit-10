@@ -60,3 +60,7 @@
 .bigInput {
     width: 100px !important;
 }
+
+.biggerInput {
+    width: 150px !important;
+}
