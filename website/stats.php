@@ -211,10 +211,8 @@
                 $title_l = implode(", ", $title_l);
                 $genre_l = implode(", ", $genre_l);
 
-                $xVal = ${"$" + $_GET["xOrd"] + "_l"};
-                $yVal = ${"$" + $_GET["yOrd"] + "_l"};
-
-                die( $xVal);
+                $xVal = ${$_GET["xOrd"] . "_l"};
+                $yVal = ${$_GET["yOrd"] . "_l"};
 
                 echo"
                 var t$rid = {
