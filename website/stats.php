@@ -144,11 +144,13 @@
           $author_l = [];
           $charRate_l = [];
           $duplicateWords_l = [];
-          $topTenWords_l = [];
+          $topWords_l = [];
           $inputLen_l = [];
           $outputLen_l = [];
           $title_l = [];
           $genre_l = [];
+          $execTime_l = [];
+          $url_l = [];
 
 
           $counter = 0;
@@ -162,12 +164,14 @@
             $author = str_replace("\n", "",$author);
             $charRate = $r["charRate"];
             $duplicateWords = $r["duplicateWords"];
-            $topTenWords = $r["topTenWords"];
+            $topWords = $r["topWords"];
             $inputLen = $r["inputLen"];
             $outputLen = $r["outputLen"];
             $title = str_replace("'", "", $r["title"]);
             $genre = str_replace("\r", "",$r["genre"]);
             $genre = str_replace("\n", "",$genre);
+            $execTime = $r["execTime"];
+            $url = "'" . $r["url"] . "'";
 
             $thisOrd = ord(${$ord}[0]);
 
@@ -196,7 +200,7 @@
                 $texts = [];
                 for ($i = 0; $i <= sizeof($rid_l); $i++)
                 {
-                  $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>Genre: ".$genre_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."'";
+                  $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>Genre: ".$genre_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."<br>ExecTime:".$execTime_l[$i]."<br>TopWords: ".$topWords_l[$i]."<br>Klicken zum öffnen"."'";
                 }
 
                 $texts = implode(", ", $texts);
@@ -205,11 +209,13 @@
                 $author_l = implode(", ", $author_l);
                 $charRate_l = implode(", ", $charRate_l);
                 $duplicateWords_l = implode(", ", $duplicateWords_l);
-                $topTenWords_l = implode(", ", $topTenWords_l);
+                $topWords_l = implode(", ", $topWords_l);
                 $inputLen_l = implode(", ", $inputLen_l);
                 $outputLen_l = implode(", ", $outputLen_l);
                 $title_l = implode(", ", $title_l);
                 $genre_l = implode(", ", $genre_l);
+                $execTime_l = implode(", ", $execTime_l);
+                $url_l = implode(", ", $url_l);
 
                 $xVal = ${$_GET["xOrd"] . "_l"};
                 $yVal = ${$_GET["yOrd"] . "_l"};
@@ -227,7 +233,8 @@
                       size: [$duplicateWords_l],
                       sizeref: 2,
                       sizemode: 'area',
-                      opacity: 0.3
+                      opacity: 0.3,
+                      link: [$url_l]
                     }
                 };
                 ";
@@ -241,11 +248,13 @@
                 $author_l = [];
                 $charRate_l = [];
                 $duplicateWords_l = [];
-                $topTenWords_l = [];
+                $topWords_l = [];
                 $inputLen_l = [];
                 $outputLen_l = [];
                 $title_l = [];
                 $genre_l = [];
+                $execTime_l = [];
+                $url_l = [];
 
                 $orderTypes[] = ${$ord};
             }
@@ -255,11 +264,13 @@
               $author_l[] = $author;
               $charRate_l[] = $charRate;
               $duplicateWords_l[] = $duplicateWords;
-              $topTenWords_l[] = $topTenWords;
+              $topWords_l[] = $topWords;
               $inputLen_l[] = $inputLen;
               $outputLen_l[] = $outputLen;
               $title_l[] = $title;
               $genre_l[] = $genre;
+              $execTime_l[] = $execTime;
+              $url_l[] = $url;
             }
           }
 
@@ -287,6 +298,11 @@
         var config = {responsive: true}
 
         Plotly.newPlot('plot', data, layout, config);
+
+        document.getElementById('plot').on('plotly_click', function(data){
+            open(data.link);
+        });
+
 
       </script>
     </body>
