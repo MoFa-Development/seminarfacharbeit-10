@@ -68,9 +68,9 @@
             <input id="sliderWithValue" class="slider has-output is-fullwidth filterSettingsControl" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
             <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
             <br>
-            <label class="is-medium">X-Achse: </label><input class="input" type="text" placeholder="InputLen" name="xOrd" value="<?php echo $_GET["xOrd"] or "InputLen";?>">
+            <label class="is-medium">X-Achse: </label><input class="input" type="text" placeholder="InputLen" name="xOrd" value="<?php if(isset($_GET["xOrd"])) echo $_GET["xOrd"]; else echo "inputLen";?>">
             <br>
-            <label class="is-medium">Y-Achse: </label><input class="input" type="text" placeholder="charRate" name="yOrd" value="<?php echo $_GET["yOrd"] or "charRate";?>">
+            <label class="is-medium">Y-Achse: </label><input class="input" type="text" placeholder="charRate" name="yOrd" value="<?php if(isset($_GET["yOrd"])) echo $_GET["yOrd"]; else echo "charRate";?>?>">
             <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
             <br>
             <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">
