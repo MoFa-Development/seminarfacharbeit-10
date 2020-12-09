@@ -164,7 +164,7 @@
             $author = str_replace("\n", "",$author);
             $charRate = $r["charRate"];
             $duplicateWords = $r["duplicateWords"];
-            $topWords = $r["topWords"];
+            $topWords = substr($r["topWords"], 0, 20);
             $inputLen = $r["inputLen"];
             $outputLen = $r["outputLen"];
             $title = str_replace("'", "", $r["title"]);
@@ -300,7 +300,7 @@
         Plotly.newPlot('plot', data, layout, config);
 
         document.getElementById('plot').on('plotly_click', function(data){
-            open(data.link);
+            alert(data);
         });
 
 
