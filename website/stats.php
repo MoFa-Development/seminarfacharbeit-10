@@ -11,21 +11,13 @@
           {
               $ord = "Listenart wählen";
           }
-          if(isset($_GET["xOrd"]))
+          if(!isset($_GET["xOrd"]))
           {
-              $ord = $_GET["xOrd"];
+            $_GET["xOrd"] = "inputLen";
           }
-          else
+          if(!isset($_GET["yOrd"]))
           {
-              $ord = "inputLen";
-          }
-          if(isset($_GET["yOrd"]))
-          {
-              $ord = $_GET["yOrd"];
-          }
-          else
-          {
-              $ord = "charRate";
+            $_GET["yOrd"] = "charRate";
           }
 ?>
 <!DOCTYPE html>
@@ -219,10 +211,13 @@
                 $title_l = implode(", ", $title_l);
                 $genre_l = implode(", ", $genre_l);
 
+                $xVal = ${"$" + $_GET["xOrd"] + "_l"};
+                $yVal = ${"$" + $_GET["yOrd"] + "_l"};
+
                 echo"
                 var t$rid = {
-                      x: [$inputLen_l],
-                      y: [$charRate_l],
+                      x: [$xVal],
+                      y: [$yVal],
                       name: '$ordVal',
                       hovertemplate: '%{text}',
                       text: [$texts],
@@ -282,10 +277,10 @@
           showlegend: true,
           hovermode: 'closest',
           xaxis: {
-            title: 'InputLen'
+            title: <?php echo $_GET["xOrd"]; ?>
           },
           yaxis: {
-            title: 'CharRate'
+            title: <?php echo $_GET["yOrd"]; ?>
           }
         };
 
