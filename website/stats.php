@@ -9,7 +9,7 @@
           }
           else
           {
-              $ord = "Bitte auswählen";
+              $ord = "Listenart wählen";
           }
 ?>
 <!DOCTYPE html>
@@ -40,7 +40,7 @@
           <div class="dropdown filterSettingsControl" style="margin: auto">
             <div class="dropdown-trigger">
               <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                <span id="ddText"><?php if(isset($ord)) echo $ord; else echo "Bitte auswählen";?></span>
+                <span id="ddText"><?php if(isset($ord)) echo $ord; else echo "Listenart wählen";?></span>
                 <span class="icon is-small">
                   <i class="fas fa-angle-down" aria-hidden="true"></i>
                 </span>
@@ -62,11 +62,14 @@
           </div>
 
           <form action="stats.php" method="get">
-            <input class="input" type="text" placeholder="A" name="startOrd" value="<?php echo $_GET["startOrd"];?>"><label class="is-medium"> bis </label><input class="input" type="text" placeholder="Z" name="endOrd" value="<?php echo $_GET["endOrd"];?>">
+            <input class="input" type="text" placeholder="A" name="startOrd" value="<?php echo $_GET["startOrd"] or "A";?>"><label class="is-medium"> bis </label><input class="input" type="text" placeholder="Z" name="endOrd" value="<?php echo $_GET["endOrd"] or "Z";?>">
             <br>
             <label class="is-medium">Text-Anzahl pro Farbe</label>
             <input id="sliderWithValue" class="slider has-output is-fullwidth filterSettingsControl" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
             <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
+            <label class="is-medium">X-Achse: </label><input class="input" type="text" placeholder="InputLen" name="xOrd" value="<?php echo $_GET["xOrd"] or "InputLen";?>">
+            <br>
+            <label class="is-medium">Y-Achse: </label><input class="input" type="text" placeholder="charRate" name="yOrd" value="<?php echo $_GET["yOrd"] or "charRate";?>">
             <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
             <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">
           </form>
@@ -105,7 +108,7 @@
         <?php
 
           include "php/statsLoader.php";
-          if($ord != "Bitte auswählen")
+          if($ord != "Listenart wählen")
           {
             $fr = loadStats($ord);
           }
