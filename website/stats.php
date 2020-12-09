@@ -277,10 +277,10 @@
           showlegend: true,
           hovermode: 'closest',
           xaxis: {
-            title: <?php echo $_GET["xOrd"]; ?>
+            title: "<?php echo $_GET["xOrd"]; ?>"
           },
           yaxis: {
-            title: <?php echo $_GET["yOrd"]; ?>
+            title: "<?php echo $_GET["yOrd"]; ?>"
           }
         };
 
