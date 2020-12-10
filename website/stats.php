@@ -318,7 +318,7 @@
 
         document.getElementById('plot').on('plotly_click', function(data){
             for(var i=0; i < data.points.length; i++){
-              open(data.points[i].customdata);
+              open(data.points[i].customdata[0]);
             }
         });
 
