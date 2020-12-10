@@ -88,7 +88,7 @@
             <label class="is-medium">Bubble-Größe: </label><input class="input biggerInput" type="text" placeholder="duplicateWords" name="bSize" value="<?php echo $_GET["bSize"];?>">
             <br><br>
             <label class="checkbox">
-              <input type="checkbox" name="av">
+              <input type="checkbox" name="av" <?php if(isset($ord)) echo "checked";?>>
                 Durchschnitt
             </label>
             <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
