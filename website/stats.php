@@ -320,7 +320,6 @@
             for(var i=0; i < data.points.length; i++){
               open(data.points[i].customdata);
             }
-            alert(msg);
         });
 
 
