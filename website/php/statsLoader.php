@@ -14,7 +14,7 @@
         
         $database->set_charset("utf8");
         
-function loadStats($ord)
+function loadStats($ord, $av)
 {
         global $database;
 
@@ -48,4 +48,11 @@ function loadStats($ord)
             $rowNr += 1;
         }
         return $final_result;
+}
+
+function average($a)
+{
+    $a = array_filter($a);
+    $average = array_sum($a)/count($a);
+    return   $average;
 }
