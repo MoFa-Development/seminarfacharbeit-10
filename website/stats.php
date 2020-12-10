@@ -314,11 +314,11 @@
 
         var config = {responsive: true}
 
-        Plotly.newPlot('plot', data, layout, config);
-
-        document.getElementById('plot').on('plotly_click', function(data, layout){
-            alert(data.points[0].customdata);
-            alert(data.customdata);
+        Plotly.on('plotly_click', function(data){
+            for(var i=0; i < data.points.length; i++){
+              open(data.points[i].customdata);
+            }
+            alert(msg);
         });
 
 
