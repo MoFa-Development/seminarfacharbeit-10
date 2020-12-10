@@ -135,6 +135,7 @@
               $fr = loadStats($ord, true);
             else
               $fr = loadStats($ord, false);
+            echo $fr;
           }
 
           
