@@ -22,7 +22,7 @@ function loadStats($ord, $av)
         if (!$av)
             $sql = "SELECT * FROM articles ORDER BY ".$ord;
         else
-            $sql = "SELECT AVG(id), AVG(topWords), AVG(charrate), AVG(genre), AVG(url), AVG(author), AVG(title), AVG(inputLen), AVG(outputLen), AVG(duplicateWords), AVG(execTime) FROM articles GROUP BY ".$ord." ORDER BY ".$ord;
+            $sql = "SELECT AVG(id), AVG(topWords), AVG(charRate), AVG(genre), AVG(url), AVG(author), AVG(title), AVG(inputLen), AVG(outputLen), AVG(duplicateWords), AVG(execTime) FROM articles GROUP BY ".$ord." ORDER BY ".$ord;
 
 
         $result = $database->query($sql);
