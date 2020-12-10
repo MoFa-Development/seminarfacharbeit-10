@@ -50,9 +50,15 @@ function loadStats($ord, $av)
         $rowNr = 1;
         while($row = mysqli_fetch_assoc($result)) 
         {
+            foreach ($row as $key => $value) {
+                $row[str_replace(")", "", str_replace("AVG(", "", $key))] = $row[$key];
+                unset($row[$key]);
+            }
+
             $final_result[$rowNr] = $row;
             $rowNr += 1;
         }
+
         return $final_result;
 }
 
