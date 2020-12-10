@@ -22,7 +22,7 @@ function loadStats($ord, $av)
         if (!$av)
             $sql = "SELECT * FROM articles ORDER BY ".$ord;
         else
-            $sql = "SELECT AVG(inputLen), AVG(outputLen), AVG(duplicateWords), AVG(execTime) FROM articles GROUP BY ".$ord." ORDER BY ".$ord;
+            $sql = "SELECT AVG(id), AVG(inputLen), AVG(outputLen), AVG(duplicateWords), AVG(execTime) FROM articles GROUP BY ".$ord." ORDER BY ".$ord;
 
 
         $result = $database->query($sql);
@@ -31,7 +31,7 @@ function loadStats($ord, $av)
         {
             $sql = "CREATE TABLE articles (
                       id int(11) AUTO_INCREMENT,
-                      topTenWords varchar(100) NOT NULL,
+                      topWords varchar(100) NOT NULL,
                       inputLen int(11) NOT NULL,
                       outputLen int(11) NOT NULL,
                       duplicateWords int(11) NOT NULL,
