@@ -67,10 +67,10 @@ def naive_compress(input_text: str):
 
     index = 0
 
-    for word in input_words:
+    for i, word in enumerate(input_words):
         if word in words:
             continue
-        if (input_words.count(word) >= 2 or word.isdigit()) and len(word) > 1: #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
+        if (word in input_words[i+1:] or word.isdigit()) and len(word) > 1: #Es werden nur wörter durch Indexe ersetzt, die mehr als ein Mal vorkommen, oder nur aus Zahlen bestehen, welche den Dekompremierungsalgorithmus zu Fehlern bringen würden.
             word_index = add_word_to_list(word)
             output = output[:index] + replace(output[index:], word, str(word_index))
 
