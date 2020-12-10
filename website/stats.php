@@ -9,8 +9,21 @@
           }
           else
           {
-              $ord = "Bitte auswählen";
+              $ord = "Listenart wählen";
           }
+          if(!isset($_GET["xOrd"]))
+          {
+            $_GET["xOrd"] = "inputLen";
+          }
+          if(!isset($_GET["yOrd"]))
+          {
+            $_GET["yOrd"] = "charRate";
+          }
+          if(!isset($_GET["bSize"]))
+          {
+            $_GET["bSize"] = "duplicateWords";
+          }
+           
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,7 +53,7 @@
           <div class="dropdown filterSettingsControl" style="margin: auto">
             <div class="dropdown-trigger">
               <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                <span id="ddText"><?php if(isset($ord)) echo $ord; else echo "Bitte auswählen";?></span>
+                <span id="ddText"><?php if(isset($ord)) echo $ord; else echo "Listenart wählen";?></span>
                 <span class="icon is-small">
                   <i class="fas fa-angle-down" aria-hidden="true"></i>
                 </span>
@@ -62,11 +75,22 @@
           </div>
 
           <form action="stats.php" method="get">
-            <input class="input" type="text" placeholder="A" name="startOrd" value="<?php echo $_GET["startOrd"];?>"><label class="is-medium"> bis </label><input class="input" type="text" placeholder="z" name="endOrd" value="<?php echo $_GET["endOrd"];?>">
+            <input class="input" type="text" placeholder="A" name="startOrd" value="<?php if(isset($_GET["startOrd"])) echo $_GET["startOrd"]; else echo "A";?>"><label class="is-medium"> bis </label><input class="input" type="text" placeholder="Z" name="endOrd" value="<?php if(isset($_GET["endOrd"])) echo $_GET["endOrd"]; else echo "Z";?>">
             <br>
             <label class="is-medium">Text-Anzahl pro Farbe</label>
             <input id="sliderWithValue" class="slider has-output is-fullwidth filterSettingsControl" min="0" max="100" value="<?php echo intval($_GET["amount"]);?>" step="1" type="range" name="amount">
             <output for="sliderWithValue"><?php echo intval($_GET["amount"]);?></output>
+            <br>
+            <label class="is-medium">X-Achse: </label><input class="input bigInput" type="text" placeholder="InputLen" name="xOrd" value="<?php echo $_GET["xOrd"];?>">
+            <br><br>
+            <label class="is-medium">Y-Achse: </label><input class="input bigInput" type="text" placeholder="charRate" name="yOrd" value="<?php echo $_GET["yOrd"];?>">
+            <br><br>
+            <label class="is-medium">Bubble-Größe: </label><input class="input biggerInput" type="text" placeholder="duplicateWords" name="bSize" value="<?php echo $_GET["bSize"];?>">
+            <br><br>
+            <label class="checkbox">
+              <input type="checkbox" name="av">
+                Durchschnitt
+            </label>
             <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
             <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">
           </form>
@@ -105,9 +129,12 @@
         <?php
 
           include "php/statsLoader.php";
-          if($ord != "Bitte auswählen")
+          if($ord != "Listenart wählen")
           {
-            $fr = loadStats($ord);
+            if($_GET["av"] == "on")
+              $fr = loadStats($ord, true);
+            else
+              $fr = loadStats($ord, false);
           }
 
           
@@ -131,11 +158,13 @@
           $author_l = [];
           $charRate_l = [];
           $duplicateWords_l = [];
-          $topTenWords_l = [];
+          $topWords_l = [];
           $inputLen_l = [];
           $outputLen_l = [];
           $title_l = [];
           $genre_l = [];
+          $execTime_l = [];
+          $url_l = [];
 
 
           $counter = 0;
@@ -149,17 +178,20 @@
             $author = str_replace("\n", "",$author);
             $charRate = $r["charRate"];
             $duplicateWords = $r["duplicateWords"];
-            $topTenWords = $r["topTenWords"];
+            $topWords = explode(",", $r["topWords"], 5); unset($topWords[count($topWords)-1]);
+            $topWords = implode(", ", $topWords);
             $inputLen = $r["inputLen"];
             $outputLen = $r["outputLen"];
             $title = str_replace("'", "", $r["title"]);
             $genre = str_replace("\r", "",$r["genre"]);
             $genre = str_replace("\n", "",$genre);
+            $execTime = $r["execTime"];
+            $url = "'" . $r["url"] . "'";
 
             $thisOrd = ord(${$ord}[0]);
 
 
-            if(${$ord} == $skip || $thisOrd < ord($_GET["startOrd"]) || $thisOrd > ord($_GET["endOrd"]))
+            if(${$ord} == $skip || $thisOrd < ord(strtoupper($_GET["startOrd"])) || $thisOrd > ord(strtoupper($_GET["endOrd"])))
               continue;
 
             //Jump to next ord if max words reached for this ord reached
@@ -183,7 +215,7 @@
                 $texts = [];
                 for ($i = 0; $i <= sizeof($rid_l); $i++)
                 {
-                  $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>Genre: ".$genre_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."'";
+                  $texts[] = "'Titel: ".$title_l[$i]."<br>Autor: ".$author_l[$i]."<br>Genre: ".$genre_l[$i]."<br>CharRate: ".$charRate_l[$i]."%<br>Duplikatswörter: ".$duplicateWords_l[$i]."<br>InputLen: ".$inputLen_l[$i]."<br>OutputLen: ".$outputLen_l[$i]."<br>ExecTime:".$execTime_l[$i]."<br>TopWords: ".$topWords_l[$i]."<br>Klicken zum öffnen"."'";
                 }
 
                 $texts = implode(", ", $texts);
@@ -192,26 +224,33 @@
                 $author_l = implode(", ", $author_l);
                 $charRate_l = implode(", ", $charRate_l);
                 $duplicateWords_l = implode(", ", $duplicateWords_l);
-                $topTenWords_l = implode(", ", $topTenWords_l);
+                $topWords_l = implode(", ", $topWords_l);
                 $inputLen_l = implode(", ", $inputLen_l);
                 $outputLen_l = implode(", ", $outputLen_l);
                 $title_l = implode(", ", $title_l);
                 $genre_l = implode(", ", $genre_l);
+                $execTime_l = implode(", ", $execTime_l);
+                $url_l = implode(", ", $url_l);
+
+                $xVal = ${$_GET["xOrd"] . "_l"};
+                $yVal = ${$_GET["yOrd"] . "_l"};
+                $size = ${$_GET["bSize"] . "_l"};
 
                 echo"
                 var t$rid = {
-                      x: [$inputLen_l],
-                      y: [$charRate_l],
+                      x: [$xVal],
+                      y: [$yVal],
                       name: '$ordVal',
                       hovertemplate: '%{text}',
                       text: [$texts],
                       mode: 'markers',
                       visible: 'legendonly',
                       marker: {
-                      size: [$duplicateWords_l],
+                      size: [$size],
                       sizeref: 2,
                       sizemode: 'area',
-                      opacity: 0.3
+                      opacity: 0.3,
+                      customdata: [$url_l]
                     }
                 };
                 ";
@@ -225,11 +264,13 @@
                 $author_l = [];
                 $charRate_l = [];
                 $duplicateWords_l = [];
-                $topTenWords_l = [];
+                $topWords_l = [];
                 $inputLen_l = [];
                 $outputLen_l = [];
                 $title_l = [];
                 $genre_l = [];
+                $execTime_l = [];
+                $url_l = [];
 
                 $orderTypes[] = ${$ord};
             }
@@ -239,11 +280,13 @@
               $author_l[] = $author;
               $charRate_l[] = $charRate;
               $duplicateWords_l[] = $duplicateWords;
-              $topTenWords_l[] = $topTenWords;
+              $topWords_l[] = $topWords;
               $inputLen_l[] = $inputLen;
               $outputLen_l[] = $outputLen;
               $title_l[] = $title;
               $genre_l[] = $genre;
+              $execTime_l[] = $execTime;
+              $url_l[] = $url;
             }
           }
 
@@ -261,16 +304,22 @@
           showlegend: true,
           hovermode: 'closest',
           xaxis: {
-            title: 'InputLen'
+            title: "<?php echo $_GET["xOrd"]; ?>"
           },
           yaxis: {
-            title: 'CharRate'
+            title: "<?php echo $_GET["yOrd"]; ?>"
           }
         };
 
         var config = {responsive: true}
 
         Plotly.newPlot('plot', data, layout, config);
+
+        document.getElementById('plot').on('plotly_click', function(data, layout){
+            alert(data.points[0].customdata);
+            alert(data.customdata);
+        });
+
 
       </script>
     </body>

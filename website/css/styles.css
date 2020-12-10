@@ -20,11 +20,6 @@
     margin-bottom: 30px;
 }
 
-#plotFrame{
-    display: block;
-    margin: auto;
-}
-
 .filterSettings{
     display: block;
     border-radius: 10px;
@@ -54,5 +49,13 @@
 }
 
 .input, .textarea {
-    width: 35px !important;
+    width: 35px;
+}
+
+.bigInput {
+    width: 100px !important;
+}
+
+.biggerInput {
+    width: 150px !important;
 }

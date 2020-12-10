@@ -14,11 +14,17 @@
         
         $database->set_charset("utf8");
         
-function loadStats($ord)
+function loadStats($ord, $av)
 {
         global $database;
 
-        $sql = "SELECT * FROM articles ORDER BY ".$ord;
+
+        if (!$av)
+            $sql = "SELECT * FROM articles ORDER BY ".$ord;
+        else
+            $sql = "SELECT AVG(inputLen), AVG(outputLen), AVG(duplicateWords), AVG(execTime) FROM articles GROUP BY ".$ord." ORDER BY ".$ord;
+
+
         $result = $database->query($sql);
         
         if(empty($result))
@@ -48,4 +54,11 @@ function loadStats($ord)
             $rowNr += 1;
         }
         return $final_result;
+}
+
+function average($a)
+{
+    $a = array_filter($a);
+    $average = array_sum($a)/count($a);
+    return   $average;
 }
