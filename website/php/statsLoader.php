@@ -19,7 +19,7 @@ function loadStats($ord, $av)
         global $database;
 
 
-        if ($av)
+        if (!$av)
             $sql = "SELECT * FROM articles ORDER BY ".$ord;
         else
             $sql = "SELECT ".$ord.", AVG(inputLen, outputLen, duplicateWords, execTime) FROM acticles GROUP BY".$ord." ORDER BY ".$ord;
