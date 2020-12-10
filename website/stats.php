@@ -251,7 +251,7 @@
                       sizeref: 2,
                       sizemode: 'area',
                       opacity: 0.3,
-                      customdata: $url_l
+                      customdata: [$url_l]
                     }
                 };
                 ";
