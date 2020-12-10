@@ -47,7 +47,7 @@ function loadStats($ord, $av)
 
         $final_result = [];
 
-        $rowNr = 1;
+        $rowNr = 0;
         while($row = mysqli_fetch_assoc($result)) 
         {
             foreach ($row as $key => $value) {

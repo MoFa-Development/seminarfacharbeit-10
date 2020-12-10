@@ -135,7 +135,7 @@
               $fr = loadStats($ord, true);
             else
               $fr = loadStats($ord, false);
-            var_dump($fr);
+            var_dump($fr[0]);
           }
 
           
