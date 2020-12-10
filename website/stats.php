@@ -317,10 +317,13 @@
         Plotly.newPlot('plot', data, layout, config);
 
         document.getElementById('plot').on('plotly_click', function(data){
-            for(var i=0; i < data.points.length; i++){
-              alert(data.points[i].customdata);
-            }
-        });
+    var msg = 'Closest point clicked:';
+    for(var i=0; i < data.points.length; i++){
+      msg += '\ncustomdata = ' + data.points[i].customdata;
+      msg += '\ntext = ' + data.points[i].text;
+    }
+    alert(msg);
+});
 
 
       </script>
