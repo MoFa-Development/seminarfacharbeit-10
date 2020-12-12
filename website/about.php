@@ -27,7 +27,11 @@
               Diese Website nutzt das Git Repository unter <a href="https://github.com/Antricks/seminarfacharbeit-10">https://github.com/Antricks/seminarfacharbeit-10</a> der <strong>Version <?php exec("git rev-list --all --count 2>&1", $result); echo($result[0]); ?></strong>.
             </div>
           </div>
-        
+        <div class="bgCard">
+          <h1 class="title">Grundlagenforschung zur Komprimierungsrate von Texten verschiedener Art</h1>
+          <hr>
+          <p>Untersucht wird die Länge eines komprimierten Textes im Vergleich zum Ursprungstext. Dabei basiert die Komprimierung auf dem mehrfachen Auftreten von Zeichenketten. Dabei wird die Frage gestellt, in wie fern aus der Komprimierungsrate auf den Inhalt der Texte geschlossen werden kann.</p>
+        </div>
     </body>
 </html>
 
