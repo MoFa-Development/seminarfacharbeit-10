@@ -22,7 +22,7 @@ function loadStats($ord, $av)
         if (!$av)
             $sql = "SELECT * FROM articles ORDER BY ".$ord;
         else
-            $sql = "SELECT AVG(inputLen), AVG(outputLen), AVG(duplicateWords), AVG(execTime) FROM articles GROUP BY ".$ord." ORDER BY ".$ord;
+            $sql = "SELECT AVG(id), AVG(topWords), AVG(charRate), AVG(genre), AVG(url), AVG(author), AVG(title), AVG(inputLen), AVG(outputLen), AVG(duplicateWords), AVG(execTime) FROM articles GROUP BY ".$ord." ORDER BY ".$ord;
 
 
         $result = $database->query($sql);
@@ -31,7 +31,7 @@ function loadStats($ord, $av)
         {
             $sql = "CREATE TABLE articles (
                       id int(11) AUTO_INCREMENT,
-                      topTenWords varchar(100) NOT NULL,
+                      topWords varchar(100) NOT NULL,
                       inputLen int(11) NOT NULL,
                       outputLen int(11) NOT NULL,
                       duplicateWords int(11) NOT NULL,
@@ -47,12 +47,18 @@ function loadStats($ord, $av)
 
         $final_result = [];
 
-        $rowNr = 1;
+        $rowNr = 0;
         while($row = mysqli_fetch_assoc($result)) 
         {
+            foreach ($row as $key => $value) {
+                unset($row[$key]);
+                $row[str_replace(")", "", str_replace("AVG(", "", $key))] = $value;
+            }
+
             $final_result[$rowNr] = $row;
             $rowNr += 1;
         }
+
         return $final_result;
 }
 

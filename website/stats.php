@@ -88,7 +88,7 @@
             <label class="is-medium">Bubble-Größe: </label><input class="input biggerInput" type="text" placeholder="duplicateWords" name="bSize" value="<?php echo $_GET["bSize"];?>">
             <br><br>
             <label class="checkbox">
-              <input type="checkbox" name="av">
+              <input type="checkbox" name="av" <?php if(isset($_GET["av"])) echo "checked";?>>
                 Durchschnitt
             </label>
             <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
@@ -135,6 +135,7 @@
               $fr = loadStats($ord, true);
             else
               $fr = loadStats($ord, false);
+            var_dump($fr[0]);
           }
 
           
@@ -315,10 +316,14 @@
 
         Plotly.newPlot('plot', data, layout, config);
 
-        document.getElementById('plot').on('plotly_click', function(data, layout){
-            alert(data.points[0].customdata);
-            alert(data.customdata);
-        });
+        document.getElementById('plot').on('plotly_click', function(data){
+    var msg = 'Closest point clicked:';
+    for(var i=0; i < data.points.length; i++){
+      msg += '\ncustomdata = ' + data.points[i].customdata;
+      msg += '\ntext = ' + data.points[i].text;
+    }
+    alert(msg);
+});
 
 
       </script>
