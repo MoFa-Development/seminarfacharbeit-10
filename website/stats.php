@@ -169,7 +169,7 @@
 
 
           $counter = 0;
-          $max = $_GET["amount"] + 2;
+          $max = $_GET["amount"] + 4;
           $skip = "";
           foreach($fr as $r)
           {
@@ -317,13 +317,13 @@
         Plotly.newPlot('plot', data, layout, config);
 
         document.getElementById('plot').on('plotly_click', function(data){
-    var msg = 'Closest point clicked:';
-    for(var i=0; i < data.points.length; i++){
-      msg += '\ncustomdata = ' + data.points[i].customdata;
-      msg += '\ntext = ' + data.points[i].text;
-    }
-    alert(msg);
-});
+            var msg = 'Closest point clicked:';
+            for(var i=0; i < data.points.length; i++){
+              msg += '\ncustomdata = ' + data.points[i].customdata;
+              msg += '\ntext = ' + data.points[i].text;
+            }
+            alert(msg);
+        });
 
 
       </script>
