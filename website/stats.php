@@ -169,7 +169,7 @@
 
 
           $counter = 0;
-          $max = $_GET["amount"] + 4;
+          $max = $_GET["amount"];
           $skip = "";
           foreach($fr as $r)
           {
