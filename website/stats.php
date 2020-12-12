@@ -192,7 +192,7 @@
             $thisOrd = ord(${$ord}[0]);
 
 
-            if($thisOrd < ord(strtoupper($_GET["startOrd"])) || $thisOrd > ord(strtoupper($_GET["endOrd"])))
+            if(${$ord} == $skip || $thisOrd < ord(strtoupper($_GET["startOrd"])) || $thisOrd > ord(strtoupper($_GET["endOrd"])))
               continue;
 
             //Jump to next ord if max words reached for this ord reached
@@ -203,25 +203,6 @@
               $counter = 0;
             }
             $counter += 1;
-
-
-
-            $rid_l[] = $rid;
-            $author_l[] = $author;
-            $charRate_l[] = $charRate;
-            $duplicateWords_l[] = $duplicateWords;
-            $topWords_l[] = $topWords;
-            $inputLen_l[] = $inputLen;
-            $outputLen_l[] = $outputLen;
-            $title_l[] = $title;
-            $genre_l[] = $genre;
-            $execTime_l[] = $execTime;
-            $url_l[] = $url;
-
-
-
-
-
 
             if(end($orderTypes) != ${$ord})
             {
@@ -293,6 +274,20 @@
                 $url_l = [];
 
                 $orderTypes[] = ${$ord};
+            }
+            else
+            {
+              $rid_l[] = $rid;
+              $author_l[] = $author;
+              $charRate_l[] = $charRate;
+              $duplicateWords_l[] = $duplicateWords;
+              $topWords_l[] = $topWords;
+              $inputLen_l[] = $inputLen;
+              $outputLen_l[] = $outputLen;
+              $title_l[] = $title;
+              $genre_l[] = $genre;
+              $execTime_l[] = $execTime;
+              $url_l[] = $url;
             }
           }
 
