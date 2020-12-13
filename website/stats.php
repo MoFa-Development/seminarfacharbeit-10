@@ -275,8 +275,7 @@
 
                 $orderTypes[] = ${$ord};
             }
-            else
-            {
+
               $rid_l[] = $rid;
               $author_l[] = $author;
               $charRate_l[] = $charRate;
@@ -288,7 +287,7 @@
               $genre_l[] = $genre;
               $execTime_l[] = $execTime;
               $url_l[] = $url;
-            }
+
           }
 
           $str = rtrim($str, ", ");
