@@ -294,7 +294,7 @@
             
           }
 
-          $str = "t".trim(rtrim($str, ", "), "t6353, ");
+          $str = str_replace(", t1160", "", "t".trim(rtrim($str, ", "), "t6353, "));
           
 
           echo "var data = [".$str."];";
