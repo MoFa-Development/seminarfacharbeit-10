@@ -226,7 +226,7 @@
                 $texts = implode(", ", $texts);
 
                 $rid_l = implode(", ", $rid_l);
-                $author_l = implode(", ", $author_l);
+                $author_l = implode(", ", array_shift($author_l));
                 $charRate_l = implode(", ", $charRate_l);
                 $duplicateWords_l = implode(", ", $duplicateWords_l);
                 $topWords_l = implode(", ", $topWords_l);
