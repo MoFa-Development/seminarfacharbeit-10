@@ -203,8 +203,8 @@
             }
             $counter += 1;
 
-            if(${$ord} == $skip || $thisOrd < ord(strtoupper($_GET["startOrd"])) || $thisOrd > ord(strtoupper($_GET["endOrd"])))
-              continue;
+            //if(${$ord} == $skip || $thisOrd < ord(strtoupper($_GET["startOrd"])) || $thisOrd > ord(strtoupper($_GET["endOrd"])))
+            //  continue;
 
             if(end($orderTypes) != ${$ord})
             {
