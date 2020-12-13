@@ -203,8 +203,20 @@
             }
             $counter += 1;
 
-            //if(${$ord} == $skip || $thisOrd < ord(strtoupper($_GET["startOrd"])) || $thisOrd > ord(strtoupper($_GET["endOrd"])))
-            //  continue;
+            if(${$ord} == $skip || $thisOrd < ord(strtoupper($_GET["startOrd"])) || $thisOrd > ord(strtoupper($_GET["endOrd"])))
+              continue;
+
+            $rid_l[] = $rid;
+            $author_l[] = $author;
+            $charRate_l[] = $charRate;
+            $duplicateWords_l[] = $duplicateWords;
+            $topWords_l[] = $topWords;
+            $inputLen_l[] = $inputLen;
+            $outputLen_l[] = $outputLen;
+            $title_l[] = $title;
+            $genre_l[] = $genre;
+            $execTime_l[] = $execTime;
+            $url_l[] = $url;
 
             if(end($orderTypes) != ${$ord})
             {
@@ -276,20 +288,6 @@
                 $url_l = [];
 
                 $orderTypes[] = ${$ord};
-            }
-            else
-            {
-              $rid_l[] = $rid;
-              $author_l[] = $author;
-              $charRate_l[] = $charRate;
-              $duplicateWords_l[] = $duplicateWords;
-              $topWords_l[] = $topWords;
-              $inputLen_l[] = $inputLen;
-              $outputLen_l[] = $outputLen;
-              $title_l[] = $title;
-              $genre_l[] = $genre;
-              $execTime_l[] = $execTime;
-              $url_l[] = $url;
             }
           }
 
