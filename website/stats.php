@@ -204,7 +204,10 @@
             $counter += 1;
 
             if(${$ord} == $skip || $thisOrd < ord(strtoupper($_GET["startOrd"])) || $thisOrd > ord(strtoupper($_GET["endOrd"])))
+            {
+              $counter = 0;  
               continue;
+            }
 
             $rid_l[] = $rid;
             $author_l[] = $author;
