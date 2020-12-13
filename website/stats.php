@@ -294,8 +294,8 @@
             
           }
 
-          //$str = rtrim($str, ", ");
-          $str = implode(", ", array_shift(explode(", ", $str)));
+          $str = str_replace("t6353, ", rtrim($str, ", "), $str);
+          
 
           echo "var data = [".$str."];";
 
