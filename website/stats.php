@@ -251,12 +251,12 @@
                       text: [$texts],
                       mode: 'markers',
                       visible: 'legendonly',
+                      customdata: [$url_l].
                       marker: {
                       size: [$size],
                       sizeref: 2,
                       sizemode: 'area',
                       opacity: 0.3,
-                      customdata: [$url_l]
                     }
                 };
                 ";
@@ -320,12 +320,9 @@
         Plotly.newPlot('plot', data, layout, config);
 
         document.getElementById('plot').on('plotly_click', function(data){
-            var msg = 'Closest point clicked:';
             for(var i=0; i < data.points.length; i++){
-              msg += '\ncustomdata = ' + data.points[i].customdata;
-              msg += '\ntext = ' + data.points[i].text;
+              open(data.points[i].customdata);
             }
-            alert(msg);
         });
 
 
