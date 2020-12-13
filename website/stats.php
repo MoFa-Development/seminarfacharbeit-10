@@ -251,7 +251,7 @@
                       text: [$texts],
                       mode: 'markers',
                       visible: 'legendonly',
-                      customdata: [$url_l].
+                      customdata: [$url_l],
                       marker: {
                       size: [$size],
                       sizeref: 2,
