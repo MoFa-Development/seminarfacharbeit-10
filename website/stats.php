@@ -192,8 +192,7 @@
             $thisOrd = ord(${$ord}[0]);
 
 
-            if(${$ord} == $skip || $thisOrd < ord(strtoupper($_GET["startOrd"])) || $thisOrd > ord(strtoupper($_GET["endOrd"])))
-              continue;
+
 
             //Jump to next ord if max words reached for this ord reached
             if($counter > $max)
@@ -203,6 +202,9 @@
               $counter = 0;
             }
             $counter += 1;
+
+            if(${$ord} == $skip || $thisOrd < ord(strtoupper($_GET["startOrd"])) || $thisOrd > ord(strtoupper($_GET["endOrd"])))
+              continue;
 
             if(end($orderTypes) != ${$ord})
             {
@@ -275,7 +277,8 @@
 
                 $orderTypes[] = ${$ord};
             }
-
+            else
+            {
               $rid_l[] = $rid;
               $author_l[] = $author;
               $charRate_l[] = $charRate;
@@ -287,7 +290,7 @@
               $genre_l[] = $genre;
               $execTime_l[] = $execTime;
               $url_l[] = $url;
-
+            }
           }
 
           $str = rtrim($str, ", ");
