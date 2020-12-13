@@ -172,6 +172,9 @@
           //$skip = "";
           foreach($fr as $r)
           {
+            if($author == "      ")
+              continue;
+
             $rid = strval($r["id"]);
             $author = str_replace("'", "", $r["author"]);
             $author = str_replace("\r", "",$author);
