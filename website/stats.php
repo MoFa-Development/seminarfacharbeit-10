@@ -294,7 +294,7 @@
             
           }
 
-          $str = rtrim($str, ", ");
+          //$str = rtrim($str, ", ");
           $str = implode(", ", array_shift(explode(", ", $str)));
 
           echo "var data = [".$str."];";
