@@ -241,9 +241,9 @@
                 $xVal = ${$_GET["xOrd"] . "_l"};
                 $yVal = ${$_GET["yOrd"] . "_l"};
                 $size = ${$_GET["bSize"] . "_l"};
-                if ($_GET["bSize"] == "1")
+                if (!isset($size))
                 {
-                  $size = "1";
+                  $size = $_GET["bSize"];
                 }
 
                 echo"
