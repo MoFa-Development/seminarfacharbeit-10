@@ -53,8 +53,8 @@ function onClick()
     }).done(function( o ) {
         $("#btn1").toggleClass("is-loading");
         $("#btn1").prop("disabled", function(i, v) { return !v; });
-        document.getElementById("textarea2").value = result[0];
-        document.getElementById("label").innerText = result[1];
+        document.getElementById("textarea2").value = o;
+        document.getElementById("label").innerText = o;
     });
    
 }
