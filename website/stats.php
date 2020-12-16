@@ -91,11 +91,12 @@
               <input disabled type="checkbox" name="av" <?php if(isset($_GET["av"])) echo "checked";?>>
                 Durchschnitt
             </label>
-            <br><br>
+            <br>
             <label class="checkbox">
               <input type="checkbox" name="allBlack" <?php if(isset($_GET["allBlack"])) echo "checked";?>>
                 Alles schwarz
             </label>
+            <br><br>
             <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
             <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">
           </form>
@@ -254,7 +255,7 @@
                 $color = "";
                 if(isset($_GET["allBlack"]))
                 {
-                  $color = "color: rgb(0,0,0),";
+                  $color = "color: 'rgb(0,0,0)',";
                 }
 
                 echo"
