@@ -241,6 +241,10 @@
                 $xVal = ${$_GET["xOrd"] . "_l"};
                 $yVal = ${$_GET["yOrd"] . "_l"};
                 $size = ${$_GET["bSize"] . "_l"};
+                if ($_GET["bSize"] == "1")
+                {
+                  $size = "1";
+                }
 
                 echo"
                 var t$rid = {
