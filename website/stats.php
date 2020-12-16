@@ -88,8 +88,13 @@
             <label class="is-medium">Bubble-Größe: </label><input class="input biggerInput" type="text" placeholder="duplicateWords" name="bSize" value="<?php echo $_GET["bSize"];?>">
             <br><br>
             <label class="checkbox">
-              <input type="checkbox" name="av" <?php if(isset($_GET["av"])) echo "checked";?>>
+              <input disabled type="checkbox" name="av" <?php if(isset($_GET["av"])) echo "checked";?>>
                 Durchschnitt
+            </label>
+            <br><br>
+            <label class="checkbox">
+              <input type="checkbox" name="allBlack" <?php if(isset($_GET["allBlack"])) echo "checked";?>>
+                Alles schwarz
             </label>
             <input type="submit" class="button filterSettingsControl" value="Diagramm erstellen"></input>
             <input type="hidden" id="ord" name="ord" value="<?php if(isset($ord)) echo $ord;?>">
@@ -246,6 +251,12 @@
                   $size = $_GET["bSize"];
                 }
 
+                $color = "";
+                if(isset($_GET["allBlack"]))
+                {
+                  $color = "color: rgb(0,0,0),";
+                }
+
                 echo"
                 var t$rid = {
                       x: [$xVal],
@@ -258,6 +269,7 @@
                       customdata: [$url_l],
                       marker: {
                       size: [$size],
+                      $color
                       sizeref: 2,
                       sizemode: 'area',
                       opacity: 0.3,
