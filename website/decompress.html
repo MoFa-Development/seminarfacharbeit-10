@@ -53,7 +53,12 @@ function onClick()
     }).done(function( o ) {
         $("#btn1").toggleClass("is-loading");
         $("#btn1").prop("disabled", function(i, v) { return !v; });
-        document.getElementById("textarea2").value = o;
+        var result = o.split("input_len: ");
+        result[1] = result[1].replace("\033[1m", "");
+        result[1] = result[1].replace("\033[0m", "");
+        result[1] = "input_len: " + result[1];
+        document.getElementById("textarea2").value = result[0];
+        document.getElementById("label").innerText = result[1];
     });
    
 }
