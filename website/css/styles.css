@@ -39,10 +39,6 @@
     position: unset;
 }
 
-.button{
-    margin-bottom: 5px;
-}
-
 .filterSettingsControl{
     display: block;
     margin: auto;
