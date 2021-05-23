@@ -35,6 +35,8 @@ cnno / compress-naive-no-output -   Naive Kompression ohne ausgabe des Textes
 
 # endregion
 
+additional_data: list = []
+
 def replace(text: str, substr:str, repstr:str) -> str:
     matches = reversed(list(re.finditer(substr, text)))
     output = text
@@ -49,7 +51,6 @@ def replace(text: str, substr:str, repstr:str) -> str:
         output = output[:index]+repstr+output[index+len(substr):]
         
     return output
-
 
 words = []
 
@@ -92,7 +93,7 @@ def naive_compress(input_text: str):
 
     top_words_str = top_words_str[:-1]
 
-    print("top_words: "+top_words_str) # das ist nicht schön, das sollte irgendwie übergeben werden
+    additional_data.append("top_words: "+top_words_str)
 
     words_str = " ".join(words)
 
@@ -168,6 +169,9 @@ def main():
         elif action != 4:
             sys.stdout.write(output_text)
 
+        for datum in additional_data:
+            print(datum)
+        
         print("input_len: " + str(len(input_text)))
         print("output_len: " + str(len(output_text)))
         print("duplicate_words: " + str(len(words)))
