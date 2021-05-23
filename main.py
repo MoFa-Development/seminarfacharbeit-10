@@ -97,6 +97,8 @@ def naive_compress(input_text: str):
 
     words_str = " ".join(words)
 
+    output = output[:-1]
+
     output += " \n" + words_str
 
     return output
