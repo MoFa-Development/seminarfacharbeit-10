@@ -110,8 +110,6 @@ def naive_decompress(input_text : str):
     for i in range(len(words)):
         output = replace(output, str(i), words[i])
 
-    output = output[:-1]
-
     return output
 
 
