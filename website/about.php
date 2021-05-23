@@ -31,8 +31,8 @@
           <h1 class="title">Grundlagenforschung zur Komprimierungsrate von Texten verschiedener Art</h1>
           <hr>
           <p>Untersucht wird die Länge eines komprimierten Textes im Vergleich zum Ursprungstext. Dabei basiert die Komprimierung auf dem mehrfachen Auftreten von Zeichenketten. Dabei wird die Frage gestellt, in wie fern aus der Komprimierungsrate auf den Inhalt der Texte geschlossen werden kann.</p>
-          <br><br>
-          <iframe id="doc" src="https://docs.google.com/document/d/e/2PACX-1vSh5ZAV3nPGvgzH5MkylqENeXsuXmYLUSlSQybOlUcY2VB0N8NGVbcGiWfis4Go1LzbD3sSe_twiH58/pub?embedded=true"></iframe>
+          <object width="80%" height="1vh" type="application/pdf" data="Seminarfacharbeit-Kompression-verschiedenartiger-Texte.pdf">
+
         </div>
     </body>
 </html>
