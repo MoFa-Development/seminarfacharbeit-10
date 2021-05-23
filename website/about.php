@@ -24,7 +24,7 @@
         
         <div class="container is-max-desktop">
             <div class="notification is-primary">
-              Diese Website nutzt das Git Repository unter <a href="https://github.com/Antricks/seminarfacharbeit-10">https://github.com/Antricks/seminarfacharbeit-10</a> der <strong>Version <?php exec("git rev-list --all --count 2>&1", $result); echo($result[0]); ?></strong>.
+              Diese Website nutzt das Git Repository unter <a href="https://github.com/Antricks/seminarfacharbeit-10">https://github.com/Antricks/seminarfacharbeit-10</a> der <strong>Version <?php exec("cd /home/ubuntu/Desktop/seminarfacharbeit-10/ && git rev-list --all --count 2>&1", $result); echo($result[0]); ?></strong>.
             </div>
           </div>
         <div class="card" style="margin: auto;  margin-top: 100px; padding: 50px; max-width: 1000px;">
